@@ -3,11 +3,14 @@ package rate
 import (
 	"encoding/json"
 	"fmt"
+
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
+
 	// "io/ioutil"
 	"log"
 	"net"
+
 	// "os"
 	"sort"
 	"time"
@@ -19,10 +22,12 @@ import (
 	"github.com/opentracing/opentracing-go"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/keepalive"
 
-	"github.com/bradfitz/gomemcache/memcache"
 	"strings"
+
+	"github.com/bradfitz/gomemcache/memcache"
 )
 
 const name = "srv-rate"
@@ -46,7 +51,13 @@ func (s *Server) Run() error {
 
 	s.uuid = uuid.New().String()
 
+	creds, err := credentials.NewServerTLSFromFile("x509/server_cert.pem", "x509/server_key.pem")
+	if err != nil {
+		return fmt.Errorf("failed to create credentials: %v", err)
+	}
+
 	srv := grpc.NewServer(
+		grpc.Creds(creds),
 		grpc.KeepaliveParams(keepalive.ServerParameters{
 			Timeout: 120 * time.Second,
 		}),

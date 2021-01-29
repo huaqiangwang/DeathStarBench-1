@@ -3,6 +3,7 @@ package recommendation
 import (
 	// "encoding/json"
 	"fmt"
+
 	"github.com/google/uuid"
 	"github.com/grpc-ecosystem/grpc-opentracing/go/otgrpc"
 	"github.com/hailocab/go-geoindex"
@@ -11,13 +12,16 @@ import (
 	"github.com/opentracing/opentracing-go"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/keepalive"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
+
 	// "io/ioutil"
 	"log"
 	"math"
 	"net"
+
 	// "os"
 	"time"
 	// "strings"
@@ -48,7 +52,13 @@ func (s *Server) Run() error {
 
 	s.uuid = uuid.New().String()
 
+	creds, err := credentials.NewServerTLSFromFile("x509/server_cert.pem", "x509/server_key.pem")
+	if err != nil {
+		return fmt.Errorf("failed to create credentials: %v", err)
+	}
+
 	srv := grpc.NewServer(
+		grpc.Creds(creds),
 		grpc.KeepaliveParams(keepalive.ServerParameters{
 			Timeout: 120 * time.Second,
 		}),

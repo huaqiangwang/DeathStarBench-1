@@ -18,6 +18,7 @@ import (
 	"github.com/opentracing/opentracing-go"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/keepalive"
 
 	"github.com/bradfitz/gomemcache/memcache"
@@ -47,7 +48,13 @@ func (s *Server) Run() error {
 
 	// fmt.Printf("in run s.IpAddr = %s, port = %d\n", s.IpAddr, s.Port)
 
+        creds, err := credentials.NewServerTLSFromFile("x509/server_cert.pem", "x509/server_key.pem")
+        if err != nil {
+                return fmt.Errorf("failed to create credentials: %v", err)
+        }
+
 	srv := grpc.NewServer(
+		grpc.Creds(creds),
 		grpc.KeepaliveParams(keepalive.ServerParameters{
 			Timeout: 120 * time.Second,
 		}),
