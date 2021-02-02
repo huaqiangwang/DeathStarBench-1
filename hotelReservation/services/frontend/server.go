@@ -10,6 +10,7 @@ import (
 	"strconv"
 
 	"github.com/harlow/go-micro-services/dialer"
+	"github.com/harlow/go-micro-services/pprof"
 	"github.com/harlow/go-micro-services/registry"
 	"github.com/harlow/go-micro-services/services/profile/proto"
 	"github.com/harlow/go-micro-services/services/search/proto"
@@ -65,6 +66,9 @@ func (s *Server) Run() error {
 	mux.Handle("/user", http.HandlerFunc(s.userHandler))
 	mux.Handle("/reservation", http.HandlerFunc(s.reservationHandler))
 
+	if err := pprof.AddHandlersToMux(mux); err != nil {
+		return err
+        }
 	// fmt.Printf("frontend starts serving\n")
 
 	return http.ListenAndServe(fmt.Sprintf(":%d", s.Port), mux)

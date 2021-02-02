@@ -8,6 +8,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/harlow/go-micro-services/pprof"
 	"github.com/harlow/go-micro-services/registry"
 	"github.com/harlow/go-micro-services/services/search"
 	"github.com/harlow/go-micro-services/tracing"
@@ -49,6 +50,9 @@ func main() {
 		panic(err)
 	}
 
+	if err := pprof.StartHttp(result["PprofSearchPort"]); err != nil {
+		panic(err)
+	}
 	srv := &search.Server{
 		Tracer:   tracer,
 		// Port:     *port,

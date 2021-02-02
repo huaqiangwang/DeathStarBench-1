@@ -33,6 +33,22 @@ $WRK_DIR/wrk -D exp -t <num-threads> -c <num-conns> -d <duration> -L -s ./wrk2_l
 
 ### Deploying in Kubernetes Cluster
 Refer to `k8s/README.md`.
+#### using [pprof](https://github.com/google/pprof "pprof") to profile  services
+```bash
+# install pprof
+go get -u github.com/google/pprof
+# look at 30 seconds CPU profile for geo service
+go tool pprof http://localhost:18083/debug/pprof/profile?seconds=30
+# load bash helper functions for pprof
+source pprof_support.sh
+# get service executables from docker
+fetch_execs
+# get 10 seconds pprof CPU profile of service geo
+get_pprof_cpu geo 10
+```
+For more pprof usage examples, please check https://golang.org/pkg/net/http/pprof/ and https://github.com/google/pprof.
+
+Please check the config.json file for pprof port number of different service.
 
 ### Questions and contact
 

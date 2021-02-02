@@ -32,6 +32,7 @@ services:
     container_name: 'hotel_reserv_profile'
     ports:
       - "8081:8081"
+      - "18081:18081"
     depends_on:
       - mongodb-profile
       - memcached-profile
@@ -46,6 +47,7 @@ services:
     container_name: 'hotel_reserv_search'
     ports:
       - "8082:8082"
+      - "18082:18082"
     depends_on:
       - consul
     restart: always
@@ -64,6 +66,7 @@ services:
     container_name: 'hotel_reserv_geo'
     ports:
       - "8083:8083"
+      - "18083:18083"
     depends_on:
       - mongodb-geo
       - consul
@@ -79,6 +82,7 @@ services:
     container_name: 'hotel_reserv_rate'
     ports:
       - "8084:8084"
+      - "18084:18084"
     depends_on:
       - mongodb-rate
       - memcached-rate
@@ -95,6 +99,7 @@ services:
     container_name: 'hotel_reserv_recommendation'
     ports:
       - "8085:8085"
+      - "18085:18085"
     depends_on:
       - mongodb-recommendation
       - consul
@@ -110,6 +115,7 @@ services:
     container_name: 'hotel_reserv_user'
     ports:
       - "8086:8086"
+      - "18086:18086"
     depends_on:
       - mongodb-user
       - consul
@@ -125,6 +131,7 @@ services:
     container_name: 'hotel_reserv_reservation'
     ports:
       - "8087:8087"
+      - "18087:18087"
     depends_on:
       - mongodb-reservation
       - memcached-reserve
@@ -144,6 +151,7 @@ services:
       - "5775:5775/udp"
       - "6831:6831/udp"
       - "6832:6832/udp"
+      - "14250:14250"
     restart: always
     cpuset: "17"
 
