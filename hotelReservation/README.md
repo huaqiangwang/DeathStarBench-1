@@ -22,9 +22,12 @@ Supported actions:
 - Install Docker and Docker Compose.
 - Make sure exposed ports in docker-compose files are available 
 
-### Start docker containers
+### Start docker containers (no TLS)
 Start docker containers by running `docker-compose up -d`. All images will be 
 pulled from Docker Hub.
+
+### Start docker containers with TLS gRPC
+Running `TLS=1 docker-compose up -d`
 
 #### workload generation
 ```bash
