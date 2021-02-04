@@ -20,7 +20,13 @@ Supported actions:
 ## Running the social network application
 ### Before you start
 - Install Docker and Docker Compose.
-- Make sure exposed ports in docker-compose files are available 
+- In case you need to deploy multiple instances of the services(the default docker-compose file launches 1 instance for each service). Please copy docker-compose_multi-instances.yml and modify it according to your environment.
+```bash
+cp docker-compose_multi-instances.yml docker-compose.yml
+vim docker-compose.yml
+```  
+- Make sure exposed ports in docker-compose files are available
+- Make sure the cpuset in docker-compose files are available
 
 ### Start docker containers (no TLS)
 Start docker containers by running `docker-compose up -d`. All images will be 

@@ -1,0 +1,302 @@
+# The following is an example of define 3 frontend and 2 profile service instances.
+# Please make sure adjust the it to your own environment.
+# NOTES:
+# 1. Make sure to adjust the cpuset settings fo each service for your environment.
+# 2. Make sure no service is exposed to the same host port.
+# 3. In this example, we do not expose the pprof port of services for simplicity(i.e. 1808x).
+version: "2"
+services:
+  consul:
+    image: consul:latest
+    ports:
+      - "8300:8300"
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:53/udp"
+    restart: always
+    cpuset: "54,71"
+
+  frontend0:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_frontend_single_node
+    entrypoint: frontend
+    container_name: 'hotel_reserv_frontend0'
+    ports:
+      - "5000:5000"
+    depends_on:
+      - consul
+    restart: always
+    cpuset: "0,72"
+
+  frontend1:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_frontend_single_node
+    entrypoint: frontend
+    container_name: 'hotel_reserv_frontend1'
+    ports:
+      - "5001:5000"
+    depends_on:
+      - consul
+    restart: always
+    cpuset: "1,73"
+
+  frontend2:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_frontend_single_node
+    entrypoint: frontend
+    container_name: 'hotel_reserv_frontend2'
+    ports:
+      - "5002:5000"
+    depends_on:
+      - consul
+    restart: always
+    cpuset: "2,74"
+
+
+  profile0:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_profile_single_node
+    entrypoint: profile
+    container_name: 'hotel_reserv_profile0'
+    #ports:
+    #  - "18081:18081"
+    depends_on:
+      - mongodb-profile
+      - memcached-profile
+      - consul
+    restart: always
+    cpuset: "18,90"
+
+  profile1:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_profile_single_node
+    entrypoint: profile
+    container_name: 'hotel_reserv_profile1'
+    #ports:
+    #  - "18081:18081"
+    depends_on:
+      - mongodb-profile
+      - memcached-profile
+      - consul
+    restart: always
+    cpuset: "19,91"
+
+  search:
+    build: .
+    image: hotel_reserv_search_single_node
+    entrypoint: search
+    container_name: 'hotel_reserv_search'
+    #ports:
+    #  - "18082:18082"
+    depends_on:
+      - consul
+    restart: always
+    cpuset: "20,92,21,93"
+    environment:
+      - TLS
+      # - GRPC_GO_LOG_VERBOSITY_LEVEL=2
+      # - GRPC_GO_LOG_SEVERITY_LEVEL=info
+
+  geo:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_geo_single_node
+    entrypoint: geo
+    container_name: 'hotel_reserv_geo'
+    #ports:
+    #  - "18083:18083"
+    depends_on:
+      - mongodb-geo
+      - consul
+    restart: always
+    cpuset: "22,94"
+
+  rate:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_rate_single_node
+    entrypoint: rate
+    container_name: 'hotel_reserv_rate'
+    #ports:
+    #  - "18084:18084"
+    depends_on:
+      - mongodb-rate
+      - memcached-rate
+      - consul
+    restart: always
+    cpuset: "24,96"
+
+  recommendation:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_recommend_single_node
+    entrypoint: recommendation
+    container_name: 'hotel_reserv_recommendation'
+    #ports:
+    #  - "18085:18085"
+    depends_on:
+      - mongodb-recommendation
+      - consul
+    restart: always
+    cpuset: "26,98"
+
+  user:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_user_single_node
+    entrypoint: user
+    container_name: 'hotel_reserv_user'
+    #ports:
+    #  - "18086:18086"
+    depends_on:
+      - mongodb-user
+      - consul
+    restart: always
+    cpuset: "28,100"
+
+  reservation:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_rsv_single_node
+    entrypoint: reservation
+    container_name: 'hotel_reserv_reservation'
+    #ports:
+    #  - "18087:18087"
+    depends_on:
+      - mongodb-reservation
+      - memcached-reserve
+      - consul
+    restart: always
+    cpuset: "30,102,31,103"
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: 'hotel_reserv_jaeger'
+    ports:
+      - "14269"
+      - "5778:5778"
+      - "14268:14268"
+      - "14267"
+      - "16686:16686"
+      - "5775:5775/udp"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "14250:14250"
+    restart: always
+    cpuset: "71,143"
+
+  memcached-rate:
+    image: memcached
+    # hostname: user-memcached
+    container_name: 'hotel_reserv_rate_mmc'
+    restart: always
+    environment:
+      - MEMCACHED_CACHE_SIZE=128
+      - MEMCACHED_THREADS=2
+    logging:
+      options:
+        max-size: 50m
+    cpuset: "36,108"
+
+  memcached-profile:
+    image: memcached
+    # hostname: user-memcached
+    container_name: 'hotel_reserv_profile_mmc'
+    restart: always
+    environment:
+      - MEMCACHED_CACHE_SIZE=128
+      - MEMCACHED_THREADS=2
+    logging:
+      options:
+        max-size: 50m
+    cpuset: "37,109"
+
+  memcached-reserve:
+    image: memcached
+    # hostname: user-memcached
+    container_name: 'hotel_reserv_reservation_mmc'
+    restart: always
+    environment:
+      - MEMCACHED_CACHE_SIZE=128
+      - MEMCACHED_THREADS=2
+    logging:
+      options:
+        max-size: 50m
+    cpuset: "38,110"
+
+  mongodb-geo:
+    image: mongo
+    container_name: 'hotel_reserv_geo_mongo'
+    # hostname: geo-db
+    restart: always
+    cpuset: "48,120"
+    volumes:
+      - geo:/data/db  
+
+  mongodb-profile:
+    image: mongo
+    container_name: 'hotel_reserv_profile_mongo'
+    hostname: profile-db
+    restart: always
+    cpuset: "49,121"
+    volumes:
+      - profile:/data/db    
+
+  mongodb-rate:
+    image: mongo
+    container_name: 'hotel_reserv_rate_mongo'
+    hostname: rate-db
+    restart: always
+    cpuset: "50,122"
+    volumes:
+      - rate:/data/db   
+
+  mongodb-recommendation:
+    image: mongo
+    hostname: recommendation-db
+    container_name: 'hotel_reserv_recommendation_mongo'
+    restart: always
+    cpuset: "51,123"
+    volumes:
+      - recommendation:/data/db
+    
+  mongodb-reservation:
+    image: mongo
+    container_name: 'hotel_reserv_reservation_mongo'
+    hostname: reservation-db
+    restart: always
+    cpuset: "52,124"
+    volumes:
+      - reservation:/data/db 
+
+  mongodb-user:
+    image: mongo
+    container_name: 'hotel_reserv_user_mongo'
+    hostname: user-db
+    restart: always
+    cpuset: "53,125"
+    volumes:
+      - user:/data/db
+    
+volumes:
+  geo:
+  profile:
+  rate:
+  recommendation:
+  reservation:
+  user:
