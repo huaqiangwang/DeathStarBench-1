@@ -1,4 +1,7 @@
 import logging
+import datetime
+import os
+
 from subprocess import check_output, Popen
 
 
@@ -87,10 +90,51 @@ def create_all_flame_graphs():
         log.error("No PIDs found")
         raise( ValueError("no docker composed services"))
     for service_name, pids in pids.items():
-        
         for pid in pids:
             file_name = 'flame_graph-%s-pid_%d.svg' % (service_name, pid)
             log.info("Generating flame graph for %s pid=%d, save to file %s" %
                      (service_name, pid, file_name))
-            get_flame_graph(pid, time=10, svg_file_name=file_name)
-    get_flame_graph(pid=None, time=10, svg_file_name='flame_graph-all.svg')
+            get_flame_graph(pid, time=60, svg_file_name=file_name)
+    get_flame_graph(pid=None, time=60, svg_file_name='flame_graph-all.svg')
+
+
+def perf_stat(metric, pid=None, duration=60):
+    if pid is None:
+        pid_flag = '-a'
+        pid_str = 'system'
+    else:
+        pid_flag = '-p %d' % pid
+        pid_str = 'pid_' % pid
+
+    folder = 'perf_result'
+    metric_name = metric["name"]
+    events = metric["events"]
+    now = datetime.datetime.now().strftime('%Y%m%d_%H-%M-%S')
+    file_name = '%s_%s_%s.txt' % (metric_name, pid_str, now)
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+    file_name = os.path.join(folder, file_name)
+
+    # Need to check if the installed perf supports these events or not
+    # https://perf.wiki.kernel.org/index.php/Tutorial
+    # using --pid <pid> -- sleep <time> to control collecting perf events
+    # for <pid> for <time> seconds.
+
+    cmd = ('perf stat -e %s %s -o %s -- sleep %d' %
+           (','.join(events), pid_str if pid_str.startswith('pid') else '',
+            file_name, duration))
+    try:
+        check_output(cmd.strip().split())
+        return file_name
+    except Exception as e:
+        log.error("perf stat command failed for %s: %s" %(file_name, e))
+
+
+def get_system_cycles_intructions():
+    metric = {
+        'name': 'inst_cycle',
+        'events': ['cycles', 'instructions']
+    }
+    result = perf_stat(metric, pid=None, duration=30)
+    if result is not None:
+        log.info('System scope CPU instructions and cycles have been recorded in file %s' % result)
