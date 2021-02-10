@@ -29,11 +29,16 @@ vim docker-compose.yml
 - Make sure the cpuset in docker-compose files are available
 
 ### Start docker containers (no TLS)
-Start docker containers by running `docker-compose up -d`. All images will be 
-pulled from Docker Hub.
+Start docker containers by running `docker-compose up -d`. All images will be pulled from Docker Hub.
 
 ### Start docker containers with TLS gRPC
-Running `TLS=1 docker-compose up -d`
+Running with default cipher suite: `TLS=1 docker-compose up -d`.
+
+Running with specified cipher suite: `TLS=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 docker-compose up -d`.
+
+Check if TLS is enabled or not: `docker-compose logs user | grep TLS`.
+
+The available cipher suite can be find at the file [options.go](tls/options.go#L21).
 
 #### workload generation
 ```bash
