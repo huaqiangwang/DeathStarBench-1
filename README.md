@@ -1,4 +1,9 @@
-# DeathStarBench
+# DeathStarBenchPlusPlus
+
+This project aims to evaluate a list of cloud workloads with an emphasis on
+the cloud features such as deployment and runtime service mesh.
+
+## DeathStarBench
 
 Open-source benchmark suite for cloud microservices. DeathStarBench includes five end-to-end services, four for cloud systems, and one for cloud-edge systems running on drone swarms. 
 
