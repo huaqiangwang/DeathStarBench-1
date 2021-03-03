@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wrk-client
+  labels:
+    death-star-project: social-network
+    app: wrk-client
+  namespace: social-network
+spec:
+  containers:
+  - name: wrk-client
+    image: aenniwang/wrk-client
+    command: ["sleep", "3600"]
+
