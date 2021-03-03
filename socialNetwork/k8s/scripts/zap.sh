@@ -31,6 +31,8 @@ do
  	kubectl delete deployment/$d -n ${NS} &
 done
 
+kubectl delete pod/wrk-client -n ${NS} &
+
 wait
 
 echo deleting cm
