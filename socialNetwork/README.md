@@ -24,7 +24,10 @@ Supported actions:
 - luarocks (apt-get install luarocks)
 - luasocket (luarocks install luasocket)
 
-## Running the social network application
+## Running the social network application with kubernetes
+Refer to `k8s/README.md`.
+
+## Running the social network application with `docker-compose`
 ### Before you start
 - Install Docker and Docker Compose.
 - Make sure the following ports are available: port `8080` for Nginx frontend, `8081` for media frontend and 
