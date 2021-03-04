@@ -2,9 +2,11 @@ package registry
 
 import (
 	"fmt"
-	consul "github.com/hashicorp/consul/api"
 	"log"
 	"net"
+	"os"
+
+	consul "github.com/hashicorp/consul/api"
 )
 
 // NewClient returns a new Client with connection to consul
@@ -25,9 +27,14 @@ type Client struct {
 	*consul.Client
 }
 
-// return the first non loopback IP addr
+// Look for the network device being dedicated for gRPC traffic.
+// The network CDIR should be specified in os environment
+// "DSB_HOTELRESERV_GRPC_NETWORK".
+// If not found, return the first non loopback IP address.
 func getLocalIP() (string, error) {
-	var ips []string
+	var ipGrpc string
+	var ips []net.IP
+
 	addrs, err := net.InterfaceAddrs()
 	if err != nil {
 		return "", err
@@ -35,16 +42,37 @@ func getLocalIP() (string, error) {
 	for _, a := range addrs {
 		if ipnet, ok := a.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
 			if ipnet.IP.To4() != nil {
-				ips = append(ips, ipnet.IP.String())
+				ips = append(ips, ipnet.IP)
 			}
 		}
 	}
 	if len(ips) == 0 {
 		return "", fmt.Errorf("registry: can not find local ip")
 	} else if len(ips) > 1 {
-		log.Println("WARNING: Multiple ip address found, use the first one!")
+		// by default, return the first network IP address found.
+		ipGrpc = ips[0].String()
+
+		grpcNet := os.Getenv("DSB_GRPC_NETWORK")
+		_, ipNetGrpc, err := net.ParseCIDR(grpcNet)
+		if err != nil {
+			log.Println("Warning: An invalid network CIDR is set in environment DSB_HOTELRESERV_GRPC_NETWORK")
+		} else {
+			for _, ip := range ips {
+				if ipNetGrpc.Contains(ip) {
+					ipGrpc = ip.String()
+					log.Printf(
+						"Info: gRPC traffic is routed to the dedicated network %s\n",
+						ipGrpc)
+					break
+				}
+			}
+		}
+	} else {
+		// only one network device existed
+		ipGrpc = ips[0].String()
 	}
-	return ips[0], nil
+
+	return ipGrpc, nil
 }
 
 // Register a service with registry
