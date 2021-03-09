@@ -37,7 +37,7 @@ spec:
         - mountPath: /go/src/github.com/harlow/go-micro-services/config.json
           subPath: config.json
           name: config-json
-        imagePullPOlicy: IfNotPresent
+        imagePullPolicy: IfNotPresent
       restartPolicy: Always
       volumes:
       - name: config-json

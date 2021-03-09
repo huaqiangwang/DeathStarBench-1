@@ -20,6 +20,13 @@
 run `<path-of-repo>/hotelReservation/k8s/scripts/deploy.sh`
 and wait for `kubectl -n hotel-res get pod` to show all pods with status `Running`.
 
+### Create istio sidecars
+
+To inject istio sidecar to each service, perform following steps before the #deploy-services step:
+```bash
+kubectl create namespace hotel-res
+kubectl label namespace hotel-res istio-injection=enabled
+```
 
 ### Prepare HTTP workload generator
 
