@@ -33,5 +33,5 @@ spec:
             luarocks install luasocket &&
             sleep 365d
         imagePullPolicy: IfNotPresent
-        restartPolicy: Always
+      restartPolicy: Always
 
