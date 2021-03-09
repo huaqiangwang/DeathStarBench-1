@@ -45,3 +45,7 @@ cd wrk2
 
 #### View Jaeger traces
 View Jaeger traces by accessing `http://localhost:16686`
+
+## Running the media services on kubernetes cluster
+
+Refer to '<repo>/mediaMicroservices/k8s/README.md' for details.
