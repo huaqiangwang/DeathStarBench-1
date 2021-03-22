@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wrk-client
+  labels:
+    death-star-project: hotel-res
+    app: wrk-client
+  namespace: hotel-res
+spec:
+  containers:
+  - name: wrk-client
+    image: aenniwang/wrk-client
+    command: ["sleep", "360000"]
+

@@ -40,6 +40,9 @@ do
 done
 wait
 
+kubectl delete pod/wrk-client -n ${NS} &
+wait
+
 for c in configmap-config-json
 do
         kubectl delete cm/${c} -n ${NS}

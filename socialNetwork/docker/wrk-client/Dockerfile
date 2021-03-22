@@ -1,5 +1,11 @@
+# Create the wrk-client container
+# For example
+#
+#   cd <DSB root>
+#   docker build -t wrk-client -f socialNetwork/docker/wrk-client/Dockerfile .
+#
 FROM ubuntu:20.04
-COPY . /socialNetwork
+COPY . /DSB
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=America/Tijuana
 RUN apt-get -y update && \
@@ -7,5 +13,5 @@ RUN apt-get -y update && \
     pip3 install asyncio && \
     pip3 install aiohttp && \
     luarocks install luasocket
-RUN cd /socialNetwork/wrk2 && make clean && make
-WORKDIR /socialNetwork
+RUN cd /DSB/socialNetwork/wrk2 && make clean && make && cp wrk /bin/
+WORKDIR /DSB
