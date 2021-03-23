@@ -21,7 +21,6 @@ Supported actions:
 ### Before you start
 - Install Docker and Docker Compose.
 - Make sure exposed ports in docker-compose files are available 
-- Replace x.x.x.x in config.json with ip address of your servers
 
 ### Start docker containers
 Start docker containers by running `docker-compose up -d`. All images will be 

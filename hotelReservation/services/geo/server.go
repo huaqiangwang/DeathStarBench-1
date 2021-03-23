@@ -11,6 +11,7 @@ import (
 	// "os"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/grpc-ecosystem/grpc-opentracing/go/otgrpc"
 	"github.com/hailocab/go-geoindex"
 	"github.com/harlow/go-micro-services/registry"
@@ -32,11 +33,11 @@ type Server struct {
 	index *geoindex.ClusteringIndex
 	uuid  string
 
-	Registry *registry.Client
-	Tracer   opentracing.Tracer
-	Port     int
-	IpAddr	 string
-	MongoSession 	*mgo.Session
+	Registry     *registry.Client
+	Tracer       opentracing.Tracer
+	Port         int
+	IpAddr       string
+	MongoSession *mgo.Session
 }
 
 // Run starts the server
@@ -49,6 +50,8 @@ func (s *Server) Run() error {
 		s.index = newGeoIndex(s.MongoSession)
 	}
 
+	s.uuid = uuid.New().String()
+
 	// opts := []grpc.ServerOption {
 	// 	grpc.KeepaliveEnforcementPolicy(keepalive.EnforcementPolicy{
 	// 		PermitWithoutStream: true,
@@ -56,10 +59,10 @@ func (s *Server) Run() error {
 	// }
 
 	srv := grpc.NewServer(
-		grpc.KeepaliveParams(keepalive.ServerParameters {
+		grpc.KeepaliveParams(keepalive.ServerParameters{
 			Timeout: 120 * time.Second,
 		}),
-		grpc.KeepaliveEnforcementPolicy(keepalive.EnforcementPolicy {
+		grpc.KeepaliveEnforcementPolicy(keepalive.EnforcementPolicy{
 			PermitWithoutStream: true,
 		}),
 		grpc.UnaryInterceptor(
@@ -90,7 +93,7 @@ func (s *Server) Run() error {
 
 	// fmt.Printf("geo server ip = %s, port = %d\n", s.IpAddr, s.Port)
 
-	err = s.Registry.Register(name, s.IpAddr, s.Port)
+	err = s.Registry.Register(name, s.uuid, s.IpAddr, s.Port)
 	if err != nil {
 		return fmt.Errorf("failed register: %v", err)
 	}
@@ -100,7 +103,7 @@ func (s *Server) Run() error {
 
 // Shutdown cleans up any processes
 func (s *Server) Shutdown() {
-	s.Registry.Deregister(name)
+	s.Registry.Deregister(s.uuid)
 }
 
 // Nearby returns all hotels within a given distance.

@@ -1,7 +1,10 @@
 package registry
 
 import (
+	"fmt"
 	consul "github.com/hashicorp/consul/api"
+	"log"
+	"net"
 )
 
 // NewClient returns a new Client with connection to consul
@@ -22,14 +25,44 @@ type Client struct {
 	*consul.Client
 }
 
+// return the first non loopback IP addr
+func getLocalIP() (string, error) {
+	var ips []string
+	addrs, err := net.InterfaceAddrs()
+	if err != nil {
+		return "", err
+	}
+	for _, a := range addrs {
+		if ipnet, ok := a.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
+			if ipnet.IP.To4() != nil {
+				ips = append(ips, ipnet.IP.String())
+			}
+		}
+	}
+	if len(ips) == 0 {
+		return "", fmt.Errorf("registry: can not find local ip")
+	} else if len(ips) > 1 {
+		log.Println("WARNING: Multiple ip address found, use the first one!")
+	}
+	return ips[0], nil
+}
+
 // Register a service with registry
-func (c *Client) Register(name string, ip string, port int) error {
+func (c *Client) Register(name string, id string, ip string, port int) error {
+	if ip == "" {
+		var err error
+		ip, err = getLocalIP()
+		if err != nil {
+			return err
+		}
+	}
 	reg := &consul.AgentServiceRegistration{
-		ID:      name,
+		ID:      id,
 		Name:    name,
 		Port:    port,
 		Address: ip,
 	}
+	log.Printf("INFO: trying to register service %s id %s with %s:%d\n", name, id, ip, port)
 	return c.Agent().ServiceRegister(reg)
 }
 
