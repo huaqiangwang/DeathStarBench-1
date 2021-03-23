@@ -1,0 +1,104 @@
+diff --git a/hotelReservation/k8s/frontend-deployment.yaml b/hotelReservation/k8s/frontend-deployment.yaml
+index 7cf6bb2..19b43e3 100644
+--- a/hotelReservation/k8s/frontend-deployment.yaml
++++ b/hotelReservation/k8s/frontend-deployment.yaml
+@@ -7,7 +7,7 @@ metadata:
+   namespace: hotel-res
+   name: frontend
+ spec:
+-  replicas: 1
++  replicas: 9
+   selector:
+     matchLabels:
+       death-star-project: hotel-res
+diff --git a/hotelReservation/k8s/geo-deployment.yaml b/hotelReservation/k8s/geo-deployment.yaml
+index d3e28c3..b59999e 100644
+--- a/hotelReservation/k8s/geo-deployment.yaml
++++ b/hotelReservation/k8s/geo-deployment.yaml
+@@ -7,7 +7,7 @@ metadata:
+   namespace: hotel-res
+   name: geo
+ spec:
+-  replicas: 1
++  replicas: 3
+   selector:
+     matchLabels:
+       death-star-project: hotel-res
+diff --git a/hotelReservation/k8s/profile-deployment.yaml b/hotelReservation/k8s/profile-deployment.yaml
+index 248e425..c7bed03 100644
+--- a/hotelReservation/k8s/profile-deployment.yaml
++++ b/hotelReservation/k8s/profile-deployment.yaml
+@@ -7,7 +7,7 @@ metadata:
+   namespace: hotel-res
+   name: profile
+ spec:
+-  replicas: 1
++  replicas: 4
+   selector:
+     matchLabels:
+       death-star-project: hotel-res
+diff --git a/hotelReservation/k8s/rate-deployment.yaml b/hotelReservation/k8s/rate-deployment.yaml
+index fe2395f..521d4d6 100644
+--- a/hotelReservation/k8s/rate-deployment.yaml
++++ b/hotelReservation/k8s/rate-deployment.yaml
+@@ -7,7 +7,7 @@ metadata:
+   namespace: hotel-res
+   name: rate
+ spec:
+-  replicas: 1
++  replicas: 3
+   selector:
+     matchLabels:
+       death-star-project: hotel-res
+diff --git a/hotelReservation/k8s/recommendation-deployment.yaml b/hotelReservation/k8s/recommendation-deployment.yaml
+index 405877e..586b266 100644
+--- a/hotelReservation/k8s/recommendation-deployment.yaml
++++ b/hotelReservation/k8s/recommendation-deployment.yaml
+@@ -7,7 +7,7 @@ metadata:
+   namespace: hotel-res
+   name: recommendation
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: hotel-res
+diff --git a/hotelReservation/k8s/reservation-deployment.yaml b/hotelReservation/k8s/reservation-deployment.yaml
+index 3452255..d2e44d6 100644
+--- a/hotelReservation/k8s/reservation-deployment.yaml
++++ b/hotelReservation/k8s/reservation-deployment.yaml
+@@ -7,7 +7,7 @@ metadata:
+   namespace: hotel-res
+   name: reservation
+ spec:
+-  replicas: 1
++  replicas: 5
+   selector:
+     matchLabels:
+       death-star-project: hotel-res
+diff --git a/hotelReservation/k8s/search-deployment.yaml b/hotelReservation/k8s/search-deployment.yaml
+index 0ccd258..013f1f4 100644
+--- a/hotelReservation/k8s/search-deployment.yaml
++++ b/hotelReservation/k8s/search-deployment.yaml
+@@ -7,7 +7,7 @@ metadata:
+   namespace: hotel-res
+   name: search
+ spec:
+-  replicas: 1
++  replicas: 5
+   selector:
+     matchLabels:
+       death-star-project: hotel-res
+diff --git a/hotelReservation/k8s/user-deployment.yaml b/hotelReservation/k8s/user-deployment.yaml
+index ff0a915..913fc12 100644
+--- a/hotelReservation/k8s/user-deployment.yaml
++++ b/hotelReservation/k8s/user-deployment.yaml
+@@ -7,7 +7,7 @@ metadata:
+   namespace: hotel-res
+   name: user
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: hotel-res
