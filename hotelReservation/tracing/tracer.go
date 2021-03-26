@@ -29,7 +29,7 @@ func Init(serviceName, host string) (opentracing.Tracer, error) {
 	cfg := config.Configuration{
 		Sampler: &config.SamplerConfig{
 			Type:  "probabilistic",
-			Param: 0.3,
+			Param: ratio,
 		},
 		Reporter: &config.ReporterConfig{
 			LogSpans:            false,
