@@ -6,7 +6,7 @@
 version: "2"
 services:
   consul:
-    image: consul:full-cpu
+    image: consul:latest
     ports:
       - "8300:8300"
       - "8400:8400"
@@ -16,7 +16,7 @@ services:
     cpuset: "19,59,39,79"
 
   jaeger:
-    image: jaegertracing/all-in-one:full-cpu
+    image: jaegertracing/all-in-one:latest
     container_name: 'hotel_reserv_jaeger'
     ports:
       - "14269"
@@ -132,7 +132,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_frontend_single_node:full-cpu
+    image: hotel_reserv_frontend_single_node:latest
     entrypoint: frontend
     container_name: 'hotel_reserv_frontend0'
     ports:
@@ -146,7 +146,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_frontend_single_node:full-cpu
+    image: hotel_reserv_frontend_single_node:latest
     entrypoint: frontend
     container_name: 'hotel_reserv_frontend1'
     ports:
@@ -160,7 +160,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_frontend_single_node:full-cpu
+    image: hotel_reserv_frontend_single_node:latest
     entrypoint: frontend
     container_name: 'hotel_reserv_frontend2'
     ports:
@@ -174,7 +174,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_frontend_single_node:full-cpu
+    image: hotel_reserv_frontend_single_node:latest
     entrypoint: frontend
     container_name: 'hotel_reserv_frontend3'
     ports:
@@ -188,7 +188,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_frontend_single_node:full-cpu
+    image: hotel_reserv_frontend_single_node:latest
     entrypoint: frontend
     container_name: 'hotel_reserv_frontend4'
     ports:
@@ -202,7 +202,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_frontend_single_node:full-cpu
+    image: hotel_reserv_frontend_single_node:latest
     entrypoint: frontend
     container_name: 'hotel_reserv_frontend5'
     ports:
@@ -216,7 +216,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_frontend_single_node:full-cpu
+    image: hotel_reserv_frontend_single_node:latest
     entrypoint: frontend
     container_name: 'hotel_reserv_frontend6'
     ports:
@@ -230,7 +230,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_frontend_single_node:full-cpu
+    image: hotel_reserv_frontend_single_node:latest
     entrypoint: frontend
     container_name: 'hotel_reserv_frontend7'
     ports:
@@ -244,7 +244,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_frontend_single_node:full-cpu
+    image: hotel_reserv_frontend_single_node:latest
     entrypoint: frontend
     container_name: 'hotel_reserv_frontend8'
     ports:
@@ -258,7 +258,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_profile_single_node:full-cpu
+    image: hotel_reserv_profile_single_node:latest
     entrypoint: profile
     container_name: 'hotel_reserv_profile0'
     depends_on:
@@ -272,7 +272,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_profile_single_node:full-cpu
+    image: hotel_reserv_profile_single_node:latest
     entrypoint: profile
     container_name: 'hotel_reserv_profile1'
     depends_on:
@@ -286,7 +286,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_profile_single_node:full-cpu
+    image: hotel_reserv_profile_single_node:latest
     entrypoint: profile
     container_name: 'hotel_reserv_profile2'
     depends_on:
@@ -300,7 +300,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_profile_single_node:full-cpu
+    image: hotel_reserv_profile_single_node:latest
     entrypoint: profile
     container_name: 'hotel_reserv_profile3'
     depends_on:
@@ -314,7 +314,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_profile_single_node:full-cpu
+    image: hotel_reserv_profile_single_node:latest
     entrypoint: profile
     container_name: 'hotel_reserv_profile4'
     depends_on:
@@ -326,7 +326,7 @@ services:
 
   search0:
     build: .
-    image: hotel_reserv_search_single_node:full-cpu
+    image: hotel_reserv_search_single_node:latest
     entrypoint: search
     container_name: 'hotel_reserv_search0'
     depends_on:
@@ -338,7 +338,7 @@ services:
  
   search1:
     build: .
-    image: hotel_reserv_search_single_node:full-cpu
+    image: hotel_reserv_search_single_node:latest
     entrypoint: search
     container_name: 'hotel_reserv_search1'
     depends_on:
@@ -350,7 +350,7 @@ services:
 
   search2:
     build: .
-    image: hotel_reserv_search_single_node:full-cpu
+    image: hotel_reserv_search_single_node:latest
     entrypoint: search
     container_name: 'hotel_reserv_search2'
     depends_on:
@@ -362,7 +362,7 @@ services:
 
   search3:
     build: .
-    image: hotel_reserv_search_single_node:full-cpu
+    image: hotel_reserv_search_single_node:latest
     entrypoint: search
     container_name: 'hotel_reserv_search3'
     depends_on:
@@ -374,7 +374,7 @@ services:
 
   search4:
     build: .
-    image: hotel_reserv_search_single_node:full-cpu
+    image: hotel_reserv_search_single_node:latest
     entrypoint: search
     container_name: 'hotel_reserv_search4'
     depends_on:
@@ -388,7 +388,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_geo_single_node:full-cpu
+    image: hotel_reserv_geo_single_node:latest
     entrypoint: geo
     container_name: 'hotel_reserv_geo0'
     depends_on:
@@ -401,7 +401,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_geo_single_node:full-cpu
+    image: hotel_reserv_geo_single_node:latest
     entrypoint: geo
     container_name: 'hotel_reserv_geo1'
     depends_on:
@@ -414,7 +414,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_geo_single_node:full-cpu
+    image: hotel_reserv_geo_single_node:latest
     entrypoint: geo
     container_name: 'hotel_reserv_geo2'
     depends_on:
@@ -427,7 +427,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_rate_single_node:full-cpu
+    image: hotel_reserv_rate_single_node:latest
     entrypoint: rate
     container_name: 'hotel_reserv_rate0'
     depends_on:
@@ -441,7 +441,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_rate_single_node:full-cpu
+    image: hotel_reserv_rate_single_node:latest
     entrypoint: rate
     container_name: 'hotel_reserv_rate1'
     depends_on:
@@ -455,7 +455,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_rate_single_node:full-cpu
+    image: hotel_reserv_rate_single_node:latest
     entrypoint: rate
     container_name: 'hotel_reserv_rate2'
     depends_on:
@@ -469,7 +469,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_rsv_single_node:full-cpu
+    image: hotel_reserv_rsv_single_node:latest
     entrypoint: reservation
     container_name: 'hotel_reserv_reservation0'
     depends_on:
@@ -483,7 +483,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_rsv_single_node:full-cpu
+    image: hotel_reserv_rsv_single_node:latest
     entrypoint: reservation
     container_name: 'hotel_reserv_reservation1'
     depends_on:
@@ -497,7 +497,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_rsv_single_node:full-cpu
+    image: hotel_reserv_rsv_single_node:latest
     entrypoint: reservation
     container_name: 'hotel_reserv_reservation2'
     depends_on:
@@ -511,7 +511,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_rsv_single_node:full-cpu
+    image: hotel_reserv_rsv_single_node:latest
     entrypoint: reservation
     container_name: 'hotel_reserv_reservation3'
     depends_on:
@@ -525,7 +525,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_rsv_single_node:full-cpu
+    image: hotel_reserv_rsv_single_node:latest
     entrypoint: reservation
     container_name: 'hotel_reserv_reservation4'
     depends_on:
@@ -539,7 +539,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_rsv_single_node:full-cpu
+    image: hotel_reserv_rsv_single_node:latest
     entrypoint: reservation
     container_name: 'hotel_reserv_reservation5'
     depends_on:
@@ -553,7 +553,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_recommend_single_node:full-cpu
+    image: hotel_reserv_recommend_single_node:latest
     entrypoint: recommendation
     container_name: 'hotel_reserv_recommendation0'
     depends_on:
@@ -566,7 +566,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_recommend_single_node:full-cpu
+    image: hotel_reserv_recommend_single_node:latest
     entrypoint: recommendation
     container_name: 'hotel_reserv_recommendation1'
     depends_on:
@@ -579,7 +579,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_user_single_node:full-cpu
+    image: hotel_reserv_user_single_node:latest
     entrypoint: user
     container_name: 'hotel_reserv_user0'
     depends_on:
@@ -592,7 +592,7 @@ services:
     environment:
       - TLS
     build: .
-    image: hotel_reserv_user_single_node:full-cpu
+    image: hotel_reserv_user_single_node:latest
     entrypoint: user
     container_name: 'hotel_reserv_user1'
     depends_on:
