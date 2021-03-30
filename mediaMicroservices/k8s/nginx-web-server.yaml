@@ -41,6 +41,7 @@ spec:
       containers:
       - name: nginx-web-server
         image: yg397/openresty-thrift:xenial
+        imagePullPolicy: IfNotPresent
         command: ["/bin/sh", "-c"]
         args:
           - /usr/local/openresty/bin/openresty &&

@@ -40,5 +40,6 @@ spec:
       containers:
       - name: user-review-service
         image: yg397/media-microservices
+        imagePullPolicy: IfNotPresent
         command: ["UserReviewService"]
       restartPolicy: Always

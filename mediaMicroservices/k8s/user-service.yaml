@@ -40,5 +40,6 @@ spec:
       containers:
       - name: user-service
         image: yg397/media-microservices
+        imagePullPolicy: IfNotPresent
         command: ["UserService"]
       restartPolicy: Always

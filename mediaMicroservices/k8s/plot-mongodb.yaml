@@ -40,6 +40,7 @@ spec:
       containers:
       - name: plot-mongodb
         image: mongo
+        imagePullPolicy: IfNotPresent
         volumeMounts:
           - name: my-data
             mountPath: "/data/db"

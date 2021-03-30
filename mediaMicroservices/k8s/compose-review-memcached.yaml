@@ -40,4 +40,5 @@ spec:
       containers:
       - name: compose-review-memcached
         image: memcached
+        imagePullPolicy: IfNotPresent
       restartPolicy: Always

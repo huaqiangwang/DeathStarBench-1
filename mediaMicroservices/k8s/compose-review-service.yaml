@@ -40,5 +40,6 @@ spec:
       containers:
       - name: compose-review-service
         image: yg397/media-microservices
+        imagePullPolicy: IfNotPresent
         command: ["ComposeReviewService"]
       restartPolicy: Always

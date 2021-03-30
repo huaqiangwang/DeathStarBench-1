@@ -40,4 +40,5 @@ spec:
       containers:
       - name: movie-id-memcached
         image: memcached
+        imagePullPolicy: IfNotPresent
       restartPolicy: Always

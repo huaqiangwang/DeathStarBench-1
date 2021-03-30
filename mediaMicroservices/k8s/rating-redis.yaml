@@ -40,4 +40,5 @@ spec:
       containers:
       - name: rating-redis
         image: redis
+        imagePullPolicy: IfNotPresent
       restartPolicy: Always

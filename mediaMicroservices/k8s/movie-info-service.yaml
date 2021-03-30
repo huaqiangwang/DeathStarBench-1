@@ -40,5 +40,6 @@ spec:
       containers:
       - name: movie-info-service
         image: yg397/media-microservices
+        imagePullPolicy: IfNotPresent
         command: ["MovieInfoService"]
       restartPolicy: Always
