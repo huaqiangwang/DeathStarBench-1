@@ -45,6 +45,7 @@ spec:
       containers:
       - name: write-home-timeline-rabbitmq
         image: rabbitmq
+        imagePullPolicy: IfNotPresent
         env:
         - name: RABBITMQ_ERLANG_COOKIE
           value: "WRITE-HOME-TIMELINE-RABBITMQ"

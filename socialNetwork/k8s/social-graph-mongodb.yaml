@@ -38,6 +38,7 @@ spec:
       containers:
       - name: social-graph-mongodb
         image: mongo
+        imagePullPolicy: IfNotPresent
         volumeMounts:
           - name: my-data
             mountPath: "/data/db"

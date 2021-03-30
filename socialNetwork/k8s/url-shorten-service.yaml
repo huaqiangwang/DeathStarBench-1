@@ -38,6 +38,7 @@ spec:
       containers:
       - name: url-shorten-service
         image: yg397/social-network-microservices
+        imagePullPolicy: IfNotPresent
         command: ["UrlShortenService"]
         volumeMounts:
           - mountPath: /social-network-microservices/config/jaeger-config.yml

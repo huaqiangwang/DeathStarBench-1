@@ -23,6 +23,7 @@ spec:
       containers:
       - name: ubuntu-client
         image: ubuntu
+        imagePullPolicy: IfNotPresent
         command:  ["/bin/sh", "-c"]
         args:
           - apt-get -y update &&

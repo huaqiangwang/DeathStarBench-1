@@ -38,6 +38,7 @@ spec:
       containers:
       - name: post-storage-mongodb
         image: mongo
+        imagePullPolicy: IfNotPresent
         volumeMounts:
           - name: my-data
             mountPath: "/data/db"
