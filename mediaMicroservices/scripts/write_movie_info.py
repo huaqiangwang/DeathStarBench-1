@@ -1,5 +1,6 @@
 import aiohttp
 import asyncio
+import os
 import sys
 import json
 import argparse
@@ -89,12 +90,16 @@ async def write_movie_info(addr, raw_movies):
     resps = await asyncio.gather(*tasks)
     print(idx, "movies finished")
 
+
 if __name__ == '__main__':
+  cwd = os.path.dirname(os.path.abspath(__file__))
+  default_cast_json = os.path.join(cwd, "../datasets/tmdb/casts.json")
+  default_movie_json = os.path.join(cwd, "../datasets/tmdb/movies.json")
   parser = argparse.ArgumentParser()
   parser.add_argument("-c", "--cast", action="store", dest="cast_filename",
-    type=str, default="../datasets/tmdb/casts.json")
+    type=str, default=default_cast_json)
   parser.add_argument("-m", "--movie", action="store", dest="movie_filename",
-    type=str, default="../datasets/tmdb/movies.json")
+    type=str, default=default_movie_json)
   args = parser.parse_args()
 
   with open(args.cast_filename, 'r') as cast_file:
