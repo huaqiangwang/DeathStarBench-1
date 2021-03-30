@@ -40,4 +40,5 @@ spec:
       containers:
       - name: user-memcached
         image: memcached
+        imagePullPolicy: IfNotPresent
       restartPolicy: Always

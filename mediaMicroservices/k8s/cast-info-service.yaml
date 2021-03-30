@@ -40,5 +40,6 @@ spec:
       containers:
       - name: cast-info-service
         image: yg397/media-microservices
+        imagePullPolicy: IfNotPresent
         command: ["CastInfoService"]
       restartPolicy: Always

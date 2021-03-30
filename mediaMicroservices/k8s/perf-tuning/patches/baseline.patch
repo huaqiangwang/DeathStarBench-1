@@ -1,0 +1,156 @@
+diff --git a/mediaMicroservices/k8s/cast-info-service.yaml b/mediaMicroservices/k8s/cast-info-service.yaml
+index 9b130a3..c08ceaf 100644
+--- a/mediaMicroservices/k8s/cast-info-service.yaml
++++ b/mediaMicroservices/k8s/cast-info-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     death-star-project: media-microsvc
+     app: cast-info-service
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: media-microsvc
+diff --git a/mediaMicroservices/k8s/compose-review-service.yaml b/mediaMicroservices/k8s/compose-review-service.yaml
+index 8168c9f..ed58fcb 100644
+--- a/mediaMicroservices/k8s/compose-review-service.yaml
++++ b/mediaMicroservices/k8s/compose-review-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     death-star-project: media-microsvc
+     app: compose-review-service
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: media-microsvc
+diff --git a/mediaMicroservices/k8s/movie-id-service.yaml b/mediaMicroservices/k8s/movie-id-service.yaml
+index 6567bbb..f5d492c 100644
+--- a/mediaMicroservices/k8s/movie-id-service.yaml
++++ b/mediaMicroservices/k8s/movie-id-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     death-star-project: media-microsvc
+     app: movie-id-service
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: media-microsvc
+diff --git a/mediaMicroservices/k8s/movie-info-service.yaml b/mediaMicroservices/k8s/movie-info-service.yaml
+index 475182d..4b85ea3 100644
+--- a/mediaMicroservices/k8s/movie-info-service.yaml
++++ b/mediaMicroservices/k8s/movie-info-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     death-star-project: media-microsvc
+     app: movie-info-service
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: media-microsvc
+diff --git a/mediaMicroservices/k8s/movie-review-service.yaml b/mediaMicroservices/k8s/movie-review-service.yaml
+index 4428019..ed0102d 100644
+--- a/mediaMicroservices/k8s/movie-review-service.yaml
++++ b/mediaMicroservices/k8s/movie-review-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     death-star-project: media-microsvc
+     app: movie-review-service
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: media-microsvc
+diff --git a/mediaMicroservices/k8s/plot-service.yaml b/mediaMicroservices/k8s/plot-service.yaml
+index 62dfc42..dc277d3 100644
+--- a/mediaMicroservices/k8s/plot-service.yaml
++++ b/mediaMicroservices/k8s/plot-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     death-star-project: media-microsvc
+     app: plot-service
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: media-microsvc
+diff --git a/mediaMicroservices/k8s/rating-service.yaml b/mediaMicroservices/k8s/rating-service.yaml
+index f881f59..4d93b63 100644
+--- a/mediaMicroservices/k8s/rating-service.yaml
++++ b/mediaMicroservices/k8s/rating-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     death-star-project: media-microsvc
+     app: rating-service
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: media-microsvc
+diff --git a/mediaMicroservices/k8s/review-storage-service.yaml b/mediaMicroservices/k8s/review-storage-service.yaml
+index 56e88cf..7c8b87d 100644
+--- a/mediaMicroservices/k8s/review-storage-service.yaml
++++ b/mediaMicroservices/k8s/review-storage-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     death-star-project: media-microsvc
+     app: review-storage-service
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: media-microsvc
+diff --git a/mediaMicroservices/k8s/text-service.yaml b/mediaMicroservices/k8s/text-service.yaml
+index e742c18..036d274 100644
+--- a/mediaMicroservices/k8s/text-service.yaml
++++ b/mediaMicroservices/k8s/text-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     death-star-project: media-microsvc
+     app: text-service
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: media-microsvc
+diff --git a/mediaMicroservices/k8s/unique-id-service.yaml b/mediaMicroservices/k8s/unique-id-service.yaml
+index e6bedb7..25d5ac2 100644
+--- a/mediaMicroservices/k8s/unique-id-service.yaml
++++ b/mediaMicroservices/k8s/unique-id-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     death-star-project: media-microsvc
+     app: unique-id-service
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: media-microsvc
+diff --git a/mediaMicroservices/k8s/user-review-service.yaml b/mediaMicroservices/k8s/user-review-service.yaml
+index 6f99aca..e59a42c 100644
+--- a/mediaMicroservices/k8s/user-review-service.yaml
++++ b/mediaMicroservices/k8s/user-review-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     death-star-project: media-microsvc
+     app: user-review-service
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: media-microsvc
+diff --git a/mediaMicroservices/k8s/user-service.yaml b/mediaMicroservices/k8s/user-service.yaml
+index bf071d7..be272f1 100644
+--- a/mediaMicroservices/k8s/user-service.yaml
++++ b/mediaMicroservices/k8s/user-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     death-star-project: media-microsvc
+     app: user-service
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: media-microsvc

@@ -40,4 +40,5 @@ spec:
       containers:
       - name: movie-review-redis
         image: redis
+        imagePullPolicy: IfNotPresent
       restartPolicy: Always

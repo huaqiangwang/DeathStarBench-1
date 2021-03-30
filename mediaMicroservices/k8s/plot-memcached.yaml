@@ -40,4 +40,5 @@ spec:
       containers:
       - name: plot-memcached
         image: memcached
+        imagePullPolicy: IfNotPresent
       restartPolicy: Always

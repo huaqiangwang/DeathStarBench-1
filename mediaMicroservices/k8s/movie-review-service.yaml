@@ -40,5 +40,6 @@ spec:
       containers:
       - name: movie-review-service
         image: yg397/media-microservices
+        imagePullPolicy: IfNotPresent
         command: ["MovieReviewService"]
       restartPolicy: Always
