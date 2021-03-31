@@ -17,7 +17,7 @@ done
 # kubectl expose service nginx-thrift -n ${NS}
 # kubectl expose service jaeger-out -n ${NS}
 
-echo "After all pods are running (oc get pods):"
-echo "Follow the instructions in openshift/README.md to configure and run init_social_graph.py to load the dataset."
+echo "After all pods are running:"
+echo "Follow the instructions in k8s/README.md to configure and run init_social_graph.py to load the dataset."
 
 cd - >/dev/null

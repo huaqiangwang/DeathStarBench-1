@@ -40,6 +40,7 @@ spec:
       containers:
       - name: write-home-timeline-service
         image: yg397/social-network-microservices
+        imagePullPolicy: IfNotPresent
         command: ["WriteHomeTimelineService"]
         volumeMounts:
           - mountPath: /social-network-microservices/config/jaeger-config.yml

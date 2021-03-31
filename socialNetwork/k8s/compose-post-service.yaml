@@ -40,6 +40,7 @@ spec:
       containers:
       - name: compose-post-service
         image: yg397/social-network-microservices
+        imagePullPolicy: IfNotPresent
         command: ["ComposePostService"]
         volumeMounts:
           - mountPath: /social-network-microservices/config/jaeger-config.yml

@@ -38,4 +38,5 @@ spec:
       containers:
       - name: social-graph-redis
         image: redis
+        imagePullPolicy: IfNotPresent
       restartPolicy: Always

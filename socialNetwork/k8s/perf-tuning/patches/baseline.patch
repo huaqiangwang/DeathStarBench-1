@@ -1,0 +1,156 @@
+diff --git a/socialNetwork/k8s/compose-post-service.yaml b/socialNetwork/k8s/compose-post-service.yaml
+index 15eaa0d..53330ea 100644
+--- a/socialNetwork/k8s/compose-post-service.yaml
++++ b/socialNetwork/k8s/compose-post-service.yaml
+@@ -25,7 +25,7 @@ metadata:
+     app: compose-post-service
+   namespace: social-network
+ spec:
+-  replicas: 1
++  replicas: 3
+   selector:
+     matchLabels:
+       death-star-project: social-network
+diff --git a/socialNetwork/k8s/home-timeline-service.yaml b/socialNetwork/k8s/home-timeline-service.yaml
+index c3e4406..a443768 100644
+--- a/socialNetwork/k8s/home-timeline-service.yaml
++++ b/socialNetwork/k8s/home-timeline-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     app: home-timeline-service
+   namespace: social-network
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: social-network
+diff --git a/socialNetwork/k8s/nginx-thrift-config/nginx.conf b/socialNetwork/k8s/nginx-thrift-config/nginx.conf
+index b508575..f5b914a 100644
+--- a/socialNetwork/k8s/nginx-thrift-config/nginx.conf
++++ b/socialNetwork/k8s/nginx-thrift-config/nginx.conf
+@@ -3,7 +3,7 @@ load_module modules/ngx_http_opentracing_module.so;
+ 
+ # Checklist: Make sure that worker_processes == #cores you gave to
+ # nginx process
+-worker_processes  16;
++worker_processes  8;
+ 
+ error_log  logs/error.log warn;
+ 
+diff --git a/socialNetwork/k8s/post-storage-service.yaml b/socialNetwork/k8s/post-storage-service.yaml
+index 0ef8167..1478ecf 100644
+--- a/socialNetwork/k8s/post-storage-service.yaml
++++ b/socialNetwork/k8s/post-storage-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     app: post-storage-service
+   namespace: social-network
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: social-network
+diff --git a/socialNetwork/k8s/social-graph-service.yaml b/socialNetwork/k8s/social-graph-service.yaml
+index d5ec716..fb36263 100644
+--- a/socialNetwork/k8s/social-graph-service.yaml
++++ b/socialNetwork/k8s/social-graph-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     app: social-graph-service
+   namespace: social-network
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: social-network
+diff --git a/socialNetwork/k8s/text-service.yaml b/socialNetwork/k8s/text-service.yaml
+index 714d213..e16ee20 100644
+--- a/socialNetwork/k8s/text-service.yaml
++++ b/socialNetwork/k8s/text-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     app: text-service
+   namespace: social-network
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: social-network
+diff --git a/socialNetwork/k8s/unique-id-service.yaml b/socialNetwork/k8s/unique-id-service.yaml
+index cececa7..ea41797 100644
+--- a/socialNetwork/k8s/unique-id-service.yaml
++++ b/socialNetwork/k8s/unique-id-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     app: unique-id-service
+   namespace: social-network
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: social-network
+diff --git a/socialNetwork/k8s/url-shorten-service.yaml b/socialNetwork/k8s/url-shorten-service.yaml
+index ef2c65e..1f367ac 100644
+--- a/socialNetwork/k8s/url-shorten-service.yaml
++++ b/socialNetwork/k8s/url-shorten-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     app: url-shorten-service
+   namespace: social-network
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: social-network
+diff --git a/socialNetwork/k8s/user-mention-service.yaml b/socialNetwork/k8s/user-mention-service.yaml
+index 5516a5c..924b8d8 100644
+--- a/socialNetwork/k8s/user-mention-service.yaml
++++ b/socialNetwork/k8s/user-mention-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     app: user-mention-service
+   namespace: social-network
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: social-network
+diff --git a/socialNetwork/k8s/user-service.yaml b/socialNetwork/k8s/user-service.yaml
+index db667e9..7ab11ee 100644
+--- a/socialNetwork/k8s/user-service.yaml
++++ b/socialNetwork/k8s/user-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     app: user-service
+   namespace: social-network
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: social-network
+diff --git a/socialNetwork/k8s/user-timeline-service.yaml b/socialNetwork/k8s/user-timeline-service.yaml
+index a75e9e7..8abc75a 100644
+--- a/socialNetwork/k8s/user-timeline-service.yaml
++++ b/socialNetwork/k8s/user-timeline-service.yaml
+@@ -23,7 +23,7 @@ metadata:
+     app: user-timeline-service
+   namespace: social-network
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: social-network
+diff --git a/socialNetwork/k8s/write-home-timeline-service.yaml b/socialNetwork/k8s/write-home-timeline-service.yaml
+index 8d6fa24..863480a 100644
+--- a/socialNetwork/k8s/write-home-timeline-service.yaml
++++ b/socialNetwork/k8s/write-home-timeline-service.yaml
+@@ -25,7 +25,7 @@ metadata:
+     app: write-home-timeline-service
+   namespace: social-network
+ spec:
+-  replicas: 1
++  replicas: 2
+   selector:
+     matchLabels:
+       death-star-project: social-network

@@ -38,4 +38,5 @@ spec:
       containers:
       - name: home-timeline-redis
         image: redis
+        imagePullPolicy: IfNotPresent
       restartPolicy: Always

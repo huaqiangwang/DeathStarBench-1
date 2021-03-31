@@ -10,5 +10,6 @@ spec:
   containers:
   - name: wrk-client
     image: aenniwang/wrk-client
-    command: ["sleep", "3600"]
+    imagePullPolicy: IfNotPresent
+    command: ["sleep", "36000"]
 

@@ -1,5 +1,6 @@
 import aiohttp
 import asyncio
+import os
 import sys
 
 async def upload_follow(session, addr, user_0, user_1):
@@ -78,14 +79,16 @@ async def follow(addr, edges):
 
 if __name__ == '__main__':
   if len(sys.argv) < 2:
-    filename = "datasets/social-graph/socfb-Reed98/socfb-Reed98.mtx"
+    cwd = os.path.dirname(os.path.abspath(__file__))
+    filename = "../datasets/social-graph/socfb-Reed98/socfb-Reed98.mtx"
+    filename = os.path.join(cwd, filename)
   else:
     filename = sys.argv[1]
   with open(filename, 'r') as file:
     nodes = getNodes(file)
     edges = getEdges(file)
 
-  addr = "http://127.0.0.1:8080"
+  addr = "http://192.168.47.149:8080"
   loop = asyncio.get_event_loop()
   future = asyncio.ensure_future(register(addr, nodes))
   loop.run_until_complete(future)

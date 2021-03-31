@@ -38,6 +38,7 @@ spec:
       containers:
       - name: text-service
         image: yg397/social-network-microservices
+        imagePullPolicy: IfNotPresent
         command: ["TextService"]
         volumeMounts:
           - mountPath: /social-network-microservices/config/jaeger-config.yml

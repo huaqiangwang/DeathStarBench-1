@@ -38,6 +38,7 @@ spec:
       containers:
       - name: home-timeline-service
         image: yg397/social-network-microservices
+        imagePullPolicy: IfNotPresent
         command: ["HomeTimelineService"]
         volumeMounts:
           - mountPath: /social-network-microservices/config/jaeger-config.yml

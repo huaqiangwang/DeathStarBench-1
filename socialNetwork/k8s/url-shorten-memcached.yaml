@@ -38,4 +38,5 @@ spec:
       containers:
       - name: url-shorten-memcached
         image: memcached
+        imagePullPolicy: IfNotPresent
       restartPolicy: Always
