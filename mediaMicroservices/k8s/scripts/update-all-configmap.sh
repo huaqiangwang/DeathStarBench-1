@@ -6,5 +6,6 @@ cd $(dirname $0)/..
 ./scripts/configmaps/update-configmap-jaeger-config-json.sh
 ./scripts/configmaps/update-configmap-lua-scripts.sh
 ./scripts/configmaps/update-configmap-nginx-conf.sh
+./scripts/configmaps/update-configmap-prometheus-conf.sh
 
 cd -
