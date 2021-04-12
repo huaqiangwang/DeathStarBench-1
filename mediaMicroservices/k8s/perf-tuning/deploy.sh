@@ -10,11 +10,14 @@ function usage() {
   echo "Usage: deply.sh <scenario>"
   echo "       valid 'scenario' includes:"
   echo "         - baseline: multi-instance case"
+  echo "         - cpu-pinning: run uServices with pinned CPU setting"
 }
 
 
 case $SCENARIO in
     "baseline")
+        ;;
+    "cpu-pinning")
         ;;
     *)
         echo "Error: Bad parameter"
