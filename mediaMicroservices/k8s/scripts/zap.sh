@@ -34,8 +34,17 @@ do
 done
 wait
 
+daemonset="cadvisor prometheus"
+echo "Deleting services and daemonsets"
+for d in ${daemonset}
+do
+    kubectl delete daemonset/$d -n ${NS} &
+	kubectl delete service/${d}-out -n ${NS} &
+done
+wait
+
 echo deleting cm
-for c in configmap-gen-lua configmap-jaeger-config-json configmap-lua-scripts configmap-lua-scripts-cast-info configmap-lua-scripts-movie configmap-lua-scripts-movie-info configmap-lua-scripts-plot configmap-lua-scripts-review configmap-lua-scripts-user configmap-nginx-conf
+for c in configmap-gen-lua configmap-jaeger-config-json configmap-lua-scripts configmap-lua-scripts-cast-info configmap-lua-scripts-movie configmap-lua-scripts-movie-info configmap-lua-scripts-plot configmap-lua-scripts-review configmap-lua-scripts-user configmap-nginx-conf configmap-prometheus-conf
 do
 	kubectl delete cm/${c} -n ${NS} &
 done
