@@ -1,10 +1,13 @@
 #! /bin/bash
 
+
 SCENARIO=$1
 SYSTEM="mediaMicroservices"
 NS="media-microsv"
 PATCH="patches/$SCENARIO.patch"
 GITDIFF=`git diff --stat`
+KUBELET_CONF_FILE='/var/lib/kubelet/config.yaml' 
+CPU_MANAGER_STATE='/var/lib/kubelet/cpu_manager_state'
 
 function usage() {
   echo "Usage: deply.sh <scenario>"
@@ -13,18 +16,72 @@ function usage() {
   echo "         - cpu-pinning: run uServices with pinned CPU setting"
 }
 
+function kubelet_cpu_manager_clear() {
+    sudo sed -i '/#### BLOCK START/,+7 d' ${KUBELET_CONF_FILE}
+
+    sudo grep -e '#### BLOCK START: CPU MANAGER' ${KUBELET_CONF_FILE} >/dev/null
+
+    if [[ $? == 0 ]]; then
+        # found. error!
+        echo "Failed in clearing kubelet cpu manager information" >&2
+        exit 2
+    fi
+}
+
+function kubelet_cpu_manager_set_static() {
+    echo "#### BLOCK START: CPU MANAGER SETTING BY DSB PERF-TURN" |sudo tee -a ${KUBELET_CONF_FILE} >/dev/null
+    echo "#### DON'T EDIT THIS BLOCK" |sudo tee -a ${KUBELET_CONF_FILE} >/dev/null
+    echo "cpuManagerPolicy: static" |sudo tee -a ${KUBELET_CONF_FILE} >/dev/null
+    echo "kubeReserved:" |sudo tee -a ${KUBELET_CONF_FILE} >/dev/null
+    echo "  cpu: 500m" |sudo tee -a ${KUBELET_CONF_FILE} >/dev/null
+    echo "systemReserved:" |sudo tee -a ${KUBELET_CONF_FILE} >/dev/null
+    echo "  cpu: 500m" |sudo tee -a ${KUBELET_CONF_FILE} >/dev/null
+    echo "#### BLOCK END" |sudo tee -a ${KUBELET_CONF_FILE} >/dev/null
+    sudo grep '#### BLOCK START: CPU MANAGER' ${KUBELET_CONF_FILE} >/dev/null
+    if [[ $? != 0 ]]; then
+        echo "Failed in setting CPU manager policy to kubelet"
+        # not found. error!
+        exit 2
+    fi
+}
+
+function kubelet_restart() {
+    sudo rm ${CPU_MANAGER_STATE}
+    sudo systemctl restart kubelet
+    sleep 15
+}
+
+function kubelet_check_cpu_static_policy() {
+    sudo grep -e '"policyName".*static"' ${CPU_MANAGER_STATE} >/dev/null
+    if [[ $? == 0 ]]; then
+        echo 'static'
+        return
+    fi 
+
+    echo 'none'
+}
+
 
 case $SCENARIO in
     "baseline")
         ;;
     "cpu-pinning")
+        kubelet_cpu_manager_clear
+        kubelet_cpu_manager_set_static
+        kubelet_restart
+        policy=$(kubelet_check_cpu_static_policy)
+        if [[ $policy != 'static' ]]; then
+            echo "Failed in settting CPU manager policy to 'static'!"
+            exit 3
+        fi
         ;;
+
     *)
         echo "Error: Bad parameter"
         echo ""
         usage
       
-        exit -1
+        exit 1
         ;;
 esac
 
