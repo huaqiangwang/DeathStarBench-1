@@ -34,8 +34,15 @@ Refer to `k8s/README.md`.
   `16686` for Jaeger.
 
 ### Start docker containers
+#### Start docker containers on single machine with `docker-compose`
 Start docker containers by running `docker-compose up -d`. All images will be 
 pulled from Docker Hub.
+
+#### Start docker containers on a machine cluster with `docker swarm`
+Before starting the containers, make sure you are on the master node of the docker swarm nodes.
+```
+docker stack deploy --compose-file=docker-compose-swarm.yml <service-name>
+```
 
 ### Register users and construct social graphs
 Register users and construct social graph by running 
