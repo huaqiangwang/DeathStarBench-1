@@ -11,6 +11,7 @@ CPU_MANAGER_STATE='/var/lib/kubelet/cpu_manager_state'
 function usage() {
   echo "Usage: deply.sh <scenario>"
   echo "       valid 'scenario' includes:"
+  echo "         - single-instance: each uService has only one instance"
   echo "         - baseline: multi-instance case"
   echo "         - cpu-pinning: run uServices with pinned CPU setting"
 }
@@ -61,6 +62,8 @@ function kubelet_check_cpu_static_policy() {
 }
 
 case $SCENARIO in
+    "single-instance")
+        ;;
     "baseline")
         ;;
     "cpu-pinning")

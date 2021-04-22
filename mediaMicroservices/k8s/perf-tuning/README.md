@@ -32,6 +32,10 @@ To run wrk test with default http workload pressure, run
 
 ```
 
+### single-instance
+
+This is the scenario that each uService has only one instance.
+
 ### baseline
 
 'baseline' is used as a scenario with no general performance
