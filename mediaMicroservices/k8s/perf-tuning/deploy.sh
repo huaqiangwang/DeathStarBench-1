@@ -1,6 +1,5 @@
 #! /bin/bash
 
-
 SCENARIO=$1
 SYSTEM="mediaMicroservices"
 NS="media-microsv"
@@ -61,7 +60,6 @@ function kubelet_check_cpu_static_policy() {
     echo 'none'
 }
 
-
 case $SCENARIO in
     "baseline")
         ;;
@@ -105,6 +103,12 @@ y
 EOF
 fi
 
+# Apply patch
+if [[ -f $PATCH ]]; then
+    echo "Apply patch $PATCH ..."
+    cd ../../../ && patch -p1 < "$SYSTEM/k8s/perf-tuning/$PATCH" && cd -
+fi
+
 IMAGE_UUID=`docker images |grep mediamicroservices |awk '{print $3}'`
 if [[ ${IMAGE_UUID} != '' ]]
 then
@@ -117,16 +121,17 @@ for file in `ls *.yaml`
 do
     sed -i 's/yg397\/media-microservices/mediamicroservices/g' $file
 done
+
+nginxconf=nginx-web-server.yaml
+sed -i 's/yg397\/openresty-thrift:xenial/openresty-thrift:xenial/g' $nginxconf
 cd -
 
-# Apply patch
-if [[ -f $PATCH ]]; then
-    echo "Apply patch $PATCH ..."
-    cd ../../../ && patch -p1 < "$SYSTEM/k8s/perf-tuning/$PATCH" && cd -
-fi
+# stop at any error
+set -e
 
 # build images
 docker build -t mediamicroservices:latest -f ../../Dockerfile ../../
+docker build -t openresty-through:xenial -f ../../docker/openresty-thrift/xenial/Dockerfile ../../docker/openresty-thrift
 
 # Start services
 cd ../scripts && ./deploy-all-services-and-configurations.sh && \
@@ -138,3 +143,5 @@ python3 ../../scripts/write_movie_info.py \
 
 # sending request through 'wrk' on machine out of cluster
 #wrk
+
+set +e
