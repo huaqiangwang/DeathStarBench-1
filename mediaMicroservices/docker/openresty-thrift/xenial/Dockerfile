@@ -7,7 +7,7 @@ LABEL maintainer="Yu Gan <yg397@cornell.edu>"
 
 # Docker Build Arguments
 ARG RESTY_VERSION="1.15.8.1rc1"
-ARG RESTY_LUAROCKS_VERSION="2.4.4"
+ARG RESTY_LUAROCKS_VERSION="3.4.0"
 ARG RESTY_OPENSSL_VERSION="1.1.0j"
 ARG RESTY_PCRE_VERSION="8.42"
 ARG JAEGER_TRACING_VERSION="0.4.2"
@@ -148,7 +148,7 @@ RUN cd /usr/local \
         pcre-${RESTY_PCRE_VERSION}.tar.gz pcre-${RESTY_PCRE_VERSION}
 
 RUN cd /tmp \
-    && curl -fSL https://github.com/luarocks/luarocks/archive/${RESTY_LUAROCKS_VERSION}.tar.gz -o luarocks-${RESTY_LUAROCKS_VERSION}.tar.gz \
+    && curl -fSL https://github.com/luarocks/luarocks/archive/v${RESTY_LUAROCKS_VERSION}.tar.gz -o luarocks-${RESTY_LUAROCKS_VERSION}.tar.gz \
     && tar xzf luarocks-${RESTY_LUAROCKS_VERSION}.tar.gz \
     && cd luarocks-${RESTY_LUAROCKS_VERSION} \
     && ./configure \
@@ -163,8 +163,8 @@ RUN cd /tmp \
     && rm -rf luarocks-${RESTY_LUAROCKS_VERSION} luarocks-${RESTY_LUAROCKS_VERSION}.tar.gz \
     && if [ -n "${RESTY_ADD_PACKAGE_BUILDDEPS}" ]; then DEBIAN_FRONTEND=noninteractive apt-get remove --purge "${RESTY_ADD_PACKAGE_BUILDDEPS}" ; fi \
     && DEBIAN_FRONTEND=noninteractive apt-get autoremove -y \
-    && ln -sf /dev/stdout /usr/local/openresty/nginx/logs/access.log \
-    && ln -sf /dev/stderr /usr/local/openresty/nginx/logs/error.log
+    && ln -sf /proc/1/fd/1 /usr/local/openresty/nginx/logs/access.log \
+    && ln -sf /proc/1/fd/2 /usr/local/openresty/nginx/logs/error.log
 
 # Add additional binaries into PATH for convenience
 ENV PATH=$PATH:/usr/local/openresty/luajit/bin:/usr/local/openresty/nginx/sbin:/usr/local/openresty/bin
