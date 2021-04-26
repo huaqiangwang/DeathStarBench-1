@@ -134,7 +134,7 @@ set -e
 
 # build images
 docker build -t mediamicroservices:latest -f ../../Dockerfile ../../
-docker build -t openresty-through:xenial -f ../../docker/openresty-thrift/xenial/Dockerfile ../../docker/openresty-thrift
+docker build -t openresty-thrift:xenial -f ../../docker/openresty-thrift/xenial/Dockerfile ../../docker/openresty-thrift
 
 # Start services
 cd ../scripts && ./deploy-all-services-and-configurations.sh && \
