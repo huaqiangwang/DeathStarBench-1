@@ -2,7 +2,7 @@
 
 SCENARIO=$1
 SYSTEM="mediaMicroservices"
-NS="media-microsv"
+NS="media-microsvc"
 PATCH="patches/$SCENARIO.patch"
 GITDIFF=`git diff --stat`
 KUBELET_CONF_FILE='/var/lib/kubelet/config.yaml' 
@@ -86,7 +86,7 @@ case $SCENARIO in
         ;;
 esac
 
-echo "DSB $SYSTEM performance tunning test, scenario: $SCENARIO"
+echo "DSB $SYSTEM performance tuning test, scenario: $SCENARIO"
 
 if [[ $GITDIFF != '' ]]
 then

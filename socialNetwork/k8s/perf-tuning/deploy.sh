@@ -26,7 +26,7 @@ case $SCENARIO in
         ;;
 esac
 
-echo "DSB $SYSTEM performance tunning test, scenario: $SCENARIO"
+echo "DSB $SYSTEM performance tuning test, scenario: $SCENARIO"
 
 if [[ $GITDIFF != '' ]]
 then

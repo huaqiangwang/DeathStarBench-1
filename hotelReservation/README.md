@@ -17,7 +17,11 @@ Supported actions:
 - luarocks (apt-get install luarocks)
 - luasocket (luarocks install luasocket)
 
-## Running the social network application
+## Running the social network with kubernetes cluster
+
+Refer to `k8s/README.md`.
+
+## Running the social network application with docker-compose
 ### Before you start
 - Install Docker and Docker Compose.
 - In case you need to deploy multiple instances of the services(the default docker-compose file launches 1 instance for each service). Please copy docker-compose_multi-instances.yml and modify it according to your environment.
@@ -41,12 +45,11 @@ Check if TLS is enabled or not: `docker-compose logs user | grep TLS`.
 The available cipher suite can be find at the file [options.go](tls/options.go#L21).
 
 #### workload generation
+
 ```bash
 $WRK_DIR/wrk -D exp -t <num-threads> -c <num-conns> -d <duration> -L -s ./wrk2_lua_scripts/mixed-workload_type_1.lua http://x.x.x.x:5000 -R <reqs-per-sec>
 ```
 
-### Deploying in Kubernetes Cluster
-Refer to `k8s/README.md`.
 #### using [pprof](https://github.com/google/pprof "pprof") to profile  services
 ```bash
 # install pprof

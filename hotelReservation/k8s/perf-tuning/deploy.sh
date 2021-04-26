@@ -26,7 +26,7 @@ esac
 PATCH="patches/$SCENARIO.patch"
 GITDIFF=`git diff --stat`
 
-echo "DSB hotelReservation performance tunning test, scenario: $SCENARIO"
+echo "DSB hotelReservation performance tuning test, scenario: $SCENARIO"
 
 if [[ $GITDIFF != '' ]]
 then

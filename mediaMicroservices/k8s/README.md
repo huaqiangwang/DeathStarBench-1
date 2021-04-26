@@ -3,10 +3,43 @@
 ## Pre-requirements
 
 - A running Kubernetes cluster is needed.
-- Pre-requirements mentioned [here](https://github.com/delimitrou/DeathStarBench/blob/master/mediaMicroservices/README.md) should be met.
+- Pre-requirements mentioned [here](https://github.com/intel-sandbox/DeathStarBenchPlusPlus/blob/master/mediaMicroservices/README.md) should be met.
 - A running istio is required if you want to inject istio sidecar to service.
 
-## Running the media service application
+## Running Predefined Performance Tuning Scenarios
+
+**NOTE: This is the recommended and easier way to deploy and run the system.**
+
+To deploy a fresh uService system:
+
+``` bash
+cd k8s/perf-tuning/
+./deploy.sh <scenario>
+```
+
+To measure performance:
+
+``` bash
+./measure.sh <scenario>
+```
+
+Refer to [k8s/perf-tuning/README.md](https://github.com/intel-sandbox/DeathStarBenchPlusPlus/blob/master/mediaMicroservices/k8s/perf-tuning/README.md)
+
+## Running Manually
+
+**NOTE: This part is for you who want to customize the deployment and the testing part.** 
+
+### Before you start
+
+
+
+- Ensure that the necessary local images have been made. Otherwise, run following commands to create images:
+
+```bash
+cd mediaMicroservices
+docker build -t mediamicroservices:latest -f ./Dockerfile .
+docker build -t openresty-through:xenial -f ./docker/openresty-thrift/xenial/Dockerfile ./docker/openresty-thrift
+```
 
 ### Deploy services
 
@@ -15,35 +48,25 @@ and wait `kubectl -n media-microsvc get pod` to show all pods with status `Runni
 
 ### Register users and movie information
 
-- If you are using an "off-cluster" client then run
- `<path-of-repo>/mediaMicroservices/k8s/scripts/init_user_data.sh` to set proper
- web server `nginx-web-server` IP address. 
+Run following comamnds on the host:
 
-- If you are using an "on-cluster" client, set the web server IP address by running
- `<path-of-repo>/mediaMicroservices/k8s/scripts/init_user_data.sh on_cluster`.
-
-- If you are running "on-cluster" copy necessary files to mms-client, and then log into mms-client to continue:
-  - `mmsclient=$(kubectl get pod | grep mms-client- | cut -f 1 -d " ")`
-  - `kubectl cp <path-of-repo> media-microsvc/"${mmsclient}":<path-of-repo>`
-    - e.g., `kubectl cp /root/DeathStarBench media-microsvc/"${mmsclient}":/root`
-  - `kubectl -n media-microsvcrsh exec -it deployment/mms-client bash`
-
-- For both on and off cluster clients, initialize the databases:
-  - `python3 <path-of-repo>/mediaMicroservices/scripts/write_movie_info.py && <path-of-repo>/mediaMicroservices/scripts/register_users.sh`
-    - e.g., `python3 /root/DeathStarBench/mediaMicroservices/scripts/write_movie_info.py && /root/DeathStarBench/mediaMicroservices/scripts/register_users.sh`
+```bash
+cd k8s/scripts 
+./init-user-data.sh
+python3 ../../scripts/write_movie_info.py
+../../scripts/register_movies.sh
+../../scripts/register_users.sh
+```
 
 ### Running HTTP workload generator
 
-#### Compose reviews
 
-Take an example, running in on-cluster client:
+We use the pod 'media-microsvc\wrk-client' as the on-cluster workload generator.
 
-```bash
-cd <path-of-repo>/mediaMicroservices/wrk2
-make clean
-make
-./wrk -D exp -t <num-threads> -c <num-conns> -d <duration> -L -s ./scripts/media-microservices/compose-review.lua http://<webserver-address>:8080/wrk2-api/review/compose -R <reqs-per-sec>
-#   e.g., ./wrk -D exp -t 2 -c 2 -d 30 -L -s ./scripts/media-microservices/compose-review.lua http://nginx-web-server.media-microsvc.svc.cluster.local:8080/wrk2-api/review/compose -R 2
+To generate workload request, perform:
+
+``` bash
+kubectl -n media-microsvc exec -it pod/wrk-client -- wrk -D exp -t <num-threads> -c <num-conns> -d <duration> -L -s <lua script> http://nginx-web-server.media-microsvc.svc.cluster.local:8080 -R <reqs-per-sec>
 ```
 
 ### View Jaeger traces
@@ -52,15 +75,7 @@ Use `kubectl -n media-microsvc get ep | grep jaeger-out` to get the location of 
 
 View Jaeger traces by accessing `http://<jaeger-ip-address>:<jaeger-port>` 
 
-
-### Tips
-
-If you are running on-cluster, you can use the following command to copy files off of the client.
-e.g., to copy the results directory from the on-cluster client to the local machine:
-  - `mmsclient=$(kubectl get pod | grep mms-client- | cut -f 1 -d " ")`
-  - `kubectl cp media-microsvc/${mmsclient}:/root/DeathStarBench/mediaMicroservices/k8s/results /tmp`
-
-## Inject istio sidecar for services
+### Inject istio sidecar for services
 
 Once the media microservices are available to be run on kubernetes cluster, just follow the
 [standard istio document](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/)
