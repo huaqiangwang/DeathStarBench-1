@@ -1,4 +1,4 @@
-FROM yg397/thrift-microservice-deps:xenial
+FROM thrift-microservice-social-deps:xenial
 
 ARG NUM_CPUS=40
 

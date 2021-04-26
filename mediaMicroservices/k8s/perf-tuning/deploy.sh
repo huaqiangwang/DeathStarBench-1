@@ -112,6 +112,20 @@ if [[ -f $PATCH ]]; then
     cd ../../../ && patch -p1 < "$SYSTEM/k8s/perf-tuning/$PATCH" && cd -
 fi
 
+IMAGE_UUID=`docker images |grep thrift-microservice-media-deps |awk '{print $3}'`
+if [[ ${IMAGE_UUID} != '' ]]
+then
+    echo "Remove $SYSTEM  docker images"
+    docker image rm --force ${IMAGE_UUID}
+fi
+
+IMAGE_UUID=`docker images |grep openresty-thrift-media |awk '{print $3}'`
+if [[ ${IMAGE_UUID} != '' ]]
+then
+    echo "Remove $SYSTEM  docker images"
+    docker image rm --force ${IMAGE_UUID}
+fi
+
 IMAGE_UUID=`docker images |grep mediamicroservices |awk '{print $3}'`
 if [[ ${IMAGE_UUID} != '' ]]
 then
@@ -126,15 +140,16 @@ do
 done
 
 nginxconf=nginx-web-server.yaml
-sed -i 's/yg397\/openresty-thrift:xenial/openresty-thrift:xenial/g' $nginxconf
+sed -i 's/yg397\/openresty-thrift:xenial/openresty-thrift-media:xenial/g' $nginxconf
 cd -
 
 # stop at any error
 set -e
 
 # build images
+docker build -t thrift-microservice-media-deps:xenial -f ../../docker/thrift-microservice-deps/cpp/Dockerfile ../../docker/thrift-microservice-deps
+docker build -t openresty-thrift-media:xenial -f ../../docker/openresty-thrift/xenial/Dockerfile ../../docker/openresty-thrift
 docker build -t mediamicroservices:latest -f ../../Dockerfile ../../
-docker build -t openresty-thrift:xenial -f ../../docker/openresty-thrift/xenial/Dockerfile ../../docker/openresty-thrift
 
 # Start services
 cd ../scripts && ./deploy-all-services-and-configurations.sh && \

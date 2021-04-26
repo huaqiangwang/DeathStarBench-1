@@ -22,7 +22,7 @@ else
 fi
 
 # BUILD OPENRESTY-THRIFT
-SERVICE="openresty-thrift"
+SERVICE="openresty-thrift-social"
 if [[ $($EXEC images | grep '"^$SERVICE\s"' | wc -l) -le 0 ]]; then
   cd docker/openresty-thrift/
   $EXEC build -t "$SERVICE":"$TAG" -f xenial/Dockerfile .
@@ -32,7 +32,7 @@ else
 fi
 
 # BUILD SOCIAL-NETWORK MICROSERVICE DEPS
-SERVICE="thrift-microservice-deps"
+SERVICE="thrift-microservice-social-deps"
 if [[ $($EXEC images | grep '"^$SERVICE\s"' | wc -l) -le 0 ]]; then
   cd docker/thrift-microservice-deps
   $EXEC build -t "$SERVICE":"$TAG" -f cpp/Dockerfile .

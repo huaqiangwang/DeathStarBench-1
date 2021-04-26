@@ -53,6 +53,8 @@ do
 done
 cd -
 
+sed -i "s/openresty-thrift/openresty-thrift-social/g" nginx-thrift.yaml
+
 IMAGE_UUID=`docker images |grep '"^$SERVICE\s"' |awk '{print $3}'`
 if [[ ${IMAGE_UUID} != '' ]]
 then
