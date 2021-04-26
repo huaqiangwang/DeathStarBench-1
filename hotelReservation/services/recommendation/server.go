@@ -3,21 +3,25 @@ package recommendation
 import (
 	// "encoding/json"
 	"fmt"
+
 	"github.com/google/uuid"
 	"github.com/grpc-ecosystem/grpc-opentracing/go/otgrpc"
 	"github.com/hailocab/go-geoindex"
 	"github.com/harlow/go-micro-services/registry"
 	pb "github.com/harlow/go-micro-services/services/recommendation/proto"
+	"github.com/harlow/go-micro-services/tls"
 	"github.com/opentracing/opentracing-go"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/keepalive"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
+
 	// "io/ioutil"
 	"log"
 	"math"
 	"net"
+
 	// "os"
 	"time"
 	// "strings"
@@ -48,7 +52,7 @@ func (s *Server) Run() error {
 
 	s.uuid = uuid.New().String()
 
-	srv := grpc.NewServer(
+	opts := []grpc.ServerOption{
 		grpc.KeepaliveParams(keepalive.ServerParameters{
 			Timeout: 120 * time.Second,
 		}),
@@ -58,7 +62,13 @@ func (s *Server) Run() error {
 		grpc.UnaryInterceptor(
 			otgrpc.OpenTracingServerInterceptor(s.Tracer),
 		),
-	)
+	}
+
+	if tlsopt := tls.GetServerOpt(); tlsopt != nil {
+		opts = append(opts, tlsopt)
+	}
+
+	srv := grpc.NewServer(opts...)
 
 	pb.RegisterRecommendationServer(srv, s)
 

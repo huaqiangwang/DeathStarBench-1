@@ -6,6 +6,7 @@ import (
 	// F"io/ioutil"
 	"log"
 	"net"
+
 	// "os"
 	"time"
 
@@ -16,6 +17,7 @@ import (
 	geo "github.com/harlow/go-micro-services/services/geo/proto"
 	rate "github.com/harlow/go-micro-services/services/rate/proto"
 	pb "github.com/harlow/go-micro-services/services/search/proto"
+	"github.com/harlow/go-micro-services/tls"
 	opentracing "github.com/opentracing/opentracing-go"
 	context "golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -44,7 +46,7 @@ func (s *Server) Run() error {
 
 	s.uuid = uuid.New().String()
 
-	srv := grpc.NewServer(
+	opts := []grpc.ServerOption{
 		grpc.KeepaliveParams(keepalive.ServerParameters{
 			Timeout: 120 * time.Second,
 		}),
@@ -54,7 +56,13 @@ func (s *Server) Run() error {
 		grpc.UnaryInterceptor(
 			otgrpc.OpenTracingServerInterceptor(s.Tracer),
 		),
-	)
+	}
+
+	if tlsopt := tls.GetServerOpt(); tlsopt != nil {
+		opts = append(opts, tlsopt)
+	}
+
+	srv := grpc.NewServer(opts...)
 	pb.RegisterSearchServer(srv, s)
 
 	// init grpc clients

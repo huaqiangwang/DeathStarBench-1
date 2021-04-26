@@ -3,11 +3,14 @@ package rate
 import (
 	"encoding/json"
 	"fmt"
+
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
+
 	// "io/ioutil"
 	"log"
 	"net"
+
 	// "os"
 	"sort"
 	"time"
@@ -16,13 +19,15 @@ import (
 	"github.com/grpc-ecosystem/grpc-opentracing/go/otgrpc"
 	"github.com/harlow/go-micro-services/registry"
 	pb "github.com/harlow/go-micro-services/services/rate/proto"
+	"github.com/harlow/go-micro-services/tls"
 	"github.com/opentracing/opentracing-go"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/keepalive"
 
-	"github.com/bradfitz/gomemcache/memcache"
 	"strings"
+
+	"github.com/bradfitz/gomemcache/memcache"
 )
 
 const name = "srv-rate"
@@ -46,7 +51,7 @@ func (s *Server) Run() error {
 
 	s.uuid = uuid.New().String()
 
-	srv := grpc.NewServer(
+	opts := []grpc.ServerOption{
 		grpc.KeepaliveParams(keepalive.ServerParameters{
 			Timeout: 120 * time.Second,
 		}),
@@ -56,7 +61,13 @@ func (s *Server) Run() error {
 		grpc.UnaryInterceptor(
 			otgrpc.OpenTracingServerInterceptor(s.Tracer),
 		),
-	)
+	}
+
+	if tlsopt := tls.GetServerOpt(); tlsopt != nil {
+		opts = append(opts, tlsopt)
+	}
+
+	srv := grpc.NewServer(opts...)
 
 	pb.RegisterRateServer(srv, s)
 
