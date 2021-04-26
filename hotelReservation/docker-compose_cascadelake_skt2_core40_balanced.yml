@@ -1,0 +1,610 @@
+# NOTE: This just for our test machine.
+# NOTE: Please adjust the cpuset to your cases.
+# The recommended wrk command is:
+#    lauch_wrk.sh -t 2 -c 200 -d 36 -C '38,78' -R 4900
+
+version: "2"
+services:
+  consul:
+    image: consul:latest
+    ports:
+      - "8300:8300"
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:53/udp"
+    restart: always
+    cpuset: "19,59,39,79"
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: 'hotel_reserv_jaeger'
+    ports:
+      - "14269"
+      - "5778:5778"
+      - "14268:14268"
+      - "14267"
+      - "16686:16686"
+      - "5775:5775/udp"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "14250:14250"
+    restart: always
+    cpuset: "19,59,39,79"
+
+  memcached-rate:
+    image: memcached
+    # hostname: user-memcached
+    container_name: 'hotel_reserv_rate_mmc'
+    restart: always
+    entrypoint: ["memcached", "-c", "4096"]
+    environment:
+      - MEMCACHED_CACHE_SIZE=128
+      - MEMCACHED_THREADS=2
+    logging:
+      options:
+        max-size: 50m
+    cpuset: "16,56"
+
+  memcached-profile:
+    image: memcached
+    # hostname: user-memcached
+    container_name: 'hotel_reserv_profile_mmc'
+    restart: always
+    entrypoint: ["memcached", "-c", "4096"]
+    environment:
+      - MEMCACHED_CACHE_SIZE=128
+      - MEMCACHED_THREADS=2
+    logging:
+      options:
+        max-size: 50m
+    cpuset: "17,57"
+
+  memcached-reserve:
+    image: memcached
+    # hostname: user-memcached
+    container_name: 'hotel_reserv_reservation_mmc'
+    restart: always
+    entrypoint: ["memcached", "-t", "4", "-c", "4096"]
+    environment:
+      - MEMCACHED_CACHE_SIZE=128
+      - MEMCACHED_THREADS=4
+    logging:
+      options:
+        max-size: 50m
+    cpuset: "36,76,37,77"
+
+  mongodb-geo:
+    image: mongo
+    container_name: 'hotel_reserv_geo_mongo'
+    # hostname: geo-db
+    restart: always
+    cpuset: "19,59,39,79"
+    volumes:
+      - geo:/data/db  
+
+  mongodb-profile:
+    image: mongo
+    container_name: 'hotel_reserv_profile_mongo'
+    hostname: profile-db
+    restart: always
+    cpuset: "19,59,39,79"
+    volumes:
+      - profile:/data/db    
+
+  mongodb-rate:
+    image: mongo
+    container_name: 'hotel_reserv_rate_mongo'
+    hostname: rate-db
+    restart: always
+    cpuset: "19,59,39,79"
+    volumes:
+      - rate:/data/db   
+
+  mongodb-recommendation:
+    image: mongo
+    hostname: recommendation-db
+    container_name: 'hotel_reserv_recommendation_mongo'
+    restart: always
+    cpuset: "19,59,39,79"
+    volumes:
+      - recommendation:/data/db
+    
+  mongodb-reservation:
+    image: mongo
+    container_name: 'hotel_reserv_reservation_mongo'
+    hostname: reservation-db
+    restart: always
+    cpuset: "19,59,39,79"
+    volumes:
+      - reservation:/data/db 
+
+  mongodb-user:
+    image: mongo
+    container_name: 'hotel_reserv_user_mongo'
+    hostname: user-db
+    restart: always
+    cpuset: "19,59,39,79"
+    volumes:
+      - user:/data/db
+
+  #------------------------
+  frontend0:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_frontend_single_node:latest
+    entrypoint: frontend
+    container_name: 'hotel_reserv_frontend0'
+    ports:
+      - "5000:5000"
+    depends_on:
+      - consul
+    restart: always
+    cpuset: "0,40"
+
+  frontend1:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_frontend_single_node:latest
+    entrypoint: frontend
+    container_name: 'hotel_reserv_frontend1'
+    ports:
+      - "5001:5000"
+    depends_on:
+      - consul
+    restart: always
+    cpuset: "20,60"
+
+  frontend2:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_frontend_single_node:latest
+    entrypoint: frontend
+    container_name: 'hotel_reserv_frontend2'
+    ports:
+      - "5002:5000"
+    depends_on:
+      - consul
+    restart: always
+    cpuset: "1,41"
+
+  frontend3:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_frontend_single_node:latest
+    entrypoint: frontend
+    container_name: 'hotel_reserv_frontend3'
+    ports:
+      - "5003:5000"
+    depends_on:
+      - consul
+    restart: always
+    cpuset: "21,61"
+
+  frontend4:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_frontend_single_node:latest
+    entrypoint: frontend
+    container_name: 'hotel_reserv_frontend4'
+    ports:
+      - "5004:5000"
+    depends_on:
+      - consul
+    restart: always
+    cpuset: "2,42"
+
+  frontend5:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_frontend_single_node:latest
+    entrypoint: frontend
+    container_name: 'hotel_reserv_frontend5'
+    ports:
+      - "5005:5000"
+    depends_on:
+      - consul
+    restart: always
+    cpuset: "22,62"
+
+  frontend6:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_frontend_single_node:latest
+    entrypoint: frontend
+    container_name: 'hotel_reserv_frontend6'
+    ports:
+      - "5006:5000"
+    depends_on:
+      - consul
+    restart: always
+    cpuset: "3,43"
+
+  frontend7:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_frontend_single_node:latest
+    entrypoint: frontend
+    container_name: 'hotel_reserv_frontend7'
+    ports:
+      - "5007:5000"
+    depends_on:
+      - consul
+    restart: always
+    cpuset: "23,63"
+
+  frontend8:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_frontend_single_node:latest
+    entrypoint: frontend
+    container_name: 'hotel_reserv_frontend8'
+    ports:
+      - "5008:5000"
+    depends_on:
+      - consul
+    restart: always
+    cpuset: "4,44"
+
+  profile0:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_profile_single_node:latest
+    entrypoint: profile
+    container_name: 'hotel_reserv_profile0'
+    depends_on:
+      - mongodb-profile
+      - memcached-profile
+      - consul
+    restart: always
+    cpuset: "24,64"
+
+  profile1:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_profile_single_node:latest
+    entrypoint: profile
+    container_name: 'hotel_reserv_profile1'
+    depends_on:
+      - mongodb-profile
+      - memcached-profile
+      - consul
+    restart: always
+    cpuset: "5,45"
+
+  profile2:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_profile_single_node:latest
+    entrypoint: profile
+    container_name: 'hotel_reserv_profile2'
+    depends_on:
+      - mongodb-profile
+      - memcached-profile
+      - consul
+    restart: always
+    cpuset: "25,65"
+
+  profile3:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_profile_single_node:latest
+    entrypoint: profile
+    container_name: 'hotel_reserv_profile3'
+    depends_on:
+      - mongodb-profile
+      - memcached-profile
+      - consul
+    restart: always
+    cpuset: "6,46"
+
+  profile4:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_profile_single_node:latest
+    entrypoint: profile
+    container_name: 'hotel_reserv_profile4'
+    depends_on:
+      - mongodb-profile
+      - memcached-profile
+      - consul
+    restart: always
+    cpuset: "26,66"
+
+  search0:
+    build: .
+    image: hotel_reserv_search_single_node:latest
+    entrypoint: search
+    container_name: 'hotel_reserv_search0'
+    depends_on:
+      - consul
+    restart: always
+    cpuset: "7,47"
+    environment:
+      - TLS
+ 
+  search1:
+    build: .
+    image: hotel_reserv_search_single_node:latest
+    entrypoint: search
+    container_name: 'hotel_reserv_search1'
+    depends_on:
+      - consul
+    restart: always
+    cpuset: "27,67"
+    environment:
+      - TLS
+
+  search2:
+    build: .
+    image: hotel_reserv_search_single_node:latest
+    entrypoint: search
+    container_name: 'hotel_reserv_search2'
+    depends_on:
+      - consul
+    restart: always
+    cpuset: "8,48"
+    environment:
+      - TLS
+
+  search3:
+    build: .
+    image: hotel_reserv_search_single_node:latest
+    entrypoint: search
+    container_name: 'hotel_reserv_search3'
+    depends_on:
+      - consul
+    restart: always
+    cpuset: "28,68"
+    environment:
+      - TLS
+
+  search4:
+    build: .
+    image: hotel_reserv_search_single_node:latest
+    entrypoint: search
+    container_name: 'hotel_reserv_search4'
+    depends_on:
+      - consul
+    restart: always
+    cpuset: "9,49"
+    environment:
+      - TLS
+
+  geo0:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_geo_single_node:latest
+    entrypoint: geo
+    container_name: 'hotel_reserv_geo0'
+    depends_on:
+      - mongodb-geo
+      - consul
+    restart: always
+    cpuset: "29,69"
+
+  geo1:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_geo_single_node:latest
+    entrypoint: geo
+    container_name: 'hotel_reserv_geo1'
+    depends_on:
+      - mongodb-geo
+      - consul
+    restart: always
+    cpuset: "10,50"
+
+  geo2:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_geo_single_node:latest
+    entrypoint: geo
+    container_name: 'hotel_reserv_geo2'
+    depends_on:
+      - mongodb-geo
+      - consul
+    restart: always
+    cpuset: "30,70"
+
+  rate0:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_rate_single_node:latest
+    entrypoint: rate
+    container_name: 'hotel_reserv_rate0'
+    depends_on:
+      - mongodb-rate
+      - memcached-rate
+      - consul
+    restart: always
+    cpuset: "11,51"
+
+  rate1:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_rate_single_node:latest
+    entrypoint: rate
+    container_name: 'hotel_reserv_rate1'
+    depends_on:
+      - mongodb-rate
+      - memcached-rate
+      - consul
+    restart: always
+    cpuset: "31,71"
+
+  rate2:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_rate_single_node:latest
+    entrypoint: rate
+    container_name: 'hotel_reserv_rate2'
+    depends_on:
+      - mongodb-rate
+      - memcached-rate
+      - consul
+    restart: always
+    cpuset: "12,52"
+
+  reservation0:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_rsv_single_node:latest
+    entrypoint: reservation
+    container_name: 'hotel_reserv_reservation0'
+    depends_on:
+      - mongodb-reservation
+      - memcached-reserve
+      - consul
+    restart: always
+    cpuset: "32,72"
+
+  reservation1:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_rsv_single_node:latest
+    entrypoint: reservation
+    container_name: 'hotel_reserv_reservation1'
+    depends_on:
+      - mongodb-reservation
+      - memcached-reserve
+      - consul
+    restart: always
+    cpuset: "13,53"
+
+  reservation2:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_rsv_single_node:latest
+    entrypoint: reservation
+    container_name: 'hotel_reserv_reservation2'
+    depends_on:
+      - mongodb-reservation
+      - memcached-reserve
+      - consul
+    restart: always
+    cpuset: "33,73"
+
+  reservation3:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_rsv_single_node:latest
+    entrypoint: reservation
+    container_name: 'hotel_reserv_reservation3'
+    depends_on:
+      - mongodb-reservation
+      - memcached-reserve
+      - consul
+    restart: always
+    cpuset: "14,54"
+
+  reservation4:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_rsv_single_node:latest
+    entrypoint: reservation
+    container_name: 'hotel_reserv_reservation4'
+    depends_on:
+      - mongodb-reservation
+      - memcached-reserve
+      - consul
+    restart: always
+    cpuset: "34,74"
+
+  reservation5:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_rsv_single_node:latest
+    entrypoint: reservation
+    container_name: 'hotel_reserv_reservation5'
+    depends_on:
+      - mongodb-reservation
+      - memcached-reserve
+      - consul
+    restart: always
+    cpuset: "18,58"
+
+  recommendation0:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_recommend_single_node:latest
+    entrypoint: recommendation
+    container_name: 'hotel_reserv_recommendation0'
+    depends_on:
+      - mongodb-recommendation
+      - consul
+    restart: always
+    cpuset: "15,55"
+
+  recommendation1:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_recommend_single_node:latest
+    entrypoint: recommendation
+    container_name: 'hotel_reserv_recommendation1'
+    depends_on:
+      - mongodb-recommendation
+      - consul
+    restart: always
+    cpuset: "35,75"
+
+  user0:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_user_single_node:latest
+    entrypoint: user
+    container_name: 'hotel_reserv_user0'
+    depends_on:
+      - mongodb-user
+      - consul
+    restart: always
+    cpuset: "15,55"
+
+  user1:
+    environment:
+      - TLS
+    build: .
+    image: hotel_reserv_user_single_node:latest
+    entrypoint: user
+    container_name: 'hotel_reserv_user1'
+    depends_on:
+      - mongodb-user
+      - consul
+    restart: always
+    cpuset: "35,75"
+
+volumes:
+  geo:
+  profile:
+  rate:
+  recommendation:
+  reservation:
+  user:

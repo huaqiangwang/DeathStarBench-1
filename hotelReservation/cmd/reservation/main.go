@@ -8,6 +8,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/harlow/go-micro-services/pprof"
 	"github.com/harlow/go-micro-services/registry"
 	"github.com/harlow/go-micro-services/services/reservation"
 	"github.com/harlow/go-micro-services/tracing"
@@ -60,6 +61,9 @@ func main() {
 		panic(err)
 	}
 
+	if err := pprof.StartHttp(result["PprofReservePort"]); err != nil {
+		panic(err)
+	}
 	srv := &reservation.Server{
 		Tracer:   tracer,
 		// Port:     *port,

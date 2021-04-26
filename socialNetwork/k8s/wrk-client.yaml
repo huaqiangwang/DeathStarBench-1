@@ -11,5 +11,5 @@ spec:
   - name: wrk-client
     image: aenniwang/wrk-client
     imagePullPolicy: IfNotPresent
-    command: ["sleep", "36000"]
+    command: ["sleep", "365d"]
 

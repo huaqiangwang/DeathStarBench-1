@@ -10,5 +10,5 @@ spec:
   containers:
   - name: wrk-client
     image: aenniwang/wrk-client
-    command: ["sleep", "360000"]
+    command: ["sleep", "365d"]
 

@@ -106,7 +106,7 @@ func (s *Server) Shutdown() {
 // GiveRecommendation returns recommendations within a given requirement.
 func (s *Server) GetRecommendations(ctx context.Context, req *pb.Request) (*pb.Result, error) {
 	res := new(pb.Result)
-	fmt.Printf("GetRecommendations\n")
+	//fmt.Printf("GetRecommendations\n")
 	require := req.Require
 	if require == "dis" {
 		p1 := &geoindex.GeoPoint{

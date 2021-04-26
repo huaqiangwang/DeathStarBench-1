@@ -15,7 +15,12 @@
 - luarocks (apt-get install luarocks)
 - luasocket (luarocks install luasocket)
 
-## Running the media service application
+## Running the media services on kubernetes cluster
+
+Refer to '<repo>/mediaMicroservices/k8s/README.md' for details.
+
+## Running the media services with docker-compose
+
 ### Before you start
 - Install Docker and Docker Compose.
 - Make sure the following ports are available: port `8080` for Nginx frontend and 
@@ -45,7 +50,3 @@ cd wrk2
 
 #### View Jaeger traces
 View Jaeger traces by accessing `http://localhost:16686`
-
-## Running the media services on kubernetes cluster
-
-Refer to '<repo>/mediaMicroservices/k8s/README.md' for details.

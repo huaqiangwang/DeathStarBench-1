@@ -3,24 +3,43 @@
 ## Pre-requirements
 
 - A running Kubernetes cluster is needed.
-- Pre-requirements mentioned [here](https://github.com/delimitrou/DeathStarBench/blob/master/socialNetwork/README.md) should be met.
+- Pre-requirements mentioned [here](https://github.com/intel-sandbox/DeathStarBenchPlusPlus/blob/master/socialNetwork/README.md) should be met.
 
-## Running the social network application on Kubernetes
+## Running Predefined Performance Tuning Scenarios
+
+**NOTE: This is the recommended and easier way to deploy and run the system.**
+
+To deploy a fresh uService system:
+
+``` bash
+cd k8s/perf-tuning/
+./deploy.sh <scenario>
+```
+
+To measure performance:
+
+``` bash
+./measure.sh <scenario>
+```
+
+Refer to [k8s/perf-tuning/README.md](https://github.com/intel-sandbox/DeathStarBenchPlusPlus/blob/master/hotelReservation/k8s/perf-tuning/README.md)
+
+## Running Manually
+
+**NOTE: This part is for you who want to customize the deployment and the testing part.** 
+
+### Before you start
+
+- Ensure that the necessary local images have been made. Otherwise, run `<path-of-repo>/hotelReservation/k8s/scripts/build-docker-img.sh`
 
 ### Deploy services
 
 Run the script `<path-of-repo>/socialNetwork/openshift/scripts/deploy-all-services-and-configurations.sh`
 
-### Using `wrk-client` as an "on-cluster" client
-
-After customization, If you are running "on-cluster" copy necessary files to `ubuntu-client`, and then log into `ubuntu-client` to continue:
-  - `kubectl exec -it pod/wrk-client -- bash`
 
 ### Register users and construct social graphs
 
-- If using an on-cluster client:
-  - Use `nginx-thrift.social-network.svc.cluster.local` as cluster-ip and paste it at `<path-of-repo>/socialNetwork/scripts/init_social_graph.py:71`
-- Register users and construct social graph by running `cd <path-of-repo>/socialNetwork && python3 scripts/init_social_graph.py`.
+- Register users and construct social graph by running `cd <path-of-repo>/socialNetwork && k8s/scripts/fill-user-data.sh`.
   This will initialize a social graph based on [Reed98 Facebook Networks](http://networkrepository.com/socfb-Reed98.php), with 962 users and 18.8K social graph edges. 
 
 ### Running HTTP workload generator
@@ -65,15 +84,6 @@ cd <path-of-repo>/socialNetwork/wrk2
 Use `kubectl -n social-network get svc jaeger-out` to get the NodePort of jaeger service.
 
  View Jaeger traces by accessing `http://<node-ip>:<NodePort>` 
-
-
-### Local image customization
-
-If local image customization is needed, then the script
-`<path-of-repo>/socialNetwork/openshift/scripts/build-docker-img.sh`
-can be used to create them. In this case the relevant yaml files will need to
-be edited to refer to the new images.
-e.g., `image: image-registry.openshift-image-registry.svc:5000/social-network/social-network-microservices:openshift`
 
 ### Insert `Istio` side car
 

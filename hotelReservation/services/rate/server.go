@@ -121,7 +121,7 @@ func (s *Server) GetRates(ctx context.Context, req *pb.Request) (*pb.Result, err
 			rate_strs := strings.Split(string(item.Value), "\n")
 
 			// fmt.Printf("memc hit, hotelId = %s\n", hotelID)
-			fmt.Println(rate_strs)
+			// fmt.Println(rate_strs)
 
 			for _, rate_str := range rate_strs {
 				if len(rate_str) != 0 {

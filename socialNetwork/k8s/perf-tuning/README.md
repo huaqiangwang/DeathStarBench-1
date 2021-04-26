@@ -1,7 +1,16 @@
-# socialNetwork Performance Tunning Cases on XEON-6230n
+# socialNetwork Performance Tuning
 
-This folder contains the performance tunning scripts and
-attempts to speed-up for DSB/socialNetwork.
+This folder contains the documents, scripts as well as the
+performance tuning results in an attempt to speed-up the
+system performance.
+
+The 'deploy.sh' script is used to deploy a system from scratch, with following tasks:
+
+- Apply patch fixes located in the 'patches' folder.
+- Create container images with local files.
+- Destroy existing system deployed on k8s if it existed.
+- Deploy a new system on k8s.
+- Initialize necessary database.
 
 ## Hardware Platform
 
@@ -26,5 +35,5 @@ To run wrk test with default http workload pressure, run
 
 ```shell
   cd socialNetwork/k8s/perf-tuning
-  ./measure.sh
+  ./measure.sh baseline
 ```
