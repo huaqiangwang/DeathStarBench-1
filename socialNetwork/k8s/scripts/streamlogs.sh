@@ -15,9 +15,9 @@ for d in compose-post-redis compose-post-service home-timeline-redis home-timeli
 do
 	if [[ ${NOTS} -eq 1 ]]
 	then
-		oc logs -f deployment/${d} --all-containers -n social-network &
+		kubectl logs -f deployment/${d} --all-containers -n social-network &
 	else
-		oc logs -f deployment/${d} --all-containers -n social-network | ts "${d}: " &
+		kubectl logs -f deployment/${d} --all-containers -n social-network | ts "${d}: " &
 	fi
 done
 
