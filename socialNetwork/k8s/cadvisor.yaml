@@ -1,0 +1,79 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cadvisor-out
+  labels:
+    death-star-project: social-network
+    app: cadvisor
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    death-star-project: social-network
+    app: cadvisor
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: cadvisor
+  labels:
+    death-star-project: social-network
+    app: cadvisor
+spec:
+  selector:
+    matchLabels:
+      death-star-project: social-network
+      app: cadvisor
+  template:
+    metadata:
+      labels:
+        death-star-project: social-network
+        app: cadvisor
+      name: cadvisor
+      annotations:
+        sidecar.istio.io/inject: "false"
+    spec:
+      containers:
+      - name: cadvisor
+        image: gcr.io/cadvisor/cadvisor:v0.39.0
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: rootfs
+          mountPath: /rootfs
+        - name: var-run
+          mountPath: /var/run
+        - name: sys
+          mountPath: /sys
+        - name: docker
+          mountPath: /var/lib/docker
+        - name: disk
+          mountPath: /dev/disk
+        - name: machine-id
+          mountPath: /etc/machine-id
+        ports:
+          - name: http
+            containerPort: 8080
+            protocol: TCP
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: rootfs
+        hostPath:
+          path: /
+      - name: var-run
+        hostPath:
+          path: /var/run
+      - name: sys
+        hostPath:
+          path: /sys
+      - name: docker
+        hostPath:
+          path: /var/lib/docker
+      - name: disk
+        hostPath:
+          path: /dev/disk
+      - name: machine-id
+        hostPath:
+          path: /etc/machine-id
