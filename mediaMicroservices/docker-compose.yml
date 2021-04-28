@@ -1,6 +1,7 @@
 version: "3"
 services:
 #   Enables resolving container hostnames from host machine
+#   Use online image since we are not likely to change it.
   dns-media:
     image: defreitas/dns-proxy-server
     volumes:
@@ -8,8 +9,17 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /etc/resolv.conf:/etc/resolv.conf
 
+  thrift-microservice-deps:
+    build:
+      context: ./docker/thrift-microservice-deps
+      dockerfile: ./cpp/Dockerfile
+    image: thrift-microservice-media-deps:xenial
+
   unique-id-service:
-    image: yg397/media-microservices
+    build: .
+    depends_on:
+      - thrift-microservice-deps
+    image: media-microservices
     hostname: unique-id-service
 #    ports:
 #      - 10001:9090
@@ -17,7 +27,10 @@ services:
     entrypoint: UniqueIdService
 
   movie-id-service:
-    image: yg397/media-microservices
+    build: .
+    depends_on:
+      - thrift-microservice-deps
+    image: media-microservices
     hostname: movie-id-service
 #    ports:
 #      - 10002:9090
@@ -39,7 +52,10 @@ services:
     restart: always
 
   text-service:
-    image: yg397/media-microservices
+    build: .
+    depends_on:
+      - thrift-microservice-deps
+    image: media-microservices
     hostname: text-service
 #    ports:
 #      - 10003:9090
@@ -47,7 +63,10 @@ services:
     entrypoint: TextService
 
   rating-service:
-    image: yg397/media-microservices
+    build: .
+    depends_on:
+      - thrift-microservice-deps
+    image: media-microservices
     hostname: rating-service
 #    ports:
 #      - 10004:9090
@@ -62,7 +81,10 @@ services:
     restart: always
 
   user-service:
-    image: yg397/media-microservices
+    build: .
+    depends_on:
+      - thrift-microservice-deps
+    image: media-microservices
     hostname: user-service
 #    ports:
 #      - 10005:9090
@@ -84,7 +106,10 @@ services:
     restart: always
 
   compose-review-service:
-    image: yg397/media-microservices
+    build: .
+    depends_on:
+      - thrift-microservice-deps
+    image: media-microservices
     hostname: compose-review-service
 #    ports:
 #      - 10006:9090
@@ -99,7 +124,10 @@ services:
     restart: always
 
   review-storage-service:
-    image: yg397/media-microservices
+    build: .
+    depends_on:
+      - thrift-microservice-deps
+    image: media-microservices
     hostname: review-storage-service
 #    ports:
 #      - 10007:9090
@@ -121,7 +149,10 @@ services:
     restart: always
 
   user-review-service:
-    image: yg397/media-microservices
+    build: .
+    depends_on:
+      - thrift-microservice-deps
+    image: media-microservices
     hostname: user-review-service
 #    ports:
 #      - 10008:9090
@@ -143,7 +174,10 @@ services:
     restart: always
 
   movie-review-service:
-    image: yg397/media-microservices
+    build: .
+    depends_on:
+      - thrift-microservice-deps
+    image: media-microservices
     hostname: movie-review-service
 #    ports:
 #      - 10009:9090
@@ -165,7 +199,10 @@ services:
     restart: always
 
   nginx-web-server:
-    image: yg397/openresty-thrift:xenial
+    build:
+      context: ./docker/openresty-thrift
+      dockerfile: ./xenial/Dockerfile
+    image: openresty-thrift-media:xenial
     hostname: nginx-thrift
     ports:
       - 8080:8080
@@ -177,7 +214,10 @@ services:
       - ./gen-lua:/gen-lua
 
   cast-info-service:
-    image: yg397/media-microservices
+    build: .
+    depends_on:
+      - thrift-microservice-deps
+    image: media-microservices
     hostname: cast-info-service
 #    ports:
 #      - 10010:9090
@@ -199,7 +239,10 @@ services:
     restart: always
 
   plot-service:
-    image: yg397/media-microservices
+    build: .
+    depends_on:
+      - thrift-microservice-deps
+    image: media-microservices
     hostname: plot-service
 #    ports:
 #      - 10011:9090
@@ -221,7 +264,10 @@ services:
     restart: always
 
   movie-info-service:
-    image: yg397/media-microservices
+    build: .
+    depends_on:
+      - thrift-microservice-deps
+    image: media-microservices
     hostname: movie-info-service
 #    ports:
 #      - 10012:9090
