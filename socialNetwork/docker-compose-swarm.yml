@@ -39,6 +39,7 @@ services:
     hostname: compose-post-service
     image: yg397/social-network-microservices:latest
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   home-timeline-redis:
@@ -62,6 +63,7 @@ services:
     hostname: home-timeline-service
     image: yg397/social-network-microservices:latest
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   media-frontend:
@@ -118,6 +120,7 @@ services:
     hostname: media-service
     image: yg397/social-network-microservices:latest
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   nginx-web-server:
@@ -141,6 +144,8 @@ services:
       - ./nginx-web-server/conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
       - ./nginx-web-server/jaeger-config.json:/usr/local/openresty/nginx/jaeger-config.json
       - ./gen-lua:/gen-lua
+      - ./docker/openresty-thrift/lua-thrift:/usr/local/openresty/lualib/thrift
+      - ./keys:/keys      
 
   post-storage-memcached:
     depends_on:
@@ -177,6 +182,7 @@ services:
     hostname: post-storage-service
     image: yg397/social-network-microservices:latest
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   social-graph-mongodb:
@@ -208,6 +214,7 @@ services:
     hostname: social-graph-service
     image: yg397/social-network-microservices:latest
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   text-service:
@@ -225,6 +232,7 @@ services:
     hostname: text-service
     image: yg397/social-network-microservices:latest
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   unique-id-service:
@@ -242,6 +250,7 @@ services:
     hostname: unique-id-service
     image: yg397/social-network-microservices:latest
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   url-shorten-memcached:
@@ -279,6 +288,7 @@ services:
     hostname: url-shorten-service
     image: yg397/social-network-microservices:latest
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   user-memcached:
@@ -307,6 +317,7 @@ services:
     hostname: user-mention-service
     image: yg397/social-network-microservices:latest
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   user-mongodb:
@@ -333,6 +344,7 @@ services:
     hostname: user-service
     image: yg397/social-network-microservices:latest
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   user-timeline-mongodb:

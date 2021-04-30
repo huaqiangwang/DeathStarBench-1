@@ -44,6 +44,13 @@ Before starting the containers, make sure you are on the master node of the dock
 docker stack deploy --compose-file=docker-compose-swarm.yml <service-name>
 ```
 
+### Disable SSL
+Now by default SSL are enabled between all microservices (except storge and cache). 
+To disable SSL can follow below steps:
+1. Change `ssl/enabled` in `config/service-config.json` to `false`
+2. Seach `config:set("ssl", true)` in `nginx-web-server/conf/nginx.conf` and change the line to `config:set("ssl", false)`
+3. Restart all containers
+
 ### Register users and construct social graphs
 Register users and construct social graph by running 
 `python3 scripts/init_social_graph.py`. This will initialize a social graph 

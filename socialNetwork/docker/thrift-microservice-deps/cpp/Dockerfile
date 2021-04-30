@@ -1,4 +1,5 @@
 FROM ubuntu:16.04
+RUN sed -i 's/http:\/\/archive.ubuntu.com\/ubuntu\//http:\/\/mirrors.163.com\/ubuntu\//g' /etc/apt/sources.list && apt-get update
 
 ARG LIB_MONGOC_VERSION=1.14.0
 ARG LIB_THRIFT_VERSION=0.12.0
