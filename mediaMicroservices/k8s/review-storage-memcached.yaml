@@ -39,6 +39,6 @@ spec:
     spec:
       containers:
       - name: review-storage-memcached
-        image: memcached
+        image: memcached:1.6.8
         imagePullPolicy: IfNotPresent
       restartPolicy: Always

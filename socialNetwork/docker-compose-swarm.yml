@@ -45,7 +45,7 @@ services:
     depends_on:
       - jaeger-agent
     hostname: home-timeline-redis
-    image: redis
+    image: redis:6.0.10
 
   home-timeline-service:
     depends_on:
@@ -87,7 +87,7 @@ services:
     depends_on:
       - jaeger-agent
     hostname: media-memcached
-    image: memcached
+    image: memcached:1.6.8
     command: 
       - "-m 16384"
       - "-t 8"
@@ -98,7 +98,7 @@ services:
     depends_on:
       - jaeger-agent
     hostname: media-mongodb
-    image: mongo
+    image: mongo:4.4.3
     command: "mongod --nojournal --quiet"
     # command: "mongod --serviceExecutor adaptive --listenBacklog 1024 --syncdelay 3600 --wiredTigerCacheSizeGB 2"
 
@@ -146,7 +146,7 @@ services:
     depends_on:
       - jaeger-agent
     hostname: post-storage-memcached
-    image: memcached
+    image: memcached:1.6.8
     command: 
       - "-m 16384"
       - "-t 8"
@@ -157,7 +157,7 @@ services:
     depends_on:
       - jaeger-agent
     hostname: post-storage-mongodb
-    image: mongo
+    image: mongo:4.4.3
     command: "mongod --nojournal --quiet"
     # command: "mongod --serviceExecutor adaptive --listenBacklog 1024 --syncdelay 3600 --wiredTigerCacheSizeGB 75"
 
@@ -183,7 +183,7 @@ services:
     depends_on:
       - jaeger-agent
     hostname: social-graph-mongodb
-    image: mongo
+    image: mongo:4.4.3
     command: "mongod --nojournal --quiet"
     # command: "mongod --serviceExecutor adaptive --listenBacklog 1024 --syncdelay 3600 --wiredTigerCacheSizeGB 16"
 
@@ -191,7 +191,7 @@ services:
     depends_on:
       - jaeger-agent
     hostname: social-graph-redis
-    image: redis
+    image: redis:6.0.10
 
   social-graph-service:
     depends_on:
@@ -248,7 +248,7 @@ services:
     depends_on:
       - jaeger-agent
     hostname: url-shorten-memcached
-    image: memcached
+    image: memcached:1.6.8
     command: 
       - "-m 16384"
       - "-t 8"
@@ -259,7 +259,7 @@ services:
     depends_on:
       - jaeger-agent
     hostname: url-shorten-mongodb
-    image: mongo
+    image: mongo:4.4.3
     command: "mongod --nojournal --quiet"
     # command: "mongod --serviceExecutor adaptive --listenBacklog 1024 --syncdelay 3600 --wiredTigerCacheSizeGB 36"
 
@@ -285,7 +285,7 @@ services:
     depends_on:
       - jaeger-agent
     hostname: user-memcached
-    image: memcached
+    image: memcached:1.6.8
     command: 
       - "-m 16384"
       - "-t 8"
@@ -313,7 +313,7 @@ services:
     depends_on:
       - jaeger-agent
     hostname: user-mongodb
-    image: mongo
+    image: mongo:4.4.3
     command: "mongod --nojournal --quiet"
     # command: "mongod --serviceExecutor adaptive --listenBacklog 1024 --syncdelay 3600 --wiredTigerCacheSizeGB 8"
 
@@ -339,7 +339,7 @@ services:
     depends_on:
       - jaeger-agent
     hostname: user-timeline-mongodb
-    image: mongo
+    image: mongo:4.4.3
     command: "mongod --nojournal --quiet"
     # command: "mongod --serviceExecutor adaptive --listenBacklog 1024 --syncdelay 3600 --wiredTigerCacheSizeGB 75"
 
@@ -347,7 +347,7 @@ services:
     depends_on:
       - jaeger-agent
     hostname: user-timeline-redis
-    image: redis
+    image: redis:6.0.10
 
   user-timeline-service:
     depends_on:
