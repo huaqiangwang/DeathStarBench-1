@@ -25,14 +25,14 @@ services:
   #    entrypoint: MovieIdService
   #
   #  movie-id-mongodb:
-  #    image: mongo
+  #    image: mongo:4.4.3
   #    hostname: movie-id-mongodb
   #    ports:
   #      - 27018:27017
   #    restart: always
   #
   #  movie-id-memcached:
-  #    image: memcached
+  #    image: memcached:1.6.8
   #    hostname: movie-id-memcached
   #    ports:
   #      - 11212:11211
@@ -63,7 +63,7 @@ services:
     entrypoint: UserService
 
   user-mongodb-config:
-    image: mongo
+    image: mongo:4.4.3
     hostname: user-mongodb-config
     restart: always
     volumes:
@@ -71,7 +71,7 @@ services:
     command: mongod --port 27017 --configsvr --replSet user-mongodb-config --noprealloc --smallfiles --oplogSize 16 --bind_ip_all
 
   user-mongodb-shard-1_1:
-    image: mongo
+    image: mongo:4.4.3
     hostname: user-mongodb-shard-1_1
     restart: always
     volumes:
@@ -79,7 +79,7 @@ services:
     command: mongod --port 27017 --shardsvr --replSet user-mongodb-shard-1 --smallfiles --oplogSize 16 --bind_ip_all
 
   user-mongodb-shard-1_2:
-    image: mongo
+    image: mongo:4.4.3
     hostname: user-mongodb-shard-1_2
     restart: always
     volumes:
@@ -88,7 +88,7 @@ services:
 
 
   user-mongodb-shard-2_1:
-    image: mongo
+    image: mongo:4.4.3
     hostname: user-mongodb-shard-2_1
     restart: always
     volumes:
@@ -96,7 +96,7 @@ services:
     command: mongod --port 27017 --shardsvr --replSet user-mongodb-shard-2 --smallfiles --oplogSize 16 --bind_ip_all
 
   user-mongodb-shard-2_2:
-    image: mongo
+    image: mongo:4.4.3
     hostname: user-mongodb-shard-2_2
     restart: always
     volumes:
@@ -105,7 +105,7 @@ services:
 
 
   user-mongodb-shard-3_1:
-    image: mongo
+    image: mongo:4.4.3
     hostname: user-mongodb-shard-3_1
     restart: always
     volumes:
@@ -113,7 +113,7 @@ services:
     command: mongod --port 27017 --shardsvr --replSet user-mongodb-shard-3 --smallfiles --oplogSize 16 --bind_ip_all
 
   user-mongodb-shard-3_2:
-    image: mongo
+    image: mongo:4.4.3
     hostname: user-mongodb-shard-3_2
     restart: always
     volumes:
@@ -122,7 +122,7 @@ services:
 
 
   user-mongodb-router:
-    image: mongo
+    image: mongo:4.4.3
     hostname: user-mongodb-router-1
     restart: always
     volumes:
@@ -140,7 +140,7 @@ services:
     command: mongos --port 27017 --configdb user-mongodb-config/user-mongodb-config:27017 --bind_ip_all
 
   #  user-memcached:
-  #    image: memcached
+  #    image: memcached:1.6.8
   #    hostname: user-memcached
   #    ports:
   #      - 11213:11211
@@ -155,7 +155,7 @@ services:
   #    entrypoint: ComposeReviewService
   #
   #  compose-review-memcached:
-  #    image: memcached
+  #    image: memcached:1.6.8
   #    hostname: compose-review-memcached
   #    ports:
   #      - 11214:11211
@@ -170,14 +170,14 @@ services:
   #    entrypoint: ReviewStorageService
   #
   #  review-storage-mongodb:
-  #    image: mongo
+  #    image: mongo:4.4.3
   #    hostname: review-storage-mongodb
   #    ports:
   #      - 27020:27017
   #    restart: always
   #
   #  review-storage-memcached:
-  #    image: memcached
+  #    image: memcached:1.6.8
   #    hostname: review-storage-memcached
   #    ports:
   #      - 11215:11211
@@ -192,14 +192,14 @@ services:
   #    entrypoint: UserReviewService
   #
   #  user-review-mongodb:
-  #    image: mongo
+  #    image: mongo:4.4.3
   #    hostname: user-review-mongodb
   #    ports:
   #      - 27021:27017
   #    restart: always
   #
   #  user-review-memcached:
-  #    image: memcached
+  #    image: memcached:1.6.8
   #    hostname: user-review-memcached
   #    ports:
   #      - 11216:11211
@@ -214,14 +214,14 @@ services:
   #    entrypoint: MovieReviewService
   #
   #  movie-review-mongodb:
-  #    image: mongo
+  #    image: mongo:4.4.3
   #    hostname: movie-review-mongodb
   #    ports:
   #      - 27022:27017
   #    restart: always
   #
   #  movie-review-memcached:
-  #    image: memcached
+  #    image: memcached:1.6.8
   #    hostname: movie-review-memcached
   #    ports:
   #      - 11217:11211
@@ -240,7 +240,7 @@ services:
       - ./gen-lua:/gen-lua
 
   jaeger:
-    image: jaegertracing/all-in-one:latest
+    image: jaegertracing/all-in-one:1.21.0
     hostname: jaeger
     ports:
       - 5775:5775/udp

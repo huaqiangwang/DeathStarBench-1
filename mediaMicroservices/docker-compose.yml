@@ -38,14 +38,14 @@ services:
     entrypoint: MovieIdService
 
   movie-id-mongodb:
-    image: mongo
+    image: mongo:4.4.3
     hostname: movie-id-mongodb
 #    ports:
 #      - 27018:27017
     restart: always
 
   movie-id-memcached:
-    image: memcached
+    image: memcached:1.6.8
     hostname: movie-id-memcached
 #    ports:
 #      - 11212:11211
@@ -74,7 +74,7 @@ services:
     entrypoint: RatingService
 
   rating-redis:
-    image: redis
+    image: redis:6.0.10
     hostname: rating-redis
 #    ports:
 #      - 6382:6379
@@ -92,14 +92,14 @@ services:
     entrypoint: UserService
 
   user-mongodb:
-    image: mongo
+    image: mongo:4.4.3
     hostname: user-mongodb
 #    ports:
 #      - 27019:27017
     restart: always
 
   user-memcached:
-    image: memcached
+    image: memcached:1.6.8
     hostname: user-memcached
 #    ports:
 #      - 11213:11211
@@ -117,7 +117,7 @@ services:
     entrypoint: ComposeReviewService
 
   compose-review-memcached:
-    image: memcached
+    image: memcached:1.6.8
     hostname: compose-review-memcached
 #    ports:
 #      - 11214:11211
@@ -135,14 +135,14 @@ services:
     entrypoint: ReviewStorageService
 
   review-storage-mongodb:
-    image: mongo
+    image: mongo:4.4.3
     hostname: review-storage-mongodb
 #    ports:
 #      - 27020:27017
     restart: always
 
   review-storage-memcached:
-    image: memcached
+    image: memcached:1.6.8
     hostname: review-storage-memcached
 #    ports:
 #      - 11215:11211
@@ -160,14 +160,14 @@ services:
     entrypoint: UserReviewService
 
   user-review-mongodb:
-    image: mongo
+    image: mongo:4.4.3
     hostname: user-review-mongodb
 #    ports:
 #      - 27021:27017
     restart: always
 
   user-review-redis:
-    image: redis
+    image: redis:6.0.10
     hostname: user-review-redis
 #    ports:
 #      - 6381:6379
@@ -185,14 +185,14 @@ services:
     entrypoint: MovieReviewService
 
   movie-review-mongodb:
-    image: mongo
+    image: mongo:4.4.3
     hostname: movie-review-mongodb
     ports:
       - 27022:27017
     restart: always
 
   movie-review-redis:
-    image: redis
+    image: redis:6.0.10
     hostname: movie-review-redis
 #    ports:
 #      - 6380:6379
@@ -225,14 +225,14 @@ services:
     entrypoint: CastInfoService
 
   cast-info-mongodb:
-    image: mongo
+    image: mongo:4.4.3
     hostname: cast-info-mongodb
 #    ports:
 #      - 27024:27017
     restart: always
 
   cast-info-memcached:
-    image: memcached
+    image: memcached:1.6.8
     hostname: cast-info-memcached
 #    ports:
 #      - 11219:11211
@@ -250,14 +250,14 @@ services:
     entrypoint: PlotService
 
   plot-mongodb:
-    image: mongo
+    image: mongo:4.4.3
     hostname: plot-mongodb
 #    ports:
 #      - 27025:27017
     restart: always
 
   plot-memcached:
-    image: memcached
+    image: memcached:1.6.8
     hostname: plot-memcached
 #    ports:
 #      - 11220:11211
@@ -275,21 +275,21 @@ services:
     entrypoint: MovieInfoService
 
   movie-info-mongodb:
-    image: mongo
+    image: mongo:4.4.3
     hostname: movie-info-mongodb
 #    ports:
 #      - 27026:27017
     restart: always
 
   movie-info-memcached:
-    image: memcached
+    image: memcached:1.6.8
     hostname: movie-info-memcached
 #    ports:
 #      - 11221:11211
     restart: always
 
   jaeger:
-    image: jaegertracing/all-in-one:latest
+    image: jaegertracing/all-in-one:1.21.0
     hostname: jaeger
     ports:
 #      - 5775:5775/udp

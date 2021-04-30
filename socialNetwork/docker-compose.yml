@@ -20,14 +20,14 @@ services:
     entrypoint: SocialGraphService
 
   social-graph-mongodb:
-    image: mongo
+    image: mongo:4.4.3
     hostname: social-graph-mongodb
     # ports:
     #   - 27018:27017
     restart: always
 
   social-graph-redis:
-    image: redis
+    image: redis:6.0.10
     hostname: social-graph-redis
     # ports:
     #   - 6380:6379
@@ -53,7 +53,7 @@ services:
   #   restart: always
 
   home-timeline-redis:
-    image: redis
+    image: redis:6.0.10
     hostname: home-timeline-redis
     # ports:
     #   - 6381:6379
@@ -65,7 +65,7 @@ services:
     hostname: home-timeline-redis
     # ports:
     #   - 6381:6379
-    image: redis
+    image: redis:6.0.10
 
   compose-post-service:
     build: .
@@ -81,7 +81,7 @@ services:
       - ./config:/social-network-microservices/config
 
   compose-post-redis:
-    image: redis
+    image: redis:6.0.10
     hostname: compose-post-redis
     #    ports:
     #      - 6382:6379
@@ -101,14 +101,14 @@ services:
       - ./config:/social-network-microservices/config
 
   post-storage-memcached:
-    image: memcached
+    image: memcached:1.6.8
     hostname: post-storage-memcached
     #    ports:
     #      - 11212:11211
     restart: always
 
   post-storage-mongodb:
-    image: mongo
+    image: mongo:4.4.3
     hostname: post-storage-mongodb
     #    ports:
     #      - 27019:27017
@@ -128,14 +128,14 @@ services:
       - ./config:/social-network-microservices/config
 
   user-timeline-redis:
-    image: redis
+    image: redis:6.0.10
     hostname: user-timeline-redis
     #    ports:
     #      - 6383:6379
     restart: always
 
   user-timeline-mongodb:
-    image: mongo
+    image: mongo:4.4.3
     hostname: user-timeline-mongodb
     #    ports:
     #      - 27020:27017
@@ -155,14 +155,14 @@ services:
       - ./config:/social-network-microservices/config
 
   url-shorten-memcached:
-    image: memcached
+    image: memcached:1.6.8
     hostname: url-shorten-memcached
     #    ports:
     #      - 11213:11211
     restart: always
 
   url-shorten-mongodb:
-    image: mongo
+    image: mongo:4.4.3
     hostname: url-shorten-mongodb
     #    ports:
     #      - 27021:27017
@@ -182,14 +182,14 @@ services:
       - ./config:/social-network-microservices/config
 
   user-memcached:
-    image: memcached
+    image: memcached:1.6.8
     hostname: user-memcached
     #    ports:
     #      - 11214:11211
     restart: always
 
   user-mongodb:
-    image: mongo
+    image: mongo:4.4.3
     hostname: user-mongodb
     #    ports:
     #      - 27023:27017
@@ -209,14 +209,14 @@ services:
       - ./config:/social-network-microservices/config
 
   media-memcached:
-    image: memcached
+    image: memcached:1.6.8
     hostname: media-memcached
     #    ports:
     #      - 11215:11211
     restart: always
 
   media-mongodb:
-    image: mongo
+    image: mongo:4.4.3
     hostname: media-mongodb
     #    ports:
     #      - 27024:27017
@@ -304,7 +304,7 @@ services:
       - ./media-frontend/conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
 
   jaeger:
-    image: jaegertracing/all-in-one:latest
+    image: jaegertracing/all-in-one:1.21.0
     hostname: jaeger-agent
     ports:
       #      - 5775:5775/udp

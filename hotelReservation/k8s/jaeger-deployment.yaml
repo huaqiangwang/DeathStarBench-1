@@ -23,7 +23,7 @@ spec:
         sidecar.istio.io/inject: "true"
     spec:
       containers:
-      - image: jaegertracing/all-in-one:latest
+      - image: jaegertracing/all-in-one:1.21.0
         name: hotel-reserv-jaeger
         ports:
         - containerPort: 14269

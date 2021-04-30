@@ -7,7 +7,7 @@
 version: "2"
 services:
   consul:
-    image: consul:latest
+    image: consul:1.9.2
     ports:
       - "8300:8300"
       - "8400:8400"
@@ -185,7 +185,7 @@ services:
     cpuset: "30,102,31,103"
 
   jaeger:
-    image: jaegertracing/all-in-one:latest
+    image: jaegertracing/all-in-one:1.21.0
     container_name: 'hotel_reserv_jaeger'
     ports:
       - "14269"
@@ -201,7 +201,7 @@ services:
     cpuset: "71,143"
 
   memcached-rate:
-    image: memcached
+    image: memcached:1.6.8
     # hostname: user-memcached
     container_name: 'hotel_reserv_rate_mmc'
     restart: always
@@ -214,7 +214,7 @@ services:
     cpuset: "36,108"
 
   memcached-profile:
-    image: memcached
+    image: memcached:1.6.8
     # hostname: user-memcached
     container_name: 'hotel_reserv_profile_mmc'
     restart: always
@@ -227,7 +227,7 @@ services:
     cpuset: "37,109"
 
   memcached-reserve:
-    image: memcached
+    image: memcached:1.6.8
     # hostname: user-memcached
     container_name: 'hotel_reserv_reservation_mmc'
     restart: always
@@ -240,7 +240,7 @@ services:
     cpuset: "38,110"
 
   mongodb-geo:
-    image: mongo
+    image: mongo:4.4.3
     container_name: 'hotel_reserv_geo_mongo'
     # hostname: geo-db
     restart: always
@@ -249,7 +249,7 @@ services:
       - geo:/data/db  
 
   mongodb-profile:
-    image: mongo
+    image: mongo:4.4.3
     container_name: 'hotel_reserv_profile_mongo'
     hostname: profile-db
     restart: always
@@ -258,7 +258,7 @@ services:
       - profile:/data/db    
 
   mongodb-rate:
-    image: mongo
+    image: mongo:4.4.3
     container_name: 'hotel_reserv_rate_mongo'
     hostname: rate-db
     restart: always
@@ -267,7 +267,7 @@ services:
       - rate:/data/db   
 
   mongodb-recommendation:
-    image: mongo
+    image: mongo:4.4.3
     hostname: recommendation-db
     container_name: 'hotel_reserv_recommendation_mongo'
     restart: always
@@ -276,7 +276,7 @@ services:
       - recommendation:/data/db
     
   mongodb-reservation:
-    image: mongo
+    image: mongo:4.4.3
     container_name: 'hotel_reserv_reservation_mongo'
     hostname: reservation-db
     restart: always
@@ -285,7 +285,7 @@ services:
       - reservation:/data/db 
 
   mongodb-user:
-    image: mongo
+    image: mongo:4.4.3
     container_name: 'hotel_reserv_user_mongo'
     hostname: user-db
     restart: always
