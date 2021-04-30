@@ -20,8 +20,7 @@ then
 	exit 1
 fi
 
-work="compose-post-redis compose-post-service home-timeline-redis home-timeline-service media-frontend media-memcached media-mongodb media-service nginx-thrift post-storage-memcached post-storage-mongodb post-storage-service social-graph-mongodb social-graph-redis social-graph-service text-service unique-id-service url-shorten-memcached url-shorten-mongodb url-shorten-service user-memcached user-mention-service user-mongodb user-service user-timeline-mongodb user-timeline-redis user-timeline-service write-home-timeline-rabbitmq write-home-timeline-service"
-
+work="compose-post-redis compose-post-service home-timeline-redis home-timeline-service media-frontend media-memcached media-mongodb media-service nginx-thrift post-storage-memcached post-storage-mongodb post-storage-service social-graph-mongodb social-graph-redis social-graph-service text-service unique-id-service url-shorten-memcached url-shorten-mongodb url-shorten-service user-memcached user-mention-service user-mongodb user-service user-timeline-mongodb user-timeline-redis user-timeline-service write-home-timeline-rabbitmq write-home-timeline-service prometheus"
 
 echo deleting services and deployments
 
@@ -30,9 +29,18 @@ do
 	kubectl delete service/$d -n ${NS} &
  	kubectl delete deployment/$d -n ${NS} &
 done
+wait
+
+daemonset="cadvisor"
+echo "Deleting services and daemonsets"
+for d in ${daemonset}
+do
+    kubectl delete daemonset/$d -n ${NS} &
+	kubectl delete service/${d}-out -n ${NS} &
+done
+wait
 
 kubectl delete pod/wrk-client -n ${NS} &
-
 wait
 
 echo deleting cm

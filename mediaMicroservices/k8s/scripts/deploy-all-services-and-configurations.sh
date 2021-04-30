@@ -16,8 +16,6 @@ done
 echo "Finishing in 30 seconds"
 sleep 30
 
-mmsclient=$(kubectl -n ${NS} get pod | grep mms-client- | cut -f 1 -d " ")
-
 echo "After all pods have been created, follow <repo>/mediaMicroservices/k8s/README.md for later operations."
 
 cd - >/dev/null

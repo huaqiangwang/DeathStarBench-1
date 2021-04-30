@@ -39,6 +39,6 @@ spec:
     spec:
       containers:
       - name: user-memcached
-        image: memcached:1.6.8:1.6.8
+        image: memcached:1.6.8
         imagePullPolicy: IfNotPresent
       restartPolicy: Always
