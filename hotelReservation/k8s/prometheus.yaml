@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: prometheus-out
+  name: prometheus
   labels:
     death-star-project: hotel-res
     app: prometheus
@@ -16,7 +16,7 @@ spec:
     app: prometheus
 ---
 apiVersion: apps/v1
-kind: DaemonSet
+kind: Deployment
 metadata:
   name: prometheus
   labels:
@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
       - name: prometheus
-        image: prom/prometheus:v2.0.0
+        image: prom/prometheus:v2.26.0
         args:
           - "--config.file=/usr/local/prometheus/configure.yaml"
         imagePullPolicy: IfNotPresent

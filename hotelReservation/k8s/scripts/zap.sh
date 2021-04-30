@@ -25,12 +25,11 @@ fi
 
 cd ..
 
-for s in consul frontend geo jaeger memcached-profile memcached-rate memcached-reserve mongodb-geo mongodb-profile mongodb-rate mongodb-recommendation mongodb-reservation mongodb-user profile rate recommendation reservation search user
+for s in consul frontend geo jaeger memcached-profile memcached-rate memcached-reserve mongodb-geo mongodb-profile mongodb-rate mongodb-recommendation mongodb-reservation mongodb-user profile rate recommendation reservation search user prometheus
 do
  	kubectl delete service/$s -n ${NS} &
  	kubectl delete deployment/$s -n ${NS} &
 done
-kubectl delete deployment/hr-client -n ${NS} &
 wait
 
 for i in geo profile rate recommendation reservation user
@@ -41,6 +40,15 @@ done
 wait
 
 kubectl delete pod/wrk-client -n ${NS} &
+wait
+
+daemonset="cadvisor"
+echo "Deleting services and daemonsets"
+for d in ${daemonset}
+do
+        kubectl delete daemonset/$d -n ${NS} &
+	kubectl delete service/${d}-out -n ${NS} &
+done
 wait
 
 for c in configmap-config-json

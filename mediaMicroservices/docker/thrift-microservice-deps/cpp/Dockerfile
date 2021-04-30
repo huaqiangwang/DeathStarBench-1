@@ -9,7 +9,7 @@ ARG LIB_OPENTRACING_VERSION=1.5.1
 ARG LIB_CPP_JWT_VERSION=1.1.1
 ARG LIB_CPP_REDIS_VERSION=4.3.1
 
-ARG NUM_CPUS=40
+ARG NUM_CPUS=72
 ARG BUILD_DEPS="ca-certificates g++ cmake wget git libmemcached-dev automake bison flex libboost-all-dev libevent-dev libssl-dev libtool make pkg-config"
 
 RUN apt-get update \

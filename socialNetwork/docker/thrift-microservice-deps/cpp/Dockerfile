@@ -13,7 +13,7 @@ ARG LIB_SIMPLEAMQPCLIENT_VERSION=2.4.0
 ARG LIB_HIREDIS_VERSION=1.0.0
 ARG LIB_REDIS_PLUS_PLUS_VERSION=1.2.3
 
-ARG NUM_CPUS=40
+ARG NUM_CPUS=72
 ARG BUILD_DEPS="ca-certificates g++ cmake wget git libmemcached-dev automake bison flex libboost-all-dev libevent-dev libssl-dev libtool make pkg-config librabbitmq-dev"
 
 RUN apt-get update \

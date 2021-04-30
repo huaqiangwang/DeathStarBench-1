@@ -39,7 +39,7 @@ while [ "$1" != "" ]; do
     esac
 done
 
-WORK="consul frontend geo hr-client jaeger memcached-profile memcached-rate memcached-reserve mongodb-geo mongodb-profile mongodb-rate mongodb-recommendation mongodb-reservation mongodb-user profile rate recommendation reservation search user"
+WORK="consul frontend geo jaeger memcached-profile memcached-rate memcached-reserve mongodb-geo mongodb-profile mongodb-rate mongodb-recommendation mongodb-reservation mongodb-user profile rate recommendation reservation search user"
 
 
 echo this may take a while ... use control-c when status screen shows all services up.
