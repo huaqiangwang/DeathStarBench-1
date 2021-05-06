@@ -68,11 +68,12 @@ int main(int argc, char* argv[]) {
     }
   }
   mongoc_client_pool_push(mongodb_client_pool, mongodb_client);
+  std::shared_ptr<TServerSocket> server_socket = get_server_socket(config_json, "0.0.0.0", port);
 
   TThreadedServer server(std::make_shared<PostStorageServiceProcessor>(
                              std::make_shared<PostStorageHandler>(
                                  memcached_client_pool, mongodb_client_pool)),
-                         std::make_shared<TServerSocket>("0.0.0.0", port),
+                         server_socket,
                          std::make_shared<TFramedTransportFactory>(),
                          std::make_shared<TBinaryProtocolFactory>());
 

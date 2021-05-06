@@ -18,6 +18,9 @@ services:
     #      - 10000:9090
     restart: always
     entrypoint: SocialGraphService
+    volumes:
+      - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   social-graph-mongodb:
     image: mongo:4.4.3
@@ -61,7 +64,7 @@ services:
 
   home-timeline-redis:
     depends_on:
-      - jaeger
+      - jaeger-agent
     hostname: home-timeline-redis
     # ports:
     #   - 6381:6379
@@ -78,6 +81,7 @@ services:
     restart: always
     entrypoint: ComposePostService
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   compose-post-redis:
@@ -98,6 +102,7 @@ services:
     restart: always
     entrypoint: PostStorageService
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   post-storage-memcached:
@@ -125,6 +130,7 @@ services:
     restart: always
     entrypoint: UserTimelineService
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   user-timeline-redis:
@@ -152,6 +158,7 @@ services:
     restart: always
     entrypoint: UrlShortenService
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   url-shorten-memcached:
@@ -179,6 +186,7 @@ services:
     restart: always
     entrypoint: UserService
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   user-memcached:
@@ -206,6 +214,7 @@ services:
     restart: always
     entrypoint: MediaService
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   media-memcached:
@@ -233,6 +242,7 @@ services:
     restart: always
     entrypoint: TextService
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   unique-id-service:
@@ -246,6 +256,7 @@ services:
     restart: always
     entrypoint: UniqueIdService
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   user-mention-service:
@@ -259,6 +270,7 @@ services:
     restart: always
     entrypoint: UserMentionService
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   home-timeline-service:
@@ -272,6 +284,7 @@ services:
     restart: always
     entrypoint: HomeTimelineService
     volumes:
+      - ./keys:/keys
       - ./config:/social-network-microservices/config
 
   nginx-thrift:
@@ -289,6 +302,8 @@ services:
       - ./nginx-web-server/conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
       - ./nginx-web-server/jaeger-config.json:/usr/local/openresty/nginx/jaeger-config.json
       - ./gen-lua:/gen-lua
+      - ./docker/openresty-thrift/lua-thrift:/usr/local/openresty/lualib/thrift
+      - ./keys:/keys
 
   media-frontend:
     build:
@@ -303,7 +318,7 @@ services:
       - ./media-frontend/lua-scripts:/usr/local/openresty/nginx/lua-scripts
       - ./media-frontend/conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
 
-  jaeger:
+  jaeger-agent:
     image: jaegertracing/all-in-one:1.21.0
     hostname: jaeger-agent
     ports:

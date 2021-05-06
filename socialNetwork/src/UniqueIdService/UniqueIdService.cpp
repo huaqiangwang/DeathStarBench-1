@@ -48,11 +48,11 @@ int main(int argc, char *argv[]) {
   LOG(info) << "machine_id = " << machine_id;
 
   std::mutex thread_lock;
-
+  std::shared_ptr<TServerSocket> server_socket = get_server_socket(config_json, "0.0.0.0", port);
   TThreadedServer server(
       std::make_shared<UniqueIdServiceProcessor>(
           std::make_shared<UniqueIdHandler>(&thread_lock, machine_id)),
-      std::make_shared<TServerSocket>("0.0.0.0", port),
+      server_socket,
       std::make_shared<TFramedTransportFactory>(),
       std::make_shared<TBinaryProtocolFactory>());
 
