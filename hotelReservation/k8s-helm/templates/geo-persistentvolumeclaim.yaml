@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    death-star-project: hotel-res
+    app-name: geo
+  namespace: hotel-res
+  name: geo
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: geo
+  labels:
+    death-star-project: hotel-res
+    app-name: geo
+    type: local
+  namespace: hotel-res
+spec:
+        #  storageClassName: manual
+  capacity:
+    storage: 100Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/tmp/geo"
