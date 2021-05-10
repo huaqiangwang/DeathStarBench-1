@@ -28,6 +28,9 @@ services:
     # ports:
     #   - 27018:27017
     restart: always
+    command: --tlsMode requireTLS --tlsCertificateKeyFile /keys/server.pem
+    volumes:
+      - ./keys:/keys
 
   social-graph-redis:
     image: redis:6.0.10
@@ -118,6 +121,9 @@ services:
     #    ports:
     #      - 27019:27017
     restart: always
+    command: --tlsMode requireTLS --tlsCertificateKeyFile /keys/server.pem
+    volumes:
+      - ./keys:/keys
 
   user-timeline-service:
     build: .
@@ -146,6 +152,9 @@ services:
     #    ports:
     #      - 27020:27017
     restart: always
+    command: --tlsMode requireTLS --tlsCertificateKeyFile /keys/server.pem
+    volumes:
+      - ./keys:/keys
 
   url-shorten-service:
     build: .
@@ -174,6 +183,9 @@ services:
     #    ports:
     #      - 27021:27017
     restart: always
+    command: --tlsMode requireTLS --tlsCertificateKeyFile /keys/server.pem
+    volumes:
+      - ./keys:/keys
 
   user-service:
     build: .
@@ -202,6 +214,9 @@ services:
     #    ports:
     #      - 27023:27017
     restart: always
+    command: --tlsMode requireTLS --tlsCertificateKeyFile /keys/server.pem
+    volumes:
+      - ./keys:/keys
 
   media-service:
     build: .
@@ -230,6 +245,9 @@ services:
     #    ports:
     #      - 27024:27017
     restart: always
+    command: --tlsMode requireTLS --tlsCertificateKeyFile /keys/server.pem
+    volumes:
+      - ./keys:/keys
 
   text-service:
     build: .
