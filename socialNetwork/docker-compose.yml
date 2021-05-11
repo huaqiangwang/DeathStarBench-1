@@ -38,6 +38,9 @@ services:
     # ports:
     #   - 6380:6379
     restart: always
+    command: --tls-port 6379 --port 0 --tls-cert-file /keys/server.crt --tls-key-file /keys/server.key --tls-auth-clients no
+    volumes:
+      - ./keys:/keys
 
   # write-home-timeline-service:
   #   image: social-network-microservices:latest
@@ -64,6 +67,9 @@ services:
     # ports:
     #   - 6381:6379
     restart: always
+    command: --tls-port 6379 --port 0 --tls-cert-file /keys/server.crt --tls-key-file /keys/server.key --tls-auth-clients no
+    volumes:
+      - ./keys:/keys
 
   home-timeline-redis:
     depends_on:
@@ -72,6 +78,9 @@ services:
     # ports:
     #   - 6381:6379
     image: redis:6.0.10
+    command: --tls-port 6379 --port 0 --tls-cert-file /keys/server.crt --tls-key-file /keys/server.key --tls-auth-clients no
+    volumes:
+      - ./keys:/keys
 
   compose-post-service:
     build: .
@@ -93,6 +102,9 @@ services:
     #    ports:
     #      - 6382:6379
     restart: always
+    command: --tls-port 6379 --port 0 --tls-cert-file /keys/server.crt --tls-key-file /keys/server.key --tls-auth-clients no
+    volumes:
+      - ./keys:/keys
 
   post-storage-service:
     build: .
@@ -145,6 +157,9 @@ services:
     #    ports:
     #      - 6383:6379
     restart: always
+    command: --tls-port 6379 --port 0 --tls-cert-file /keys/server.crt --tls-key-file /keys/server.key --tls-auth-clients no
+    volumes:
+      - ./keys:/keys
 
   user-timeline-mongodb:
     image: mongo:4.4.3

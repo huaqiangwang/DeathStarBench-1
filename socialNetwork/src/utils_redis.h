@@ -14,6 +14,8 @@ Redis init_redis_client_pool(
   ConnectionOptions connection_options;
   connection_options.host = config_json[service_name + "-redis"]["addr"];
   connection_options.port = config_json[service_name + "-redis"]["port"];
+  connection_options.tls.enabled = true;
+  connection_options.tls.cacert = "/keys/CA.pem";
 
   ConnectionPoolOptions pool_options;
   pool_options.size = config_json[service_name + "-redis"]["connections"];
