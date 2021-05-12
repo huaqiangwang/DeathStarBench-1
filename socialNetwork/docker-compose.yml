@@ -71,17 +71,6 @@ services:
     volumes:
       - ./keys:/keys
 
-  home-timeline-redis:
-    depends_on:
-      - jaeger-agent
-    hostname: home-timeline-redis
-    # ports:
-    #   - 6381:6379
-    image: redis:6.0.10
-    command: --tls-port 6379 --port 0 --tls-cert-file /keys/server.crt --tls-key-file /keys/server.key --tls-auth-clients no
-    volumes:
-      - ./keys:/keys
-
   compose-post-service:
     build: .
     depends_on:
