@@ -28,9 +28,10 @@ services:
     # ports:
     #   - 27018:27017
     restart: always
-    command: --tlsMode requireTLS --tlsCertificateKeyFile /keys/server.pem
+    command: --config /social-network-microservices/config/mongod.conf
     volumes:
       - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   social-graph-redis:
     image: redis:6.0.10
@@ -38,9 +39,10 @@ services:
     # ports:
     #   - 6380:6379
     restart: always
-    command: --tls-port 6379 --port 0 --tls-cert-file /keys/server.crt --tls-key-file /keys/server.key --tls-auth-clients no
+    command: /social-network-microservices/config/redis.conf
     volumes:
       - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   # write-home-timeline-service:
   #   image: social-network-microservices:latest
@@ -67,9 +69,10 @@ services:
     # ports:
     #   - 6381:6379
     restart: always
-    command: --tls-port 6379 --port 0 --tls-cert-file /keys/server.crt --tls-key-file /keys/server.key --tls-auth-clients no
+    command: /social-network-microservices/config/redis.conf
     volumes:
       - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   compose-post-service:
     build: .
@@ -91,9 +94,10 @@ services:
     #    ports:
     #      - 6382:6379
     restart: always
-    command: --tls-port 6379 --port 0 --tls-cert-file /keys/server.crt --tls-key-file /keys/server.key --tls-auth-clients no
+    command: /social-network-microservices/config/redis.conf
     volumes:
       - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   post-storage-service:
     build: .
@@ -122,9 +126,10 @@ services:
     #    ports:
     #      - 27019:27017
     restart: always
-    command: --tlsMode requireTLS --tlsCertificateKeyFile /keys/server.pem
+    command: --config /social-network-microservices/config/mongod.conf
     volumes:
       - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   user-timeline-service:
     build: .
@@ -146,9 +151,10 @@ services:
     #    ports:
     #      - 6383:6379
     restart: always
-    command: --tls-port 6379 --port 0 --tls-cert-file /keys/server.crt --tls-key-file /keys/server.key --tls-auth-clients no
+    command: /social-network-microservices/config/redis.conf
     volumes:
       - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   user-timeline-mongodb:
     image: mongo:4.4.3
@@ -156,9 +162,10 @@ services:
     #    ports:
     #      - 27020:27017
     restart: always
-    command: --tlsMode requireTLS --tlsCertificateKeyFile /keys/server.pem
+    command: --config /social-network-microservices/config/mongod.conf
     volumes:
       - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   url-shorten-service:
     build: .
@@ -187,9 +194,10 @@ services:
     #    ports:
     #      - 27021:27017
     restart: always
-    command: --tlsMode requireTLS --tlsCertificateKeyFile /keys/server.pem
+    command: --config /social-network-microservices/config/mongod.conf
     volumes:
       - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   user-service:
     build: .
@@ -218,9 +226,10 @@ services:
     #    ports:
     #      - 27023:27017
     restart: always
-    command: --tlsMode requireTLS --tlsCertificateKeyFile /keys/server.pem
+    command: --config /social-network-microservices/config/mongod.conf
     volumes:
       - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   media-service:
     build: .
@@ -249,9 +258,10 @@ services:
     #    ports:
     #      - 27024:27017
     restart: always
-    command: --tlsMode requireTLS --tlsCertificateKeyFile /keys/server.pem
+    command: --config /social-network-microservices/config/mongod.conf
     volumes:
       - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   text-service:
     build: .

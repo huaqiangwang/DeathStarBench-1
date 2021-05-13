@@ -49,7 +49,9 @@ Now by default SSL are enabled between all microservices (except storge and cach
 To disable SSL can follow below steps:
 1. Change `ssl/enabled` in `config/service-config.json` to `false`
 2. Seach `config:set("ssl", true)` in `nginx-web-server/conf/nginx.conf` and change the line to `config:set("ssl", false)`
-3. Restart all containers
+3. Change `net/tls/mode` in `config/mongod.conf` to `disabled` and remove `net/tls/certificateKeyFile`
+4. Change `port` and `tls-port` in `config/redis.conf` to `6379` and `0`
+5. Restart all containers
 
 ### Register users and construct social graphs
 Register users and construct social graph by running 
