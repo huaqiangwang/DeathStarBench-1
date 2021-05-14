@@ -38,20 +38,14 @@ Refer to `k8s/README.md`.
 Start docker containers by running `docker-compose up -d`. All images will be 
 pulled from Docker Hub.
 
+##### Enable TLS
+To enable TLS, start docker containers by running `TLS=1 docker-compose up -d`.
+
 #### Start docker containers on a machine cluster with `docker swarm`
 Before starting the containers, make sure you are on the master node of the docker swarm nodes.
 ```
 docker stack deploy --compose-file=docker-compose-swarm.yml <service-name>
 ```
-
-### Disable SSL
-Now by default SSL are enabled between all microservices (except storge and cache). 
-To disable SSL can follow below steps:
-1. Change `ssl/enabled` in `config/service-config.json` to `false`
-2. Seach `config:set("ssl", true)` in `nginx-web-server/conf/nginx.conf` and change the line to `config:set("ssl", false)`
-3. Change `net/tls/mode` in `config/mongod.conf` to `disabled` and remove `net/tls/certificateKeyFile`
-4. Change `port` and `tls-port` in `config/redis.conf` to `6379` and `0`
-5. Restart all containers
 
 ### Register users and construct social graphs
 Register users and construct social graph by running 
