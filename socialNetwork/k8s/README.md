@@ -34,7 +34,7 @@ Refer to [k8s/perf-tuning/README.md](https://github.com/intel-sandbox/DeathStarB
 
 ### Deploy services
 
-Run the script `<path-of-repo>/socialNetwork/openshift/scripts/deploy-all-services-and-configurations.sh`
+Run the script `<path-of-repo>/socialNetwork/k8s/scripts/deploy-all-services-and-configurations.sh`
 
 
 ### Register users and construct social graphs

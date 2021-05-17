@@ -5,7 +5,6 @@ SYSTEM="socialNetwork"
 NS="social-network"
 PATCH="patches/$SCENARIO.patch"
 GITDIFF=`git diff --stat`
-DOCKERIMAGE="social-network-microservices"
 
 function usage() {
   echo "Usage: deply.sh <scenario>"
@@ -49,12 +48,10 @@ fi
 cd ..
 for file in `ls *.yaml`
 do
-    sed -i "s/yg397\/social-network-microservices/$DOCKERIMAGE/g" $file
+    sed -i "s/yg397\///g" $file
 done
 cd -
 
-sed -i "s/yg387\/openresty-thrift/openresty-thrift-social/g" nginx-thrift.yaml
-sed -i "s/yg397//" media-frontend.yaml
 
 IMAGE_UUID=`docker images |grep '"^$SERVICE\s"' |awk '{print $3}'`
 if [[ ${IMAGE_UUID} != '' ]]
