@@ -4,6 +4,8 @@
 #include <sw/redis++/redis++.h>
 #include <chrono>
 
+#include "utils_config.h"
+
 using namespace sw::redis;
 namespace social_network {
 
@@ -14,6 +16,11 @@ Redis init_redis_client_pool(
   ConnectionOptions connection_options;
   connection_options.host = config_json[service_name + "-redis"]["addr"];
   connection_options.port = config_json[service_name + "-redis"]["port"];
+  if (is_config_ssl_enabled()) {
+    connection_options.tls.enabled = true;
+    connection_options.tls.cacert = get_config_ca_file().c_str();
+  }
+  
 
   ConnectionPoolOptions pool_options;
   pool_options.size = config_json[service_name + "-redis"]["connections"];

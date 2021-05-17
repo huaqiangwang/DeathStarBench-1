@@ -1,6 +1,16 @@
 version: "3"
 services:
-
+  configurer:
+    build:
+      context: ./docker/configurer
+      dockerfile: ./Dockerfile
+    image: microservices-social-configurer:latest
+    environment:
+      - TLS
+    entrypoint: [ "python", "./config.py" ]
+    volumes:
+      - ./nginx-web-server/conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      - ./config:/social-network-microservices/config
 
   thrift-microservice-deps:
     build:
@@ -11,7 +21,10 @@ services:
   social-graph-service:
     build: .
     depends_on:
-      - thrift-microservice-deps
+      thrift-microservice-deps:
+        condition: service_started
+      configurer:
+        condition: service_completed_successfully
     image: social-network-microservices:latest
     hostname: social-graph-service
     #    ports:
@@ -23,18 +36,34 @@ services:
       - ./config:/social-network-microservices/config
 
   social-graph-mongodb:
+    depends_on:
+      thrift-microservice-deps:
+        condition: service_started
+      configurer:
+        condition: service_completed_successfully
     image: mongo:4.4.3
     hostname: social-graph-mongodb
     # ports:
     #   - 27018:27017
     restart: always
+    command: --config /social-network-microservices/config/mongod.conf
+    volumes:
+      - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   social-graph-redis:
+    depends_on:
+      configurer:
+        condition: service_completed_successfully
     image: redis:6.0.10
     hostname: social-graph-redis
     # ports:
     #   - 6380:6379
     restart: always
+    command: /social-network-microservices/config/redis.conf
+    volumes:
+      - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   # write-home-timeline-service:
   #   image: social-network-microservices:latest
@@ -56,24 +85,26 @@ services:
   #   restart: always
 
   home-timeline-redis:
+    depends_on:
+      configurer:
+        condition: service_completed_successfully
     image: redis:6.0.10
     hostname: home-timeline-redis
     # ports:
     #   - 6381:6379
     restart: always
-
-  home-timeline-redis:
-    depends_on:
-      - jaeger-agent
-    hostname: home-timeline-redis
-    # ports:
-    #   - 6381:6379
-    image: redis:6.0.10
+    command: /social-network-microservices/config/redis.conf
+    volumes:
+      - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   compose-post-service:
     build: .
     depends_on:
-      - thrift-microservice-deps
+      thrift-microservice-deps:
+        condition: service_started
+      configurer:
+        condition: service_completed_successfully
     image: social-network-microservices:latest
     hostname: compose-post-service
     #    ports:
@@ -85,16 +116,26 @@ services:
       - ./config:/social-network-microservices/config
 
   compose-post-redis:
+    depends_on:
+      configurer:
+        condition: service_completed_successfully
     image: redis:6.0.10
     hostname: compose-post-redis
     #    ports:
     #      - 6382:6379
     restart: always
+    command: /social-network-microservices/config/redis.conf
+    volumes:
+      - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   post-storage-service:
     build: .
     depends_on:
-      - thrift-microservice-deps
+      thrift-microservice-deps:
+        condition: service_started
+      configurer:
+        condition: service_completed_successfully
     image: social-network-microservices:latest
     hostname: post-storage-service
     ports:
@@ -106,6 +147,9 @@ services:
       - ./config:/social-network-microservices/config
 
   post-storage-memcached:
+    depends_on:
+      configurer:
+        condition: service_completed_successfully
     image: memcached:1.6.8
     hostname: post-storage-memcached
     #    ports:
@@ -113,16 +157,26 @@ services:
     restart: always
 
   post-storage-mongodb:
+    depends_on:
+      configurer:
+        condition: service_completed_successfully
     image: mongo:4.4.3
     hostname: post-storage-mongodb
     #    ports:
     #      - 27019:27017
     restart: always
+    command: --config /social-network-microservices/config/mongod.conf
+    volumes:
+      - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   user-timeline-service:
     build: .
     depends_on:
-      - thrift-microservice-deps
+      thrift-microservice-deps:
+        condition: service_started
+      configurer:
+        condition: service_completed_successfully
     image: social-network-microservices:latest
     hostname: user-timeline-service
     #    ports:
@@ -134,23 +188,40 @@ services:
       - ./config:/social-network-microservices/config
 
   user-timeline-redis:
+    depends_on:
+      configurer:
+        condition: service_completed_successfully
     image: redis:6.0.10
     hostname: user-timeline-redis
     #    ports:
     #      - 6383:6379
     restart: always
+    command: /social-network-microservices/config/redis.conf
+    volumes:
+      - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   user-timeline-mongodb:
+    depends_on:
+      configurer:
+        condition: service_completed_successfully
     image: mongo:4.4.3
     hostname: user-timeline-mongodb
     #    ports:
     #      - 27020:27017
     restart: always
+    command: --config /social-network-microservices/config/mongod.conf
+    volumes:
+      - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   url-shorten-service:
     build: .
     depends_on:
-      - thrift-microservice-deps
+      thrift-microservice-deps:
+        condition: service_started
+      configurer:
+        condition: service_completed_successfully
     image: social-network-microservices:latest
     hostname: url-shorten-service
     #    ports:
@@ -162,6 +233,9 @@ services:
       - ./config:/social-network-microservices/config
 
   url-shorten-memcached:
+    depends_on:
+      configurer:
+        condition: service_completed_successfully
     image: memcached:1.6.8
     hostname: url-shorten-memcached
     #    ports:
@@ -169,16 +243,26 @@ services:
     restart: always
 
   url-shorten-mongodb:
+    depends_on:
+      configurer:
+        condition: service_completed_successfully
     image: mongo:4.4.3
     hostname: url-shorten-mongodb
     #    ports:
     #      - 27021:27017
     restart: always
+    command: --config /social-network-microservices/config/mongod.conf
+    volumes:
+      - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   user-service:
     build: .
     depends_on:
-      - thrift-microservice-deps
+      thrift-microservice-deps:
+        condition: service_started
+      configurer:
+        condition: service_completed_successfully
     image: social-network-microservices:latest
     hostname: user-service
     #    ports:
@@ -190,6 +274,9 @@ services:
       - ./config:/social-network-microservices/config
 
   user-memcached:
+    depends_on:
+      configurer:
+        condition: service_completed_successfully
     image: memcached:1.6.8
     hostname: user-memcached
     #    ports:
@@ -197,16 +284,26 @@ services:
     restart: always
 
   user-mongodb:
+    depends_on:
+      configurer:
+        condition: service_completed_successfully
     image: mongo:4.4.3
     hostname: user-mongodb
     #    ports:
     #      - 27023:27017
     restart: always
+    command: --config /social-network-microservices/config/mongod.conf
+    volumes:
+      - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   media-service:
     build: .
     depends_on:
-      - thrift-microservice-deps
+      thrift-microservice-deps:
+        condition: service_started
+      configurer:
+        condition: service_completed_successfully
     image: social-network-microservices:latest
     hostname: media-service
     #    ports:
@@ -218,6 +315,9 @@ services:
       - ./config:/social-network-microservices/config
 
   media-memcached:
+    depends_on:
+      configurer:
+        condition: service_completed_successfully
     image: memcached:1.6.8
     hostname: media-memcached
     #    ports:
@@ -225,16 +325,26 @@ services:
     restart: always
 
   media-mongodb:
+    depends_on:
+      configurer:
+        condition: service_completed_successfully
     image: mongo:4.4.3
     hostname: media-mongodb
     #    ports:
     #      - 27024:27017
     restart: always
+    command: --config /social-network-microservices/config/mongod.conf
+    volumes:
+      - ./keys:/keys
+      - ./config:/social-network-microservices/config
 
   text-service:
     build: .
     depends_on:
-      - thrift-microservice-deps
+      thrift-microservice-deps:
+        condition: service_started
+      configurer:
+        condition: service_completed_successfully
     image: social-network-microservices:latest
     hostname: text-service
     #    ports:
@@ -248,7 +358,10 @@ services:
   unique-id-service:
     build: .
     depends_on:
-      - thrift-microservice-deps
+      thrift-microservice-deps:
+        condition: service_started
+      configurer:
+        condition: service_completed_successfully
     image: social-network-microservices:latest
     hostname: unique-id-service
     #    ports:
@@ -262,7 +375,10 @@ services:
   user-mention-service:
     build: .
     depends_on:
-      - thrift-microservice-deps
+      thrift-microservice-deps:
+        condition: service_started
+      configurer:
+        condition: service_completed_successfully
     image: social-network-microservices:latest
     hostname: user-mention-service
     #    ports:
@@ -276,7 +392,10 @@ services:
   home-timeline-service:
     build: .
     depends_on:
-      - thrift-microservice-deps
+      thrift-microservice-deps:
+        condition: service_started
+      configurer:
+        condition: service_completed_successfully
     image: social-network-microservices:latest
     hostname: home-timeline-service
     #    ports:
@@ -291,6 +410,9 @@ services:
     build:
       context: ./docker/openresty-thrift
       dockerfile: ./xenial/Dockerfile
+    depends_on:
+      configurer:
+        condition: service_completed_successfully
     image: openresty-thrift-social:xenial
     hostname: nginx-thrift
     ports:
@@ -309,6 +431,9 @@ services:
     build:
       context: ./docker/media-frontend
       dockerfile: ./xenial/Dockerfile
+    depends_on:
+      configurer:
+        condition: service_completed_successfully
     image: media-frontend:xenial
     hostname: media-frontend
     ports:

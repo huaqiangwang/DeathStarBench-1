@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 RUN sed -i 's/http:\/\/archive.ubuntu.com\/ubuntu\//http:\/\/mirrors.163.com\/ubuntu\//g' /etc/apt/sources.list && apt-get update
 
-ARG LIB_MONGOC_VERSION=1.14.0
+ARG LIB_MONGOC_VERSION=1.15.0
 ARG LIB_THRIFT_VERSION=0.12.0
 ARG LIB_JSON_VERSION=3.6.1
 ARG LIB_JAEGER_VERSION=0.4.2
@@ -118,14 +118,14 @@ RUN apt-get update \
   && git clone https://github.com/redis/hiredis.git \
   && cd hiredis \
   && git checkout v${LIB_HIREDIS_VERSION} \
-  && make -j${NUM_CPUS} \
-  && make install \
+  && make -j${NUM_CPUS} USE_SSL=1 \
+  && make USE_SSL=1 install \
   # Install Redis plus plus
   && cd /tmp \
   && git clone https://github.com/sewenew/redis-plus-plus.git \
   && cd redis-plus-plus \
   && git checkout ${LIB_REDIS_PLUS_PLUS_VERSION} \
-  && cmake . \
+  && cmake -DREDIS_PLUS_PLUS_USE_TLS=ON . \
   && make -j${NUM_CPUS} \
   && make install \
   # Clean up
