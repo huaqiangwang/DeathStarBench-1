@@ -187,5 +187,5 @@
     "verifyClient": false,
     "clientKeyPath": "/keys/client.key",
     "clientCertPath": "/keys/client.crt"
-  }  
+  }
 }
