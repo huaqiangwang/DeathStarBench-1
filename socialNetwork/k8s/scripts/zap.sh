@@ -44,7 +44,7 @@ kubectl delete pod/wrk-client -n ${NS} &
 wait
 
 echo deleting cm
-for c in jaeger-config-yaml media-frontend-lua media-frontend-nginx nginx-thrift-jaeger nginx-thrift-genlua nginx-thrift-pages nginx-thrift-luascripts nginx-thrift-luascripts-api-home-timeline nginx-thrift-luascripts-api-post nginx-thrift-luascripts-api-user nginx-thrift-luascripts-api-user-timeline nginx-thrift-luascripts-wrk2-api-home-timeline nginx-thrift-luascripts-wrk2-api-post nginx-thrift-luascripts-wrk2-api-user nginx-thrift-luascripts-wrk2-api-user-timeline nginx-thrift
+for c in service-config media-frontend-lua media-frontend-nginx nginx-thrift-jaeger nginx-thrift-genlua nginx-thrift-pages nginx-thrift-luascripts nginx-thrift-luascripts-api-home-timeline nginx-thrift-luascripts-api-post nginx-thrift-luascripts-api-user nginx-thrift-luascripts-api-user-timeline nginx-thrift-luascripts-wrk2-api-home-timeline nginx-thrift-luascripts-wrk2-api-post nginx-thrift-luascripts-wrk2-api-user nginx-thrift-luascripts-wrk2-api-user-timeline nginx-thrift
 
 do
 	kubectl delete cm/${c} -n ${NS}

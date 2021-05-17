@@ -37,17 +37,21 @@ spec:
     spec:
       containers:
       - name: post-storage-service
-        image: yg397/social-network-microservices
+        image: social-network-microservices:latest
         imagePullPolicy: IfNotPresent
         command: ["PostStorageService"]
         ports: 
         - containerPort: 9090
         volumeMounts:
-          - mountPath: /social-network-microservices/config/jaeger-config.yml
-            subPath: jaeger-config.yml
-            name: jaeger-conf-yaml
+          - mountPath: /social-network-microservices/config
+            name: service-config
+          - mountPath: /keys
+            name: ssl-keys            
       restartPolicy: Always
       volumes:
-        - name: jaeger-conf-yaml
+        - name: service-config
           configMap:
-            name: jaeger-config-yaml
+            name: service-config
+        - name: ssl-keys
+          configMap:
+            name: ssl-keys            

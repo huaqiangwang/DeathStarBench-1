@@ -39,7 +39,7 @@ spec:
     spec:
       containers:
       - name: media-frontend
-        image: yg397/media-frontend:xenial
+        image: media-frontend:xenial
         imagePullPolicy: IfNotPresent
         ports: 
         - containerPort: 8080
@@ -49,9 +49,6 @@ spec:
         - mountPath: /usr/local/openresty/nginx/conf/nginx.conf
           subPath: nginx.conf
           name: nginx-conf
-        - mountPath: /usr/local/openresty/nginx/conf/jaeger-config.yml
-          subPath: jaeger-config.yml
-          name: jaeger-conf
       restartPolicy: Always
       volumes:
       - name: nginx-conf
@@ -63,6 +60,3 @@ spec:
       - name: lua-conf
         configMap:
           name: media-frontend-lua
-      - name: jaeger-conf
-        configMap:
-          name: jaeger-config-yaml
