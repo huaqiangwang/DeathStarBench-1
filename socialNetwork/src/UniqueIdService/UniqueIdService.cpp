@@ -18,6 +18,7 @@
 #include <thrift/transport/TServerSocket.h>
 
 #include "../utils.h"
+#include "../utils_thrift.h"
 #include "UniqueIdHandler.h"
 
 using apache::thrift::protocol::TBinaryProtocolFactory;

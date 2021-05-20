@@ -38,14 +38,18 @@ Refer to `k8s/README.md`.
 Start docker containers by running `docker-compose up -d`. All images will be 
 pulled from Docker Hub.
 
-##### Enable TLS
-To enable TLS, start docker containers by running `TLS=1 docker-compose up -d`.
-
 #### Start docker containers on a machine cluster with `docker swarm`
 Before starting the containers, make sure you are on the master node of the docker swarm nodes.
 ```
 docker stack deploy --compose-file=docker-compose-swarm.yml <service-name>
 ```
+
+### Enable TLS
+If you are using `docker-compose`, start docker containers by running `TLS=1 docker-compose up -d` to enable TLS.
+
+Since the `depends_on` option is ignored when deploying a stack in swarm mode with a version 3 Compose file, you 
+must turn on TLS manually by modifing `config/mongod.conf`, `config/redis.conf`, `config/service-config.json` and 
+`nginx-web-server/conf/nginx.conf` to enable TLS with `docker swarm`.
 
 ### Register users and construct social graphs
 Register users and construct social graph by running 

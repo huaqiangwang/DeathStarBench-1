@@ -4,8 +4,6 @@
 #include <mongoc.h>
 #include <bson/bson.h>
 
-#include "utils_config.h"
-
 #define SERVER_SELECTION_TIMEOUT_MS 300
 
 namespace social_network {
@@ -34,12 +32,14 @@ mongoc_client_pool_t* init_mongodb_client_pool(
               << error.message<< std::endl;
     return nullptr;
   } else {
-    if (is_config_ssl_enabled()) {
+    if (config_json["ssl"]["enabled"]) {
+      std::string ca_file = config_json["ssl"]["caPath"];
+
       mongoc_uri_set_option_as_bool(mongodb_uri, MONGOC_URI_TLS, true);
-      mongoc_uri_set_option_as_utf8(mongodb_uri, MONGOC_URI_TLSCAFILE, get_config_ca_file().c_str());
+      mongoc_uri_set_option_as_utf8(mongodb_uri, MONGOC_URI_TLSCAFILE, ca_file.c_str());
       mongoc_uri_set_option_as_bool(mongodb_uri, MONGOC_URI_TLSALLOWINVALIDHOSTNAMES, true);
     }
-    
+
     mongoc_client_pool_t *client_pool= mongoc_client_pool_new(mongodb_uri);
     mongoc_client_pool_max_size(client_pool, max_size);
     return client_pool;

@@ -5,6 +5,7 @@
 #include <thrift/transport/TServerSocket.h>
 
 #include "../utils.h"
+#include "../utils_thrift.h"
 #include "ComposePostHandler.h"
 
 using apache::thrift::protocol::TBinaryProtocolFactory;

@@ -7,6 +7,7 @@
 #include "../utils.h"
 #include "../utils_memcached.h"
 #include "../utils_mongodb.h"
+#include "../utils_thrift.h"
 #include "UserMentionHandler.h"
 #include "nlohmann/json.hpp"
 
