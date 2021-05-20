@@ -17,9 +17,27 @@ Supported actions:
 - luarocks (apt-get install luarocks)
 - luasocket (luarocks install luasocket)
 
-## Running the social network with kubernetes cluster
+## Running on kubernetes cluster
 
 Refer to `k8s/README.md`.
+
+## Running on kubeernetes cluster with Helm
+
+It is available to deploy services on k8s with help of helm, you need to deploy services in this way when you want to create multiple frontend services and each frontend service is receiving http requests from a dedicated wrk-client.
+
+To deploy:
+
+```bash
+cd hotelReservation/ks8-helm/scripts
+./deploy.sh
+```
+
+To issue hotel reservation http requests for benchmarking:
+
+```bash
+cd hotelReservation/ks8-helm/scripts
+./measure.sh
+```
 
 ## Running the social network application with docker-compose
 ### Before you start

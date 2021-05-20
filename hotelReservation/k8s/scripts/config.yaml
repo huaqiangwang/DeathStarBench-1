@@ -1,0 +1,36 @@
+apiVersion: v1
+data:
+  config.json: |
+    {
+      "consulAddress": "consul.hotel-res.svc.cluster.local:8500",
+      "jaegerAddress": "jaeger.hotel-res.svc.cluster.local:6831",
+      "FrontendPort": "5000",
+      "GeoPort": "8083",
+      "PprofGeoPort": "18083",
+      "GeoMongoAddress": "mongodb-geo.hotel-res.svc.cluster.local:27018",
+      "ProfilePort": "8081",
+      "PprofProfilePort": "18081",
+      "ProfileMongoAddress": "mongodb-profile.hotel-res.svc.cluster.local:27019",
+      "ProfileMemcAddress": "memcached-profile.hotel-res.svc.cluster.local:11213",
+      "RatePort": "8084",
+      "PprofRatePort": "18084",
+      "RateMongoAddress": "mongodb-rate.hotel-res.svc.cluster.local:27020",
+      "RateMemcAddress": "memcached-rate.hotel-res.svc.cluster.local:11212",
+      "RecommendPort": "8085",
+      "PprofRecommendPort": "18085",
+      "RecommendMongoAddress": "mongodb-recommendation.hotel-res.svc.cluster.local:27021",
+      "ReservePort": "8087",
+      "PprofReservePort": "18087",
+      "ReserveMongoAddress": "mongodb-reservation.hotel-res.svc.cluster.local:27022",
+      "ReserveMemcAddress": "memcached-reserve.hotel-res.svc.cluster.local:11214",
+      "SearchPort": "8082",
+      "PprofSearchPort": "18082",
+      "UserPort": "8086",
+      "PprofUserPort": "18086",
+      "UserMongoAddress": "mongodb-user.hotel-res.svc.cluster.local:27023"
+    }
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: configmap-config-json
+  namespace: hotel-res
