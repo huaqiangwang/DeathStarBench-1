@@ -30,7 +30,7 @@ spec:
       app: post-storage-service
   template:
     metadata:
-      labels: 
+      labels:
         death-star-project: social-network
         app: post-storage-service
       name: post-storage-service
@@ -40,13 +40,13 @@ spec:
         image: social-network-microservices:latest
         imagePullPolicy: IfNotPresent
         command: ["PostStorageService"]
-        ports: 
+        ports:
         - containerPort: 9090
         volumeMounts:
           - mountPath: /social-network-microservices/config
             name: service-config
           - mountPath: /keys
-            name: ssl-keys            
+            name: ssl-keys
       restartPolicy: Always
       volumes:
         - name: service-config
@@ -54,4 +54,4 @@ spec:
             name: service-config
         - name: ssl-keys
           configMap:
-            name: ssl-keys            
+            name: ssl-keys

@@ -30,7 +30,7 @@ spec:
       app: url-shorten-mongodb
   template:
     metadata:
-      labels: 
+      labels:
         death-star-project: social-network
         app: url-shorten-mongodb
       name: url-shorten-mongodb
@@ -39,10 +39,21 @@ spec:
       - name: url-shorten-mongodb
         image: mongo:4.4.3
         imagePullPolicy: IfNotPresent
+        args: ["--config", "/config/mongod.conf"]
         volumeMounts:
-          - name: my-data
-            mountPath: "/data/db"
+        - mountPath: /config
+          name: service-config
+        - mountPath: /keys
+          name: ssl-keys
+        - name: my-data
+          mountPath: "/data/db"
       restartPolicy: Always
       volumes:
+      - name: service-config
+        configMap:
+          name: service-config
+      - name: ssl-keys
+        configMap:
+          name: ssl-keys
       - name: my-data
         emptyDir: {}

@@ -30,7 +30,7 @@ spec:
       app: home-timeline-redis
   template:
     metadata:
-      labels: 
+      labels:
         death-star-project: social-network
         app: home-timeline-redis
       name: home-timeline-redis
@@ -39,4 +39,17 @@ spec:
       - name: home-timeline-redis
         image: redis:6.0.10
         imagePullPolicy: IfNotPresent
+        args: ["/config/redis.conf"]
+        volumeMounts:
+        - mountPath: /config
+          name: service-config
+        - mountPath: /keys
+          name: ssl-keys
       restartPolicy: Always
+      volumes:
+      - name: service-config
+        configMap:
+          name: service-config
+      - name: ssl-keys
+        configMap:
+          name: ssl-keys

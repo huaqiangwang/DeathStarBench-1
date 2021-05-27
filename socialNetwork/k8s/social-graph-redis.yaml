@@ -30,13 +30,26 @@ spec:
       app: social-graph-redis
   template:
     metadata:
-      labels: 
+      labels:
         death-star-project: social-network
         app: social-graph-redis
       name: social-graph-redis
     spec:
       containers:
       - name: social-graph-redis
-        image: redis
+        image: redis:6.0.10
         imagePullPolicy: IfNotPresent
+        args: ["/config/redis.conf"]
+        volumeMounts:
+        - mountPath: /config
+          name: service-config
+        - mountPath: /keys
+          name: ssl-keys
       restartPolicy: Always
+      volumes:
+      - name: service-config
+        configMap:
+          name: service-config
+      - name: ssl-keys
+        configMap:
+          name: ssl-keys
