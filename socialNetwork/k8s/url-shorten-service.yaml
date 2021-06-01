@@ -30,7 +30,7 @@ spec:
       app: url-shorten-service
   template:
     metadata:
-      labels: 
+      labels:
         death-star-project: social-network
         app: url-shorten-service
       name: url-shorten-service
@@ -44,7 +44,7 @@ spec:
           - mountPath: /social-network-microservices/config
             name: service-config
           - mountPath: /keys
-            name: ssl-keys            
+            name: ssl-keys
       restartPolicy: Always
       volumes:
         - name: service-config
@@ -52,4 +52,4 @@ spec:
             name: service-config
         - name: ssl-keys
           configMap:
-            name: ssl-keys            
+            name: ssl-keys

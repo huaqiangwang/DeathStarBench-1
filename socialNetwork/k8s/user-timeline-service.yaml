@@ -30,7 +30,7 @@ spec:
       app: user-timeline-service
   template:
     metadata:
-      labels: 
+      labels:
         death-star-project: social-network
         app: user-timeline-service
       name: user-timeline-service
@@ -44,7 +44,7 @@ spec:
           - mountPath: /social-network-microservices/config
             name: service-config
           - mountPath: /keys
-            name: ssl-keys            
+            name: ssl-keys
       restartPolicy: Always
       volumes:
         - name: service-config
@@ -53,4 +53,4 @@ spec:
         - name: ssl-keys
           configMap:
             name: ssl-keys
-            
+

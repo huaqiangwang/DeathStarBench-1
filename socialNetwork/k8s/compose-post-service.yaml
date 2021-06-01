@@ -1,5 +1,3 @@
-    # depends_on:
-    #   - write-home-timeline-rabbitmq
 ---
 apiVersion: v1
 kind: Service
@@ -32,7 +30,7 @@ spec:
       app: compose-post-service
   template:
     metadata:
-      labels: 
+      labels:
         death-star-project: social-network
         app: compose-post-service
       name: compose-post-service

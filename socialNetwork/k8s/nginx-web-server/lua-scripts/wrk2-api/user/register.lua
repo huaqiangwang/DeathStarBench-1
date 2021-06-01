@@ -50,7 +50,6 @@ function _M.RegisterUser()
     ngx.exit(ngx.HTTP_INTERNAL_SERVER_ERROR)
   end
 
-  ngx.say("Success!")
   GenericObjectPool:returnConnection(client)
   span:finish()
 end
