@@ -11,6 +11,7 @@
 #include "../tracing.h"
 #include "../utils.h"
 #include "../utils_redis.h"
+#include "../utils_thrift.h"
 #include "HomeTimelineHandler.h"
 
 using apache::thrift::protocol::TBinaryProtocolFactory;
