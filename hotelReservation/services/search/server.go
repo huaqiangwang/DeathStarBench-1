@@ -36,6 +36,9 @@ type Server struct {
 	Registry *registry.Client
 }
 
+var nearbyCallCount int
+var timerDone chan bool
+
 // Run starts the server
 func (s *Server) Run() error {
 	if s.Port == 0 {
@@ -88,11 +91,26 @@ func (s *Server) Run() error {
 		return fmt.Errorf("failed register: %v", err)
 	}
 
+	timerDone := make(chan bool)
+	go func(){
+		timer := time.NewTicker(5 * time.Second)
+		for {
+			select {
+			case <- timerDone:
+				fmt.Println("Nearyby counter exists")
+				break
+			case <- timer.C:
+				fmt.Printf("Nearby CAlled Counter: %d\n", nearbyCallCount)
+			}
+		}
+	}()
+
 	return srv.Serve(lis)
 }
 
 // Shutdown cleans up any processes
 func (s *Server) Shutdown() {
+	timerDone <- true
 	s.Registry.Deregister(s.uuid)
 }
 
@@ -129,6 +147,7 @@ func (s *Server) Nearby(ctx context.Context, req *pb.NearbyRequest) (*pb.SearchR
 
 	// fmt.Printf("nearby lat = %f\n", req.Lat)
 	// fmt.Printf("nearby lon = %f\n", req.Lon)
+	nearbyCallCount += 1
 
 	nearby, err := s.geoClient.Nearby(ctx, &geo.Request{
 		Lat: req.Lat,

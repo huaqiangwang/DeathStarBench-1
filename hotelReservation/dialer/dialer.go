@@ -35,6 +35,7 @@ func WithBalancer(registry *consul.Client) DialOption {
 
 // Dial returns a load balanced grpc client conn with tracing interceptor
 func Dial(name string, opts ...DialOption) (*grpc.ClientConn, error) {
+	fmt.Printf("Dial to gRPC server %s\n", name)
 	dialopts := []grpc.DialOption{
 		grpc.WithInsecure(),
 		grpc.WithKeepaliveParams(keepalive.ClientParameters{
