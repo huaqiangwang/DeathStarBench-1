@@ -4,6 +4,8 @@ import (
 	"crypto/sha256"
 	// "encoding/json"
 	"fmt"
+
+	"github.com/google/uuid"
 	"github.com/grpc-ecosystem/grpc-opentracing/go/otgrpc"
 	"github.com/harlow/go-micro-services/registry"
 	pb "github.com/harlow/go-micro-services/services/user/proto"
@@ -24,6 +26,7 @@ const name = "srv-user"
 
 // Server implements the user service
 type Server struct {
+	uuid  string
 	users map[string]string
 
 	Tracer   opentracing.Tracer
@@ -42,6 +45,8 @@ func (s *Server) Run() error {
 	if s.users == nil {
 		s.users = loadUsers(s.MongoSession)
 	}
+
+	s.uuid = uuid.New().String()
 
 	srv := grpc.NewServer(
 		grpc.KeepaliveParams(keepalive.ServerParameters{
@@ -75,7 +80,7 @@ func (s *Server) Run() error {
 	// var result map[string]string
 	// json.Unmarshal([]byte(byteValue), &result)
 
-	err = s.Registry.Register(name, s.IpAddr, s.Port)
+	err = s.Registry.Register(name, s.uuid, s.IpAddr, s.Port)
 	if err != nil {
 		return fmt.Errorf("failed register: %v", err)
 	}
@@ -85,7 +90,7 @@ func (s *Server) Run() error {
 
 // Shutdown cleans up any processes
 func (s *Server) Shutdown() {
-	s.Registry.Deregister(name)
+	s.Registry.Deregister(s.uuid)
 }
 
 // CheckUser returns whether the username and password are correct.

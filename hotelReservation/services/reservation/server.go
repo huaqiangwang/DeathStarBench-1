@@ -3,6 +3,8 @@ package reservation
 import (
 	// "encoding/json"
 	"fmt"
+
+	"github.com/google/uuid"
 	"github.com/grpc-ecosystem/grpc-opentracing/go/otgrpc"
 	"github.com/harlow/go-micro-services/registry"
 	pb "github.com/harlow/go-micro-services/services/reservation/proto"
@@ -27,12 +29,13 @@ const name = "srv-reservation"
 
 // Server implements the user service
 type Server struct {
-	Tracer   opentracing.Tracer
-	Port     int
-	IpAddr	 string
-	MongoSession	*mgo.Session
-	Registry *registry.Client
-	MemcClient *memcache.Client
+	uuid         string
+	Tracer       opentracing.Tracer
+	Port         int
+	IpAddr       string
+	MongoSession *mgo.Session
+	Registry     *registry.Client
+	MemcClient   *memcache.Client
 }
 
 // Run starts the server
@@ -40,6 +43,8 @@ func (s *Server) Run() error {
 	if s.Port == 0 {
 		return fmt.Errorf("server port must be set")
 	}
+
+	s.uuid = uuid.New().String()
 
 	srv := grpc.NewServer(
 		grpc.KeepaliveParams(keepalive.ServerParameters{
@@ -75,7 +80,7 @@ func (s *Server) Run() error {
 
 	// fmt.Printf("In reservation s.IpAddr = %s, port = %d\n", s.IpAddr, s.Port)
 
-	err = s.Registry.Register(name, s.IpAddr, s.Port)
+	err = s.Registry.Register(name, s.uuid, s.IpAddr, s.Port)
 	if err != nil {
 		return fmt.Errorf("failed register: %v", err)
 	}
@@ -85,7 +90,7 @@ func (s *Server) Run() error {
 
 // Shutdown cleans up any processes
 func (s *Server) Shutdown() {
-	s.Registry.Deregister(name)
+	s.Registry.Deregister(s.uuid)
 }
 
 // MakeReservation makes a reservation based on given information
