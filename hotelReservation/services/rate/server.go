@@ -3,14 +3,11 @@ package rate
 import (
 	"encoding/json"
 	"fmt"
-
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
-
 	// "io/ioutil"
 	"log"
 	"net"
-
 	// "os"
 	"sort"
 	"time"
@@ -18,29 +15,28 @@ import (
 	"github.com/google/uuid"
 	"github.com/grpc-ecosystem/grpc-opentracing/go/otgrpc"
 	"github.com/harlow/go-micro-services/registry"
-	pb "github.com/harlow/go-micro-services/services/rate/proto"
 	"github.com/harlow/go-micro-services/tls"
+	pb "github.com/harlow/go-micro-services/services/rate/proto"
 	"github.com/opentracing/opentracing-go"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/keepalive"
 
-	"strings"
-
 	"github.com/bradfitz/gomemcache/memcache"
+	"strings"
 )
 
 const name = "srv-rate"
 
 // Server implements the rate service
 type Server struct {
-	uuid         string
-	Tracer       opentracing.Tracer
-	Port         int
-	IpAddr       string
-	MongoSession *mgo.Session
-	Registry     *registry.Client
-	MemcClient   *memcache.Client
+	Tracer    opentracing.Tracer
+	Port      int
+	IpAddr	 string
+	MongoSession 	*mgo.Session
+	Registry  *registry.Client
+	MemcClient *memcache.Client
+	uuid       string
 }
 
 // Run starts the server
@@ -148,7 +144,7 @@ func (s *Server) GetRates(ctx context.Context, req *pb.Request) (*pb.Result, err
 			} else {
 				for _, r := range tmpRatePlans {
 					ratePlans = append(ratePlans, r)
-					rate_json, err := json.Marshal(r)
+					rate_json , err := json.Marshal(r)
 					if err != nil {
 						fmt.Printf("json.Marshal err = %s\n", err)
 					}

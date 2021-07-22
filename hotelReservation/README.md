@@ -50,20 +50,16 @@ vim docker-compose.yml
 - Make sure exposed ports in docker-compose files are available
 - Make sure the cpuset in docker-compose files are available
 
-### Start docker containers (no TLS)
-Start docker containers by running `docker-compose up -d`. All images will be pulled from Docker Hub.
+### Running the containers
+##### Docker-compose
+- NOTLS: Start docker containers by running `docker-compose up -d`. All images will be pulled from Docker Hub.
+- TLS: Start docker containers by running `TLS=1 docker-compose up -d`. All the gRPC communications will be protected by TLS.
+- TLS with spcified ciphersuite: Start docker containers by running `TLS=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 docker-compose up -d`. The available cipher suite can be find at the file [options.go](tls/options.go#L21).
 
-### Start docker containers with TLS gRPC
-Running with default cipher suite: `TLS=1 docker-compose up -d`.
+Check if TLS is enabled or not: `docker-compose logs <service> | grep TLS`.
 
-Running with specified cipher suite: `TLS=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 docker-compose up -d`.
-
-Check if TLS is enabled or not: `docker-compose logs user | grep TLS`.
-
-The available cipher suite can be find at the file [options.go](tls/options.go#L21).
 
 #### workload generation
-
 ```bash
 $WRK_DIR/wrk -D exp -t <num-threads> -c <num-conns> -d <duration> -L -s ./wrk2_lua_scripts/mixed-workload_type_1.lua http://x.x.x.x:5000 -R <reqs-per-sec>
 ```
