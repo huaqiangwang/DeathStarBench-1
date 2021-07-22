@@ -9,7 +9,6 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/harlow/go-micro-services/pprof"
 	"github.com/harlow/go-micro-services/registry"
 	"github.com/harlow/go-micro-services/services/profile"
 	"github.com/harlow/go-micro-services/tracing"
@@ -61,9 +60,6 @@ func main() {
 		panic(err)
 	}
 
-	if err := pprof.StartHttp(result["PprofProfilePort"]); err != nil{
-		panic(err)
-	}
 	srv := profile.Server{
 		Tracer:   tracer,
 		// Port:     *port,

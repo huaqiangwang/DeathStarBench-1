@@ -8,7 +8,6 @@ import (
 	"log"
 	"os"
 
-	"github.com/harlow/go-micro-services/pprof"
 	"github.com/harlow/go-micro-services/registry"
 	"github.com/harlow/go-micro-services/services/recommendation"
 	"github.com/harlow/go-micro-services/tracing"
@@ -54,9 +53,6 @@ func main() {
 		panic(err)
 	}
 
-	if err := pprof.StartHttp(result["PprofRecommendPort"]); err != nil {
-		panic(err)
-	}
 	srv := &recommendation.Server{
 		Tracer:   tracer,
 		// Port:     *port,

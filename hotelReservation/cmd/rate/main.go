@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"github.com/harlow/go-micro-services/pprof"
 	"github.com/harlow/go-micro-services/registry"
 	"github.com/harlow/go-micro-services/services/rate"
 	"github.com/harlow/go-micro-services/tracing"
@@ -55,9 +54,6 @@ func main() {
 		panic(err)
 	}
 
-	if err := pprof.StartHttp(result["PprofRatePort"]); err != nil {
-		panic(err)
-	}
 	registry, err := registry.NewClient(*consuladdr)
 	if err != nil {
 		panic(err)
