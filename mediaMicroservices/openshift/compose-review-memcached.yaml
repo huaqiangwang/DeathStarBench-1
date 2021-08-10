@@ -40,4 +40,5 @@ spec:
       containers:
       - name: compose-review-memcached
         image: memcached
+        command: ["memcached", "-c", "65536"]
       restartPolicy: Always
