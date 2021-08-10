@@ -40,4 +40,5 @@ spec:
       containers:
       - name: movie-info-memcached
         image: memcached
+        command: ["memcached", "-c", "65536"]
       restartPolicy: Always
