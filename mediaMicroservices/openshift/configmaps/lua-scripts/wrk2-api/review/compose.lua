@@ -74,6 +74,18 @@ function _M.ComposeReview()
   for i = 1, #threads do
     local ok, res = ngx.thread.wait(threads[i])
     if not ok then
+      if i == 1 then
+        ngx.say("UploadUserId error")
+      end
+      if i == 2 then
+        ngx.say("UploadMovieID error")
+      end
+      if i == 3 then
+        ngx.say("UploadText error")
+      end
+      if i == 4 then
+        ngx.say("UploadUniqueId error")
+      end
       status = ngx.HTTP_INTERNAL_SERVER_ERROR
     end
   end
