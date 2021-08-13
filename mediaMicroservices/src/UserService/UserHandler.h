@@ -375,7 +375,7 @@ namespace media_service {
         auto span = opentracing::Tracer::Global()->StartSpan(
                 "UploadUserWithUsername",
                 { opentracing::ChildOf(parent_span->get()) });
-        span->SetTag("UUID", _uuid)
+        span->SetTag("UUID", _uuid);
         opentracing::Tracer::Global()->Inject(span->context(), writer);
 
         size_t user_id_size;
@@ -566,7 +566,7 @@ namespace media_service {
                 "UploadUserWithUserId",
                 { opentracing::ChildOf(parent_span->get()) });
         _req_count ++;
-        Log(debug) << "UploadUserWithUserId" << " count : " << _req_count << std::endl;
+        LOG(debug) << "UploadUserWithUserId" << " count : " << _req_count << std::endl;
         span->SetTag("UUID", "kd");
         span->Log({{"Request Count", _req_count}});
 
