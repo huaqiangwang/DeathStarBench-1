@@ -61,6 +61,8 @@ function _M.ComposeReview()
     ngx.say("Incomplete arguments")
     ngx.log(ngx.ERR, "Incomplete arguments")
     ngx.exit(ngx.HTTP_BAD_REQUEST)
+    span:set_tag("failed", "Incomplete arguments")
+    span:finish()
   end
 
   local threads = {

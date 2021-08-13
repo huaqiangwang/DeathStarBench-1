@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+server=`kubectl -n media-microsvc get svc|grep nginx | awk '{print $3}'`
 
 for i in {1..1000}; do
   username="username_"$i
@@ -6,6 +7,6 @@ for i in {1..1000}; do
   title="title_"$i
   text=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 256 | head -n 1)
   curl -d "text="$text"&username="$username"&password="$password"&rating=5&title="$title \
-      http://127.0.0.1:8080/api/review/compose
+      http://$server:8080/api/review/compose
 done
  
