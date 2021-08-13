@@ -24,6 +24,7 @@ function _M.RegisterMovie()
     ngx.status = ngx.HTTP_BAD_REQUEST
     ngx.say("Incomplete arguments")
     ngx.log(ngx.ERR, "Incomplete arguments")
+    span:finish()
     ngx.exit(ngx.HTTP_BAD_REQUEST)
   end
 

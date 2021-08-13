@@ -303,6 +303,7 @@ namespace media_service {
 
         if (found) {
             LOG(warning) << "Movie "<< title << " already existed in MongoDB";
+            #if 0
             ServiceException se;
             se.errorCode = ErrorCode::SE_THRIFT_HANDLER_ERROR;
             se.message = "Movie " + title + " already existed in MongoDB";
@@ -310,6 +311,7 @@ namespace media_service {
             mongoc_collection_destroy(collection);
             mongoc_client_pool_push(_mongodb_client_pool, mongodb_client);
             throw se;
+            #endif
         } else {
             bson_t *new_doc = bson_new();
             BSON_APPEND_UTF8(new_doc, "title", title.c_str());
