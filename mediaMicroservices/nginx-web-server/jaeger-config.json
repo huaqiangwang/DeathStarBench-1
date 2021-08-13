@@ -6,7 +6,7 @@
     "localAgentHostPort": "jaeger:6831"
   },
   "sampler": {
-    "type": "probabilistic",
-    "param": "0.01"
+    "type": "const",
+    "param": "1"
   }
 }
