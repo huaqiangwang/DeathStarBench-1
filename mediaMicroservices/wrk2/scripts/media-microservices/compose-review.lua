@@ -1026,6 +1026,7 @@ request = function()
   local username = "username_" .. tostring(user_index)
   local password = "password_" .. tostring(user_index)
   local title = movie_titles[movie_index]
+  title = string.gsub(title, "%&", "%%26")
   local rating = math.random(0, 10)
   local text = string.random(256)
 
