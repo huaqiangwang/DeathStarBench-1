@@ -3,5 +3,5 @@ reporter:
   logSpans: false
   localAgentHostPort: "jaeger:6831"
 sampler:
-  type: const
-  param: 1
+  type: probabilistic
+  param: 0.01
