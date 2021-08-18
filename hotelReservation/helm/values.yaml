@@ -21,7 +21,7 @@ image:
   repository: lianhao/dsbpp_hotel_reserv
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "89ece9e"
+  tag: "85bdd93"
 
 imagePullSecrets: []
 nameOverride: ""
