@@ -1,0 +1,15 @@
+FROM golang:1.9 AS iodlr
+WORKDIR /root
+RUN git clone https://github.com/intel/iodlr && cd iodlr/large_page-c && make -f Makefile.preload
+
+FROM golang:1.9
+COPY --from=iodlr /root/iodlr/large_page-c/liblppreload.so /lib64/liblppreload.so
+COPY . /go/src/github.com/harlow/go-micro-services
+WORKDIR /go/src/github.com/harlow/go-micro-services
+RUN go get gopkg.in/mgo.v2
+RUN go get github.com/bradfitz/gomemcache/memcache
+RUN go get github.com/google/uuid
+RUN go install -ldflags="-s -w" ./cmd/...
+ENV LD_PRELOAD=/lib64/liblppreload.so
+ENV LP_IGNORE='(linux-vdso)|(/lib64/liblppreload.so)|(libpthread)|(libc)|(ld-linux-x86-64)'
+
