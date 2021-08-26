@@ -79,7 +79,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.serviceAccount.create -}}
+      {{- if .Values.serviceAccount.create }}
       serviceAccountName: {{ include "hotelres.serviceAccountName" . }}
       {{- end }}
       {{- with (include "hotelres.get" (list .Values "profile" "podSecurityContext" "json") | mustFromJson) }}
