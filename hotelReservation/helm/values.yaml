@@ -12,6 +12,14 @@ serviceAccount:
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
+  # role rules
+  rules: []
+  # the following rules are for OpenShift specific, uncomment it if necessary
+  #rules:
+  #  - apiGroups: ["security.openshift.io"]
+  #    resources: ["securitycontextconstraints"]
+  #    resourceNames: ["privileged"]
+  #    verbs: ["use"]
 
 # Beginning of ommon default settings for all microservices in hotelReservation
 # May be overwritten by each misroservice's own setting
@@ -89,6 +97,9 @@ consul:
   image:
     repository: consul
     tag: "1.9.2"
+  # The following container securityContext is for OpenShift specific. Uncomment it if necessary
+  #securityContext:
+  #  runAsUser: 0
   #resources:
   #  request:
   #    cpu: "500m"
