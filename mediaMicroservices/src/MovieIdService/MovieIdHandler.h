@@ -316,16 +316,7 @@ void MovieIdHandler::RegisterMovieId (
   bool found = mongoc_cursor_next(cursor, &doc);
   find_span->Finish();
 
-  if (found) {
-    LOG(warning) << "Movie "<< title << " already existed in MongoDB";
-    ServiceException se;
-    se.errorCode = ErrorCode::SE_THRIFT_HANDLER_ERROR;
-    se.message = "Movie " + title + " already existed in MongoDB";
-    mongoc_cursor_destroy(cursor);
-    mongoc_collection_destroy(collection);
-    mongoc_client_pool_push(_mongodb_client_pool, mongodb_client);
-    throw se;
-  } else {
+  if (!found) {
     bson_t *new_doc = bson_new();
     BSON_APPEND_UTF8(new_doc, "title", title.c_str());
     BSON_APPEND_UTF8(new_doc, "movie_id", movie_id.c_str());

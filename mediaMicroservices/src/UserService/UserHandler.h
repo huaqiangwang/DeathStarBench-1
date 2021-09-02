@@ -221,16 +221,6 @@ void UserHandler::RegisterUser(
       se.errorCode = ErrorCode::SE_MONGODB_ERROR;
       se.message = error.message;
       throw se;
-    } else {
-      LOG(warning) << "User " << username << " already existed.";
-      ServiceException se;
-      se.errorCode = ErrorCode::SE_THRIFT_HANDLER_ERROR;
-      se.message = "User " + username + " already existed";
-      bson_destroy(query);
-      mongoc_cursor_destroy(cursor);
-      mongoc_collection_destroy(collection);
-      mongoc_client_pool_push(_mongodb_client_pool, mongodb_client);
-      throw se;
     }
   } else {
     bson_t *new_doc = bson_new();
