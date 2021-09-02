@@ -76,7 +76,8 @@ class UserHandler : public UserServiceIf {
       const std::string &,
       memcached_pool_st *,
       mongoc_client_pool_t *,
-      ClientPool<ThriftClient<ComposeReviewServiceClient>> *);
+      ClientPool<ThriftClient<ComposeReviewServiceClient>> *,
+      bool loopback);
   ~UserHandler() override = default;
   void RegisterUser(
       int64_t,
@@ -110,6 +111,7 @@ class UserHandler : public UserServiceIf {
   memcached_pool_st *_memcached_client_pool;
   mongoc_client_pool_t *_mongodb_client_pool;
   ClientPool<ThriftClient<ComposeReviewServiceClient>> *_compose_client_pool;
+  bool _loopback;
 
 };
 
@@ -119,7 +121,8 @@ UserHandler::UserHandler(
     const std::string &secret,
     memcached_pool_st *memcached_client_pool,
     mongoc_client_pool_t *mongodb_client_pool,
-    ClientPool<ThriftClient<ComposeReviewServiceClient>> *compose_client_pool
+    ClientPool<ThriftClient<ComposeReviewServiceClient>> *compose_client_pool,
+    bool loopback
     ) {
   _thread_lock = thread_lock;
   _machine_id = machine_id;
@@ -127,6 +130,10 @@ UserHandler::UserHandler(
   _mongodb_client_pool = mongodb_client_pool;
   _compose_client_pool = compose_client_pool;
   _secret = secret;
+  _loopback = loopback;
+
+  if (_loopback)
+    std::cout << "loopback enabled" << std::endl;
 }
 
 void UserHandler::RegisterUser(
@@ -136,6 +143,10 @@ void UserHandler::RegisterUser(
     const std::string &username,
     const std::string &password,
     const std::map<std::string, std::string> &carrier) {
+
+  if (_loopback) {
+    return;
+  }
 
   // Initialize a span
   TextMapReader reader(carrier);

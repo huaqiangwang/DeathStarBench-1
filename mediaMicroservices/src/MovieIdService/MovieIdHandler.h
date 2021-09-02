@@ -27,7 +27,8 @@ class MovieIdHandler : public MovieIdServiceIf {
       memcached_pool_st *,
       mongoc_client_pool_t *,
       ClientPool<ThriftClient<ComposeReviewServiceClient>> *,
-      ClientPool<ThriftClient<RatingServiceClient>> *);
+      ClientPool<ThriftClient<RatingServiceClient>> *,
+      bool);
   ~MovieIdHandler() override = default;
   void UploadMovieId(int64_t, const std::string &, int32_t,
                      const std::map<std::string, std::string> &) override;
@@ -39,17 +40,23 @@ class MovieIdHandler : public MovieIdServiceIf {
   mongoc_client_pool_t *_mongodb_client_pool;
   ClientPool<ThriftClient<ComposeReviewServiceClient>> *_compose_client_pool;
   ClientPool<ThriftClient<RatingServiceClient>> *_rating_client_pool;
+  bool _loopback;
 };
 
 MovieIdHandler::MovieIdHandler(
     memcached_pool_st *memcached_client_pool,
     mongoc_client_pool_t *mongodb_client_pool,
     ClientPool<ThriftClient<ComposeReviewServiceClient>> *compose_client_pool,
-    ClientPool<ThriftClient<RatingServiceClient>> *rating_client_pool) {
+    ClientPool<ThriftClient<RatingServiceClient>> *rating_client_pool,
+    bool loopback) {
   _memcached_client_pool = memcached_client_pool;
   _mongodb_client_pool = mongodb_client_pool;
   _compose_client_pool = compose_client_pool;
   _rating_client_pool = rating_client_pool;
+  _loopback = loopback;
+  if (_loopback) {
+    std::cout << "Loopback mode enabled." << std::endl;
+  }
 }
 
 void MovieIdHandler::UploadMovieId(
@@ -57,6 +64,10 @@ void MovieIdHandler::UploadMovieId(
     const std::string &title,
     int32_t rating,
     const std::map<std::string, std::string> & carrier) {
+
+  if (_loopback) {
+    return;
+  }
 
   // Initialize a span
   TextMapReader reader(carrier);
@@ -260,6 +271,10 @@ void MovieIdHandler::RegisterMovieId (
     const std::string &title,
     const std::string &movie_id,
     const std::map<std::string, std::string> & carrier) {
+
+  if (_loopback) {
+    return;
+  }
 
   // Initialize a span
   TextMapReader reader(carrier);

@@ -35,6 +35,10 @@ int main(int argc, char *argv[]) {
   std::string secret = config_json["secret"];
 
   int port = config_json["user-service"]["port"];
+  bool loopback = false;
+  if (config_json["user-service"].contains("loopback")) {
+    loopback = config_json["user-service"]["loopback"];
+  }
   std::string compose_addr = config_json["compose-review-service"]["addr"];
   int compose_port = config_json["compose-review-service"]["port"];
 
@@ -65,7 +69,8 @@ int main(int argc, char *argv[]) {
               secret,
               memcached_client_pool,
               mongodb_client_pool,
-              &compose_client_pool)),
+              &compose_client_pool,
+              loopback)),
       std::make_shared<TServerSocket>("0.0.0.0", port),
       std::make_shared<TFramedTransportFactory>(),
       std::make_shared<TBinaryProtocolFactory>()

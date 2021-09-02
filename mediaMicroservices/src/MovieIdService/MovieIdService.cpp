@@ -36,6 +36,10 @@ int main(int argc, char *argv[]) {
   int compose_port = config_json["compose-review-service"]["port"];
   std::string rating_addr = config_json["rating-service"]["addr"];
   int rating_port = config_json["rating-service"]["port"];
+  bool loopback = false;
+  if (config_json["movie-id-service"].contains("loopback")) {
+    loopback = config_json["movie-id-service"]["loopback"];
+  }
 
   memcached_pool_st *memcached_client_pool =
       init_memcached_client_pool(config_json, "movie-id", 32, 128);
@@ -71,7 +75,8 @@ int main(int argc, char *argv[]) {
       std::make_shared<MovieIdServiceProcessor>(
       std::make_shared<MovieIdHandler>(
               memcached_client_pool, mongodb_client_pool,
-              &compose_client_pool, &rating_client_pool)),
+              &compose_client_pool, &rating_client_pool,
+              loopback)),
       std::make_shared<TServerSocket>("0.0.0.0", port),
       std::make_shared<TFramedTransportFactory>(),
       std::make_shared<TBinaryProtocolFactory>()
