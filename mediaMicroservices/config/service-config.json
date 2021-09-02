@@ -38,7 +38,8 @@
   },
   "user-service": {
     "addr": "user-service",
-    "port": 9090
+    "port": 9090,
+    "loopback": true
   },
   "compose-review-service": {
     "addr": "compose-review-service",
@@ -110,7 +111,8 @@
   },
   "movie-info-service": {
     "addr": "movie-info-service",
-    "port": 9090
+    "port": 9090,
+    "loopback": true
   },
   "movie-info-mongodb": {
     "addr": "movie-info-mongodb",
