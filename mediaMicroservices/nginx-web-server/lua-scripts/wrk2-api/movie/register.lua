@@ -27,10 +27,11 @@ function _M.RegisterMovie()
     ngx.exit(ngx.HTTP_BAD_REQUEST)
   end
 
-  local client = GenericObjectPool:connection(MovieIdServiceClient,"movie-id-service",9090)
-
-  client:RegisterMovieId(req_id, post.title, tostring(post.movie_id), carrier)
-  GenericObjectPool:returnConnection(client)
+  if _StrIsEmpty(post.loopback) then
+    local client = GenericObjectPool:connection(MovieIdServiceClient,"movie-id-service",9090)
+    client:RegisterMovieId(req_id, post.title, tostring(post.movie_id), carrier)
+    GenericObjectPool:returnConnection(client)
+  end
 
   span:finish()
 end
