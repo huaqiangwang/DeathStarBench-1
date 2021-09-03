@@ -61,6 +61,21 @@ int main(int argc, char *argv[]) {
   ClientPool<ThriftClient<ComposeReviewServiceClient>> compose_client_pool(
       "compose-review-client", compose_addr, compose_port, 0, 128, 1000);
 
+  mongoc_client_t *mongodb_client = mongoc_client_pool_pop(mongodb_client_pool);
+  if (!mongodb_client) {
+    LOG(fatal) << "Failed to pop mongoc client";
+    exit(EXIT_FAILURE);
+  }
+  bool r = false;
+  while (!r) {
+    r = CreateIndex(mongodb_client, "user", "username", true);
+    if (!r) {
+      LOG(error) << "Failed to create mongodb index, try again";
+      sleep(1);
+    }
+  }
+  mongoc_client_pool_push(mongodb_client_pool, mongodb_client);
+
   TThreadedServer server(
       std::make_shared<UserServiceProcessor>(
           std::make_shared<UserHandler>(
