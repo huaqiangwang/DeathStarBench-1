@@ -89,13 +89,27 @@ void MovieReviewHandler::UploadMovieReview(
   const bson_t *doc;
   bool found = mongoc_cursor_next(cursor, &doc);
   if (!found) {
+    // Check error first
+    bson_error_t error;
+    if (mongoc_cursor_error (cursor, &error)) {
+      LOG(error) << error.message;
+      bson_destroy(query);
+      mongoc_cursor_destroy(cursor);
+      mongoc_collection_destroy(collection);
+      mongoc_client_pool_push(_mongodb_client_pool, mongodb_client);
+      ServiceException se;
+      se.errorCode = ErrorCode::SE_MONGODB_ERROR;
+      se.message = error.message;
+      throw se;
+    }
+
     bson_t *new_doc = BCON_NEW(
         "movie_id", BCON_UTF8(movie_id.c_str()),
         "reviews",
         "[", "{", "review_id", BCON_INT64(review_id),
         "timestamp", BCON_INT64(timestamp), "}", "]"
     );
-    bson_error_t error;
+
     auto insert_span = opentracing::Tracer::Global()->StartSpan(
         "MongoInsert", {opentracing::ChildOf(&span->context())});
     bool plotinsert = mongoc_collection_insert_one(
