@@ -40,7 +40,7 @@ spec:
       containers:
       - name: movie-review-mongodb
         image: mongo
-        command: ["mongod", "--maxConns", "20000"]
+        command: ["mongod", "--maxConns", "20000", "--bind_ip_all"]
         volumeMounts:
           - name: my-data
             mountPath: "/data/db"
