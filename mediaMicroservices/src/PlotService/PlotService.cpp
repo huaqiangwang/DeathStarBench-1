@@ -34,9 +34,9 @@ int main(int argc, char *argv[]) {
   int port = config_json["plot-service"]["port"];
 
   memcached_pool_st *memcached_client_pool =
-      init_memcached_client_pool(config_json, "plot", 32, 128);
+      init_memcached_client_pool(config_json, "plot", 32, 512);
   mongoc_client_pool_t* mongodb_client_pool =
-      init_mongodb_client_pool(config_json, "plot", 128);
+      init_mongodb_client_pool(config_json, "plot", 512);
 
   if (memcached_client_pool == nullptr || mongodb_client_pool == nullptr) {
     return EXIT_FAILURE;

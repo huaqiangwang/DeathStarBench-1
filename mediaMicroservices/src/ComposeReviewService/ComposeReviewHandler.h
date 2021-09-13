@@ -33,7 +33,8 @@ class ComposeReviewHandler : public ComposeReviewServiceIf {
       memcached_pool_st *,
       ClientPool<ThriftClient<ReviewStorageServiceClient>> *,
       ClientPool<ThriftClient<UserReviewServiceClient>> *,
-      ClientPool<ThriftClient<MovieReviewServiceClient>> *);
+      ClientPool<ThriftClient<MovieReviewServiceClient>> *,
+      bool);
   ~ComposeReviewHandler() override = default;
 
   void UploadText(int64_t, const std::string &,
@@ -57,6 +58,7 @@ class ComposeReviewHandler : public ComposeReviewServiceIf {
   ClientPool<ThriftClient<MovieReviewServiceClient>>
       *_movie_review_client_pool;
   void _ComposeAndUpload(int64_t, const std::map<std::string, std::string> &);
+  bool _loopback;
 };
 
 ComposeReviewHandler::ComposeReviewHandler(
@@ -66,11 +68,17 @@ ComposeReviewHandler::ComposeReviewHandler(
     ClientPool<ThriftClient<UserReviewServiceClient>>
         *user_review_client_pool,
     ClientPool<ThriftClient<MovieReviewServiceClient>>
-        *movie_review_client_pool ) {
+        *movie_review_client_pool,
+        bool loopback) {
   _memcached_client_pool = memcached_client_pool;
   _review_storage_client_pool = review_storage_client_pool;
   _user_review_client_pool = user_review_client_pool;
   _movie_review_client_pool = movie_review_client_pool;
+
+  _loopback = loopback;
+  if (_loopback){
+    std::cout << "loopback enabled" << std::endl;
+  }
 }
 
 void ComposeReviewHandler::_ComposeAndUpload(
@@ -256,6 +264,10 @@ void ComposeReviewHandler::UploadMovieId(
     const std::string &movie_id,
     const std::map<std::string, std::string> & carrier) {
 
+  if (_loopback) {
+    return;
+  }
+
   // Initialize a span
   TextMapReader reader(carrier);
   std::map<std::string, std::string> writer_text_map;
@@ -363,6 +375,10 @@ void ComposeReviewHandler::UploadMovieId(
 void ComposeReviewHandler::UploadUserId(
     int64_t req_id, int64_t user_id,
     const std::map<std::string, std::string> & carrier) {
+
+  if (_loopback) {
+    return;
+  }
 
   // Initialize a span
   TextMapReader reader(carrier);
@@ -473,6 +489,10 @@ void ComposeReviewHandler::UploadUserId(
 void ComposeReviewHandler::UploadUniqueId(
     int64_t req_id, int64_t review_id,
     const std::map<std::string, std::string> & carrier) {
+
+  if (_loopback) {
+    return;
+  }
 
   // Initialize a span
   TextMapReader reader(carrier);
@@ -586,6 +606,10 @@ void ComposeReviewHandler::UploadText(
     const std::string &text,
     const std::map<std::string, std::string> & carrier) {
 
+  if (_loopback) {
+    return;
+  }
+
   // Initialize a span
   TextMapReader reader(carrier);
   std::map<std::string, std::string> writer_text_map;
@@ -692,6 +716,10 @@ void ComposeReviewHandler::UploadText(
 void ComposeReviewHandler::UploadRating(
     int64_t req_id, int32_t rating, const std::map<std::string, std::string> & carrier) {
 
+  if (_loopback) {
+    return;
+  }
+
   // Initialize a span
   TextMapReader reader(carrier);
   std::map<std::string, std::string> writer_text_map;
@@ -700,14 +728,21 @@ void ComposeReviewHandler::UploadRating(
   auto span = opentracing::Tracer::Global()->StartSpan(
       "UploadRating",
       { opentracing::ChildOf(parent_span->get()) });
+
   opentracing::Tracer::Global()->Inject(span->context(), writer);
 
   memcached_return_t memcached_rc;
   std::string key_counter = std::to_string(req_id) + ":counter";
+  auto redis_span = opentracing::Tracer::Global()->StartSpan(
+          "memcachedTotal",
+          {opentracing::ChildOf(&span->context())});
   memcached_st *memcached_client = memcached_pool_pop(
       _memcached_client_pool, true, &memcached_rc);
 
   // Initialize the counter to 0 if there it is not in the memcached
+  auto redis_span_1 = opentracing::Tracer::Global()->StartSpan(
+          "memcachedInsert",
+          {opentracing::ChildOf(&span->context())});
   memcached_rc = memcached_add(
       memcached_client,
       key_counter.c_str(),
@@ -725,6 +760,7 @@ void ComposeReviewHandler::UploadRating(
     memcached_pool_push(_memcached_client_pool, memcached_client);
     throw se;
   }
+  redis_span_1->Finish();
 
   // Store rating to memcached
   uint64_t counter_value;
@@ -742,6 +778,9 @@ void ComposeReviewHandler::UploadRating(
     LOG(warning) << "rating of request " << req_id
                  << " has already been stored";
     size_t value_size;
+    auto redis_span_get = opentracing::Tracer::Global()->StartSpan(
+            "memcachedGet",
+            {opentracing::ChildOf(&span->context())});
     char *counter_value_str = memcached_get(
         memcached_client,
         key_counter.c_str(),
@@ -750,6 +789,7 @@ void ComposeReviewHandler::UploadRating(
         0,
         &memcached_rc);
     counter_value = std::stoul(counter_value_str);
+    redis_span_get->Finish();
     free(counter_value_str);
     if (memcached_rc != MEMCACHED_SUCCESS) {
       LOG(error) << "Cannot get the counter of request " << req_id;
@@ -767,12 +807,17 @@ void ComposeReviewHandler::UploadRating(
     memcached_pool_push(_memcached_client_pool, memcached_client);
     throw se;
   } else {
+    auto redis_span_inc = opentracing::Tracer::Global()->StartSpan(
+            "memcachedInc",
+            {opentracing::ChildOf(&span->context())});
     // Atomically increment and get the counter value
     memcached_increment(
         memcached_client,
         key_counter.c_str(),
         key_counter.size(),
         1, &counter_value);
+
+    redis_span_inc->Finish();
     if (memcached_rc != MEMCACHED_SUCCESS) {
       LOG(error) << "Cannot increment and get the counter of request "
                  << req_id;
@@ -785,6 +830,7 @@ void ComposeReviewHandler::UploadRating(
   }
   LOG(debug) << "req_id " << req_id << " caching rating to Memcached finished";
   memcached_pool_push(_memcached_client_pool, memcached_client);
+  redis_span->Finish();
 
   // If this thread is the last one uploading the review components,
   // it is in charge of compose the request and upload to the microservices in

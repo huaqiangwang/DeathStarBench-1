@@ -2,11 +2,13 @@
   "secret": "secret",
   "unique-id-service": {
     "addr": "unique-id-service",
-    "port": 9090
+    "port": 9090,
+    "loopback": false
   },
   "movie-id-service": {
     "addr": "movie-id-service",
-    "port": 9090
+    "port": 9090,
+    "loopback": false
   },
   "movie-id-mongodb": {
     "addr": "movie-id-mongodb",
@@ -26,7 +28,8 @@
   },
   "text-service": {
     "addr": "text-service",
-    "port": 9090
+    "port": 9090,
+    "loopback": false
   },
   "rating-service": {
     "addr": "rating-service",
@@ -43,7 +46,8 @@
   },
   "compose-review-service": {
     "addr": "compose-review-service",
-    "port": 9090
+    "port": 9090,
+    "loopback": false
   },
   "compose-review-memcached": {
     "addr": "compose-review-memcached",

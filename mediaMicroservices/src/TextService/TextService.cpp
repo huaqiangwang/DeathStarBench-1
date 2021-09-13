@@ -28,15 +28,19 @@ int main(int argc, char *argv[]) {
   if (load_config_file("config/service-config.json", &config_json) == 0) {
 
     int port = config_json["text-service"]["port"];
+    bool loopback = false;
+    if (config_json["text-service"].contains("loopback")) {
+      loopback = config_json["text-service"]["loopback"];
+    }
     std::string compose_addr = config_json["compose-review-service"]["addr"];
     int compose_port = config_json["compose-review-service"]["port"];
 
     ClientPool<ThriftClient<ComposeReviewServiceClient>> compose_client_pool(
-        "compose-review-client", compose_addr, compose_port, 0, 128, 1000);
+        "compose-review-client", compose_addr, compose_port, 0, 512, 1000);
 
     TThreadedServer server(
         std::make_shared<TextServiceProcessor>(
-            std::make_shared<TextHandler>(&compose_client_pool)),
+            std::make_shared<TextHandler>(&compose_client_pool, loopback)),
         std::make_shared<TServerSocket>("0.0.0.0", port),
         std::make_shared<TFramedTransportFactory>(),
         std::make_shared<TBinaryProtocolFactory>()
@@ -46,5 +50,3 @@ int main(int argc, char *argv[]) {
     server.serve();
   } else exit(EXIT_FAILURE);
 }
-
-

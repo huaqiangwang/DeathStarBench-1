@@ -268,6 +268,10 @@ void UserHandler::RegisterUserWithId(
     const std::string& password, int64_t user_id,
     const std::map<std::string, std::string> & carrier) {
 
+  if (_loopback) {
+    return;
+  }
+
   // Initialize a span
   TextMapReader reader(carrier);
   std::map<std::string, std::string> writer_text_map;
@@ -362,6 +366,10 @@ void UserHandler::UploadUserWithUsername(
     const int64_t req_id,
     const std::string &username,
     const std::map<std::string, std::string> & carrier) {
+
+  if (_loopback) {
+    return;
+  }
 
   TextMapReader reader(carrier);
   std::map<std::string, std::string> writer_text_map;
@@ -551,6 +559,10 @@ void UserHandler::UploadUserWithUserId(
     int64_t user_id,
     const std::map<std::string, std::string> &carrier) {
 
+  if (_loopback) {
+    return;
+  }
+
   TextMapReader reader(carrier);
   std::map<std::string, std::string> writer_text_map;
   TextMapWriter writer(writer_text_map);
@@ -588,6 +600,10 @@ void UserHandler::Login(
     const std::string &username,
     const std::string &password,
     const std::map<std::string, std::string> &carrier) {
+
+  if (_loopback) {
+    return;
+  }
 
   TextMapReader reader(carrier);
   std::map<std::string, std::string> writer_text_map;

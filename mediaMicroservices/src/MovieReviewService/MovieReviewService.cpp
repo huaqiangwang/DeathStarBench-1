@@ -39,12 +39,12 @@ int main(int argc, char *argv[]) {
   std::string review_storage_addr = config_json["review-storage-service"]["addr"];
 
   mongoc_client_pool_t *mongodb_client_pool =
-      init_mongodb_client_pool(config_json, "movie-review", 128);
+      init_mongodb_client_pool(config_json, "movie-review", 512);
   ClientPool<RedisClient> redis_client_pool("movie-review-redis",
-                                            redis_addr, redis_port, 0, 128, 1000);
+                                            redis_addr, redis_port, 0, 512, 1000);
   ClientPool<ThriftClient<ReviewStorageServiceClient>>
       review_storage_client_pool("review-storage-client", review_storage_addr,
-                               review_storage_port, 0, 128, 1000);
+                               review_storage_port, 0, 512, 1000);
 
   if (mongodb_client_pool == nullptr) {
     return EXIT_FAILURE;

@@ -5,7 +5,7 @@
 #include <bson/bson.h>
 
 #define SERVER_SELECTION_TIMEOUT_MS 300
-#define MONGODB_POOL_MAX_SIZE 128
+#define MONGODB_POOL_MAX_SIZE 512
 
 namespace media_service {
 mongoc_client_pool_t* init_mongodb_client_pool(

@@ -61,6 +61,8 @@ void MovieReviewHandler::UploadMovieReview(
       { opentracing::ChildOf(parent_span->get()) });
   opentracing::Tracer::Global()->Inject(span->context(), writer);
 
+#ifndef DB_BYPASS
+  std::cout << "MovieReviewService:UploadMovieReview  mongodb not bypassed " << std::endl;
   mongoc_client_t *mongodb_client = mongoc_client_pool_pop(
       _mongodb_client_pool);
   if (!mongodb_client) {
@@ -170,6 +172,7 @@ void MovieReviewHandler::UploadMovieReview(
   mongoc_cursor_destroy(cursor);
   mongoc_collection_destroy(collection);
   mongoc_client_pool_push(_mongodb_client_pool, mongodb_client);
+#endif
 
   auto redis_client_wrapper = _redis_client_pool->Pop();
   if (!redis_client_wrapper) {
@@ -244,8 +247,9 @@ void MovieReviewHandler::ReadMovieReviews(
     review_ids.emplace_back(std::stoul(review_id_reply.as_string()));
   }
 
-  int mongo_start = start + review_ids.size();
   std::multimap<std::string, std::string> redis_update_map;
+#ifndef DB_BYPASS
+  int mongo_start = start + review_ids.size();
   if (mongo_start < stop) {
     // Instead find review_ids from mongodb
     mongoc_client_t *mongodb_client = mongoc_client_pool_pop(
@@ -316,6 +320,7 @@ void MovieReviewHandler::ReadMovieReviews(
     mongoc_collection_destroy(collection);
     mongoc_client_pool_push(_mongodb_client_pool, mongodb_client);
   }
+#endif
 
   std::future<std::vector<Review>> review_future = std::async(
       std::launch::async, [&]() {

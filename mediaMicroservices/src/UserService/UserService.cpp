@@ -43,9 +43,9 @@ int main(int argc, char *argv[]) {
   int compose_port = config_json["compose-review-service"]["port"];
 
   memcached_pool_st *memcached_client_pool =
-      init_memcached_client_pool(config_json, "user", 32, 128);
+      init_memcached_client_pool(config_json, "user", 32, 512);
   mongoc_client_pool_t *mongodb_client_pool =
-      init_mongodb_client_pool(config_json, "user", 128);
+      init_mongodb_client_pool(config_json, "user", 512);
 
   if (memcached_client_pool == nullptr || mongodb_client_pool == nullptr) {
     return EXIT_FAILURE;
@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
   std::mutex thread_lock;
 
   ClientPool<ThriftClient<ComposeReviewServiceClient>> compose_client_pool(
-      "compose-review-client", compose_addr, compose_port, 0, 128, 1000);
+      "compose-review-client", compose_addr, compose_port, 0, 512, 1000);
 
   mongoc_client_t *mongodb_client = mongoc_client_pool_pop(mongodb_client_pool);
   if (!mongodb_client) {

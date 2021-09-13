@@ -37,10 +37,10 @@ int main(int argc, char *argv[]) {
   int redis_port = config_json["rating-redis"]["port"];
 
   ClientPool<ThriftClient<ComposeReviewServiceClient>> compose_client_pool(
-      "compose-review-client", compose_addr, compose_port, 0, 128, 1000);
+      "compose-review-client", compose_addr, compose_port, 0, 512, 1000);
 
   ClientPool<RedisClient> redis_client_pool("rating-redis",
-      redis_addr, redis_port, 0, 128, 1000);
+      redis_addr, redis_port, 0, 512, 1000);
 
   TThreadedServer server (
       std::make_shared<RatingServiceProcessor>(

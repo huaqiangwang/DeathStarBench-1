@@ -52,7 +52,8 @@ class UniqueIdHandler : public UniqueIdServiceIf {
   UniqueIdHandler(
       std::mutex *,
       const std::string &,
-      ClientPool<ThriftClient<ComposeReviewServiceClient>> *);
+      ClientPool<ThriftClient<ComposeReviewServiceClient>> *,
+      bool);
 
   void UploadUniqueId(int64_t, const std::map<std::string, std::string> &) override;
 
@@ -60,20 +61,31 @@ class UniqueIdHandler : public UniqueIdServiceIf {
   std::mutex *_thread_lock;
   std::string _machine_id;
   ClientPool<ThriftClient<ComposeReviewServiceClient>> *_compose_client_pool;
+  bool _loopback;
 };
 
 UniqueIdHandler::UniqueIdHandler(
     std::mutex *thread_lock,
     const std::string &machine_id,
-    ClientPool<ThriftClient<ComposeReviewServiceClient>> *compose_client_pool) {
+    ClientPool<ThriftClient<ComposeReviewServiceClient>> *compose_client_pool,
+    bool loopback) {
   _thread_lock = thread_lock;
   _machine_id = machine_id;
   _compose_client_pool = compose_client_pool;
+  _loopback = loopback;
+
+  if (_loopback) {
+    std::cout << "loopback enabled" << std::endl;
+  }
 }
 
 void UniqueIdHandler::UploadUniqueId(
     int64_t req_id,
     const std::map<std::string, std::string> & carrier) {
+
+  if (_loopback){
+    return;
+  }
 
   // Initialize a span
   TextMapReader reader(carrier);

@@ -42,18 +42,18 @@ int main(int argc, char *argv[]) {
   }
 
   memcached_pool_st *memcached_client_pool =
-      init_memcached_client_pool(config_json, "movie-id", 32, 128);
+      init_memcached_client_pool(config_json, "movie-id", 32, 512);
   mongoc_client_pool_t* mongodb_client_pool =
-      init_mongodb_client_pool(config_json, "movie-id", 128);
+      init_mongodb_client_pool(config_json, "movie-id", 512);
 
   if (memcached_client_pool == nullptr || mongodb_client_pool == nullptr) {
     return EXIT_FAILURE;
   }
 
   ClientPool<ThriftClient<ComposeReviewServiceClient>> compose_client_pool(
-      "compose-review-client", compose_addr, compose_port, 0, 128, 1000);
+      "compose-review-client", compose_addr, compose_port, 0, 512, 1000);
   ClientPool<ThriftClient<RatingServiceClient>> rating_client_pool(
-      "rating-client", rating_addr, rating_port, 0, 128, 1000);
+      "rating-client", rating_addr, rating_port, 0, 512, 1000);
 
   mongoc_client_t *mongodb_client = mongoc_client_pool_pop(mongodb_client_pool);
   if (!mongodb_client) {

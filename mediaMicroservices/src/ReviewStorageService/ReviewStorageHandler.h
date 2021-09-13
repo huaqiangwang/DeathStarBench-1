@@ -52,6 +52,7 @@ void ReviewStorageHandler::StoreReview(
       { opentracing::ChildOf(parent_span->get()) });
   opentracing::Tracer::Global()->Inject(span->context(), writer);
 
+#ifndef DB_BYPASS
   mongoc_client_t *mongodb_client = mongoc_client_pool_pop(
       _mongodb_client_pool);
   if (!mongodb_client) {
@@ -102,9 +103,11 @@ void ReviewStorageHandler::StoreReview(
   bson_destroy(new_doc);
   mongoc_collection_destroy(collection);
   mongoc_client_pool_push(_mongodb_client_pool, mongodb_client);
+#endif
 
   span->Finish();
 }
+
 void ReviewStorageHandler::ReadReviews(
     std::vector<Review> & _return,
     int64_t req_id,
@@ -219,7 +222,8 @@ void ReviewStorageHandler::ReadReviews(
 
   std::vector<std::future<void>> set_futures;
   std::map<int64_t, std::string> review_json_map;
-  
+
+#ifndef DB_BYPASS
   // Find the rest in MongoDB
   if (!review_ids_not_cached.empty()) {
     mongoc_client_t *mongodb_client = mongoc_client_pool_pop(
@@ -325,6 +329,7 @@ void ReviewStorageHandler::ReadReviews(
       set_span->Finish();
     }));
   }
+#endif
 
   if (return_map.size() != review_ids.size()) {
     try {

@@ -15,24 +15,36 @@ namespace media_service {
 
 class TextHandler : public TextServiceIf {
  public:
-  explicit TextHandler(ClientPool<ThriftClient<ComposeReviewServiceClient>> *);
+  explicit TextHandler(ClientPool<ThriftClient<ComposeReviewServiceClient>> *,
+                       bool);
   ~TextHandler() override = default;
 
   void UploadText(int64_t, const std::string &,
       const std::map<std::string, std::string> &) override;
  private:
   ClientPool<ThriftClient<ComposeReviewServiceClient>> *_compose_client_pool;
+  bool _loopback;
 };
 
 TextHandler::TextHandler(
-    ClientPool<ThriftClient<ComposeReviewServiceClient>> *compose_client_pool) {
+    ClientPool<ThriftClient<ComposeReviewServiceClient>> *compose_client_pool,
+    bool loopback) {
   _compose_client_pool = compose_client_pool;
+  _loopback = loopback;
+
+  if (_loopback) {
+    std::cout << "loopback enabled" << std::endl;
+  }
 }
 
 void TextHandler::UploadText(
     int64_t req_id,
     const std::string &text,
     const std::map<std::string, std::string> & carrier) {
+
+  if (_loopback) {
+    return;
+  }
 
   // Initialize a span
   TextMapReader reader(carrier);
