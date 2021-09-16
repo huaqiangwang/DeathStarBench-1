@@ -187,6 +187,60 @@ void ComposeReviewHandler::_ComposeAndUpload(
       system_clock::now().time_since_epoch()).count();
   new_review.req_id = req_id;
 
+#if 0
+    auto review_storage_client_wrapper = _review_storage_client_pool->Pop();
+    if (!review_storage_client_wrapper) {
+      ServiceException se;
+      se.errorCode = ErrorCode::SE_THRIFT_CONN_ERROR;
+      se.message = "Failed to connected to review-storage-service";
+      throw se;
+    }
+    auto review_storage_client = review_storage_client_wrapper->GetClient();
+    try {
+      review_storage_client->StoreReview(req_id, new_review, writer_text_map);
+    } catch (...) {
+      _review_storage_client_pool->Push(review_storage_client_wrapper);
+      LOG(error) << "Failed to upload review to review-storage-service";
+      throw;
+    }
+    _review_storage_client_pool->Push(review_storage_client_wrapper);
+
+    auto user_review_client_wrapper = _user_review_client_pool->Pop();
+    if (!user_review_client_wrapper) {
+      ServiceException se;
+      se.errorCode = ErrorCode::SE_THRIFT_CONN_ERROR;
+      se.message = "Failed to connected to user-review-service";
+      throw se;
+    }
+    auto user_review_client = user_review_client_wrapper->GetClient();
+    try {
+      user_review_client->UploadUserReview(req_id, new_review.user_id,
+          new_review.review_id, new_review.timestamp, writer_text_map);
+    } catch (...) {
+      _user_review_client_pool->Push(user_review_client_wrapper);
+      LOG(error) << "Failed to upload review to user-review-service";
+      throw;
+    }
+    _user_review_client_pool->Push(user_review_client_wrapper);
+
+    auto movie_review_client_wrapper = _movie_review_client_pool->Pop();
+    if (!movie_review_client_wrapper) {
+      ServiceException se;
+      se.errorCode = ErrorCode::SE_THRIFT_CONN_ERROR;
+      se.message = "Failed to connected to movie-review-service";
+      throw se;
+    }
+    auto movie_review_client = movie_review_client_wrapper->GetClient();
+    try {
+      movie_review_client->UploadMovieReview(req_id, new_review.movie_id,
+          new_review.review_id, new_review.timestamp, writer_text_map);
+    } catch (...) {
+      _movie_review_client_pool->Push(movie_review_client_wrapper);
+      LOG(error) << "Failed to upload review to movie-review-service";
+      throw;
+    }
+    _movie_review_client_pool->Push(movie_review_client_wrapper);
+#else
   std::future<void> review_future;
   std::future<void> user_review_future;
   std::future<void> movie_review_future;
@@ -257,6 +311,7 @@ void ComposeReviewHandler::_ComposeAndUpload(
   } catch (...) {
     throw;
   }
+#endif
 }
 
 void ComposeReviewHandler::UploadMovieId(

@@ -55,7 +55,8 @@
   },
   "review-storage-service": {
     "addr": "review-storage-service",
-    "port": 9090
+    "port": 9090,
+    "loopback": false
   },
   "review-storage-mongodb": {
     "addr": "review-storage-mongodb",
@@ -67,7 +68,8 @@
   },
   "user-review-service": {
     "addr": "user-review-service",
-    "port": 9090
+    "port": 9090,
+    "loopback": false
   },
   "user-review-mongodb": {
     "addr": "user-review-mongodb",
@@ -79,7 +81,8 @@
   },
   "movie-review-service": {
     "addr": "movie-review-service",
-    "port": 9090
+    "port": 9090,
+    "loopback": false
   },
   "movie-review-mongodb": {
     "addr": "movie-review-mongodb",
