@@ -3,27 +3,25 @@ package recommendation
 import (
 	// "encoding/json"
 	"fmt"
-
 	"github.com/google/uuid"
 	"github.com/grpc-ecosystem/grpc-opentracing/go/otgrpc"
 	"github.com/hailocab/go-geoindex"
 	"github.com/harlow/go-micro-services/registry"
-	pb "github.com/harlow/go-micro-services/services/recommendation/proto"
 	"github.com/harlow/go-micro-services/tls"
+	pb "github.com/harlow/go-micro-services/services/recommendation/proto"
 	"github.com/opentracing/opentracing-go"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/keepalive"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
-
 	// "io/ioutil"
 	"log"
 	"math"
 	"net"
-
 	// "os"
 	"time"
+
 	// "strings"
 )
 
@@ -31,13 +29,13 @@ const name = "srv-recommendation"
 
 // Server implements the recommendation service
 type Server struct {
-	uuid         string
-	hotels       map[string]Hotel
-	Tracer       opentracing.Tracer
-	Port         int
-	IpAddr       string
-	MongoSession *mgo.Session
-	Registry     *registry.Client
+	hotels map[string]Hotel
+	Tracer   opentracing.Tracer
+	Port     int
+	IpAddr	 string
+	MongoSession	*mgo.Session
+	Registry *registry.Client
+	uuid    string
 }
 
 // Run starts the server

@@ -9,7 +9,6 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/harlow/go-micro-services/pprof"
 	"github.com/harlow/go-micro-services/registry"
 	"github.com/harlow/go-micro-services/services/geo"
 	"github.com/harlow/go-micro-services/tracing"
@@ -53,9 +52,6 @@ func main() {
 		panic(err)
 	}
 
-	if err := pprof.StartHttp(result["PprofGeoPort"]); err != nil {
-		panic(err)
-	}
 	srv := &geo.Server{
 		// Port:     *port,
 		Port:     serv_port,

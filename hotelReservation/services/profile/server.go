@@ -29,13 +29,13 @@ const name = "srv-profile"
 
 // Server implements the profile service
 type Server struct {
-	Tracer       opentracing.Tracer
-	uuid         string
-	Port         int
-	IpAddr       string
-	MongoSession *mgo.Session
-	Registry     *registry.Client
-	MemcClient   *memcache.Client
+	Tracer   opentracing.Tracer
+	uuid     string
+	Port     int
+	IpAddr	 string
+	MongoSession	*mgo.Session
+	Registry *registry.Client
+	MemcClient *memcache.Client
 }
 
 // Run starts the server

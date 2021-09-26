@@ -3,14 +3,11 @@ package geo
 import (
 	// "encoding/json"
 	"fmt"
-
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
-
 	// "io/ioutil"
 	"log"
 	"net"
-
 	// "os"
 	"time"
 
@@ -18,8 +15,8 @@ import (
 	"github.com/grpc-ecosystem/grpc-opentracing/go/otgrpc"
 	"github.com/hailocab/go-geoindex"
 	"github.com/harlow/go-micro-services/registry"
-	pb "github.com/harlow/go-micro-services/services/geo/proto"
 	"github.com/harlow/go-micro-services/tls"
+	pb "github.com/harlow/go-micro-services/services/geo/proto"
 	opentracing "github.com/opentracing/opentracing-go"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -37,11 +34,11 @@ type Server struct {
 	index *geoindex.ClusteringIndex
 	uuid  string
 
-	Registry     *registry.Client
-	Tracer       opentracing.Tracer
-	Port         int
-	IpAddr       string
-	MongoSession *mgo.Session
+	Registry *registry.Client
+	Tracer   opentracing.Tracer
+	Port     int
+	IpAddr	 string
+	MongoSession 	*mgo.Session
 }
 
 // Run starts the server

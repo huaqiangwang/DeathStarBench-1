@@ -3,23 +3,20 @@ package reservation
 import (
 	// "encoding/json"
 	"fmt"
-
 	"github.com/google/uuid"
 	"github.com/grpc-ecosystem/grpc-opentracing/go/otgrpc"
 	"github.com/harlow/go-micro-services/registry"
-	pb "github.com/harlow/go-micro-services/services/reservation/proto"
 	"github.com/harlow/go-micro-services/tls"
+	pb "github.com/harlow/go-micro-services/services/reservation/proto"
 	"github.com/opentracing/opentracing-go"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/keepalive"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
-
 	// "io/ioutil"
 	"log"
 	"net"
-
 	// "os"
 	"time"
 
@@ -32,13 +29,13 @@ const name = "srv-reservation"
 
 // Server implements the user service
 type Server struct {
-	uuid         string
-	Tracer       opentracing.Tracer
-	Port         int
-	IpAddr       string
-	MongoSession *mgo.Session
-	Registry     *registry.Client
-	MemcClient   *memcache.Client
+	Tracer   opentracing.Tracer
+	Port     int
+	IpAddr	 string
+	MongoSession	*mgo.Session
+	Registry *registry.Client
+	MemcClient *memcache.Client
+	uuid     string
 }
 
 // Run starts the server
@@ -120,16 +117,16 @@ func (s *Server) MakeReservation(ctx context.Context, req *pb.Request) (*pb.Resu
 
 	inDate, _ := time.Parse(
 		time.RFC3339,
-		req.InDate+"T12:00:00+00:00")
+		req.InDate + "T12:00:00+00:00")
 
 	outDate, _ := time.Parse(
 		time.RFC3339,
-		req.OutDate+"T12:00:00+00:00")
+		req.OutDate + "T12:00:00+00:00")
 	hotelId := req.HotelId[0]
 
 	indate := inDate.String()[0:10]
 
-	memc_date_num_map := make(map[string]int)
+	memc_date_num_map := make(map[string] int)
 
 	for inDate.Before(outDate) {
 		// check reservations
@@ -154,7 +151,7 @@ func (s *Server) MakeReservation(ctx context.Context, req *pb.Request) (*pb.Resu
 			if err != nil {
 				panic(err)
 			}
-
+			
 			for _, r := range reserve {
 				count += r.Number
 			}
@@ -165,7 +162,7 @@ func (s *Server) MakeReservation(ctx context.Context, req *pb.Request) (*pb.Resu
 			fmt.Printf("Memmcached error = %s\n", err)
 			panic(err)
 		}
-
+		
 		// check capacity
 		// check memc capacity
 		memc_cap_key := hotelId + "_cap"
@@ -191,7 +188,7 @@ func (s *Server) MakeReservation(ctx context.Context, req *pb.Request) (*pb.Resu
 			panic(err)
 		}
 
-		if count+int(req.RoomNumber) > hotel_cap {
+		if count + int(req.RoomNumber) > hotel_cap {
 			return res, nil
 		}
 		indate = outdate
@@ -204,7 +201,7 @@ func (s *Server) MakeReservation(ctx context.Context, req *pb.Request) (*pb.Resu
 
 	inDate, _ = time.Parse(
 		time.RFC3339,
-		req.InDate+"T12:00:00+00:00")
+		req.InDate + "T12:00:00+00:00")
 
 	indate = inDate.String()[0:10]
 
@@ -216,7 +213,7 @@ func (s *Server) MakeReservation(ctx context.Context, req *pb.Request) (*pb.Resu
 			CustomerName: req.CustomerName,
 			InDate:       indate,
 			OutDate:      outdate,
-			Number:       int(req.RoomNumber)})
+			Number:       int(req.RoomNumber),})
 		if err != nil {
 			panic(err)
 		}
@@ -248,11 +245,11 @@ func (s *Server) CheckAvailability(ctx context.Context, req *pb.Request) (*pb.Re
 		// fmt.Printf("reservation check hotel %s\n", hotelId)
 		inDate, _ := time.Parse(
 			time.RFC3339,
-			req.InDate+"T12:00:00+00:00")
+			req.InDate + "T12:00:00+00:00")
 
 		outDate, _ := time.Parse(
 			time.RFC3339,
-			req.OutDate+"T12:00:00+00:00")
+			req.OutDate + "T12:00:00+00:00")
 
 		indate := inDate.String()[0:10]
 
@@ -300,7 +297,7 @@ func (s *Server) CheckAvailability(ctx context.Context, req *pb.Request) (*pb.Re
 				// memcached hit
 				hotel_cap, _ = strconv.Atoi(string(item.Value))
 				// fmt.Printf("memcached hit %s = %d\n", memc_cap_key, hotel_cap)
-			} else if err == memcache.ErrCacheMiss {
+			} else if err == memcache.ErrCacheMiss { 
 				var num number
 				err = c1.Find(&bson.M{"hotelId": hotelId}).One(&num)
 				if err != nil {
@@ -314,7 +311,7 @@ func (s *Server) CheckAvailability(ctx context.Context, req *pb.Request) (*pb.Re
 				panic(err)
 			}
 
-			if count+int(req.RoomNumber) > hotel_cap {
+			if count + int(req.RoomNumber) > hotel_cap {
 				break
 			}
 			indate = outdate
@@ -337,6 +334,6 @@ type reservation struct {
 }
 
 type number struct {
-	HotelId string `bson:"hotelId"`
-	Number  int    `bson:"numberOfRoom"`
+	HotelId      string `bson:"hotelId"`
+	Number       int    `bson:"numberOfRoom"`
 }
