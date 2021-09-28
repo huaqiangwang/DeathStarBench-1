@@ -30,7 +30,7 @@ Refer to [k8s/perf-tuning/README.md](https://github.com/intel-sandbox/DeathStarB
 
 ### Before you start
 
-- Ensure that the necessary local images have been made. Otherwise, run `<path-of-repo>/hotelReservation/k8s/scripts/build-docker-img.sh`
+- Ensure that the necessary local images have been made. Otherwise, run `<path-of-repo>/socialNetwork/k8s/scripts/build-docker-img.sh`
 
 ### Deploy services
 
