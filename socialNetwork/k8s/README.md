@@ -2,27 +2,8 @@
 
 ## Pre-requirements
 
-- A running Kubernetes cluster is needed.
+- A running Kubernetes cluster.
 - Pre-requirements mentioned [here](https://github.com/intel-sandbox/DeathStarBenchPlusPlus/blob/master/socialNetwork/README.md) should be met.
-
-## Running Predefined Performance Tuning Scenarios
-
-**NOTE: This is the recommended and easier way to deploy and run the system.**
-
-To deploy a fresh uService system:
-
-``` bash
-cd k8s/perf-tuning/
-./deploy.sh <scenario>
-```
-
-To measure performance:
-
-``` bash
-./measure.sh <scenario>
-```
-
-Refer to [k8s/perf-tuning/README.md](https://github.com/intel-sandbox/DeathStarBenchPlusPlus/blob/master/hotelReservation/k8s/perf-tuning/README.md)
 
 ## Running Manually
 
@@ -31,6 +12,34 @@ Refer to [k8s/perf-tuning/README.md](https://github.com/intel-sandbox/DeathStarB
 ### Before you start
 
 - Ensure that the necessary local images have been made. Otherwise, run `<path-of-repo>/socialNetwork/k8s/scripts/build-docker-img.sh`
+- If you are deploying on a multi-node Kubernetes cluster, you need to upload the socialNetwork container images to a
+  docker image registry and fetch images from that. [This](https://docs.docker.com/engine/reference/commandline/push/)
+  is a document for pushing image to a docker registry.
+- If you don't have a docker registry available, you can copy your local docker image to other worker node and load
+  them manually, here is an example:
+    ```shell
+    # root@ip-10-0-0-53:~# docker images
+    REPOSITORY                                 TAG        IMAGE ID       CREATED         SIZE
+    openresty-thrift-media                     xenial     3b5c5a109924   4 weeks ago     619MB
+    k8s.gcr.io/kube-apiserver                  v1.21.4    cef7457710b1   5 weeks ago     126MB
+    k8s.gcr.io/kube-scheduler                  v1.21.4    993d3ec13feb   5 weeks ago     50.6MB
+    k8s.gcr.io/kube-controller-manager         v1.21.4    2c25d0f89db7   5 weeks ago     120MB
+    k8s.gcr.io/kube-proxy                      v1.21.4    ef4bce0a7569   5 weeks ago     103MB
+    quay.io/tigera/operator                    v1.17.1    7e900a7dccd7   4 months ago    47.7MB
+    k8s.gcr.io/metrics-server/metrics-server   v0.4.4     181172b235b2   4 months ago    60.6MB
+
+    root@ip-10-0-0-53:~# docker save -o ./openresty-thrift-media_xenial.tar openresty-thrift-media:xenial
+
+    # copy openresty-thrift-media_xenial.tar to every worker node, in following example
+    # worker1 node is just one of them ...
+    root@ip-10-0-0-53:~# scp ./openresty-thrift-media_xenial.tar worker1:
+    openresty-thrift-media_xenial.tar
+
+    # In each worker node load the docker image                                                                                                                                                             100%  606MB 302.8MB/s   00:02
+    root@ip-10-0-0-53:~# ssh worker1 sudo docker load < ./openresty-thrift-media_xenial.tar
+    Loaded image: openresty-thrift-media:xenial
+
+    ```
 
 ### Deploy services
 
@@ -55,7 +64,8 @@ The applications run independently and each one has a different workflow, using 
 `kubectl -n social-network exec -it pod/wrk-client -- /socialNetwork/wrk2/wrk <wrk Parameters>`
 ```
 
-For all load generating commands below, it should be possible to use `nginx-thrift.social-network.svc.cluster.local:8080` for `cluster-ip`.
+For all load generating commands below, it should be possible to use
+`nginx-thrift.social-network.svc.cluster.local:8080` for `cluster-ip`.
 
 #### Compose posts
 
@@ -85,11 +95,11 @@ cd <path-of-repo>/socialNetwork/wrk2
 
 Use `kubectl -n social-network get svc jaeger-out` to get the NodePort of jaeger service.
 
- View Jaeger traces by accessing `http://<node-ip>:<NodePort>` 
+ View Jaeger traces by accessing `http://<node-ip>:<NodePort>` on any cluster node.
 
 ### Insert `Istio` side car
 
-Follow these instructions to run socialNetwork with `istio` side cars:
+Follow these instructions to run socialNetwork with `istio` sidecars:
 
 1. Install istio if you don't have it.
    Follow the [guide](https://istio.io/latest/docs/setup/getting-started/) from official page.
