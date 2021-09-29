@@ -5,25 +5,6 @@
 - A running Kubernetes cluster is needed.
 - Pre-requirements mentioned [here](https://github.com/intel-sandbox/DeathStarBenchPlusPlus/blob/master/hotelReservation/README.md) should be met.
 
-## Running Predefined Performance Tuning Scenarios
-
-**NOTE: This is the recommended and easier way to deploy and run the system.**
-
-To deploy a fresh uService system:
-
-``` bash
-cd k8s/perf-tuning/
-./deploy.sh <scenario>
-```
-
-To measure performance:
-
-``` bash
-./measure.sh <scenario>
-```
-
-Refer to [k8s/perf-tuning/README.md](https://github.com/intel-sandbox/DeathStarBenchPlusPlus/blob/master/hotelReservation/k8s/perf-tuning/README.md)
-
 ## Running Manually
 
 **NOTE: This part is for you who want to customize the deployment and the testing part.** 
@@ -31,6 +12,9 @@ Refer to [k8s/perf-tuning/README.md](https://github.com/intel-sandbox/DeathStarB
 ### Before you start
 
 - Ensure that the necessary local images have been made. Otherwise, run `<path-of-repo>/hotelReservation/k8s/scripts/build-docker-img.sh`
+
+- Refer to [doc](https://github.com/intel-sandbox/DeathStarBenchPlusPlus/blob/master/socialNetwork/k8s/README.md) for
+  how to upload your local compiled container images to a docker registry or copy and load them manually.
 
 - If necessary, update the addresses in `<path-of-repo>/hotelReservation/k8s/configmaps/config.json`
   - Currently the addresses are in a fairly generic form supported by on-cluster DNS. As long as

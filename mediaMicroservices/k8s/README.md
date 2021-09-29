@@ -2,45 +2,24 @@
 
 ## Pre-requirements
 
-- A running Kubernetes cluster is needed.
+- A running Kubernetes cluster.
 - Pre-requirements mentioned [here](https://github.com/intel-sandbox/DeathStarBenchPlusPlus/blob/master/mediaMicroservices/README.md) should be met.
 - A running istio is required if you want to inject istio sidecar to service.
-
-## Running Predefined Performance Tuning Scenarios
-
-**NOTE: This is the recommended and easier way to deploy and run the system.**
-
-To deploy a fresh uService system:
-
-``` bash
-cd k8s/perf-tuning/
-./deploy.sh <scenario>
-```
-
-To measure performance:
-
-``` bash
-./measure.sh <scenario>
-```
-
-Refer to [k8s/perf-tuning/README.md](https://github.com/intel-sandbox/DeathStarBenchPlusPlus/blob/master/mediaMicroservices/k8s/perf-tuning/README.md)
-
-## Running Manually
 
 **NOTE: This part is for you who want to customize the deployment and the testing part.** 
 
 ### Before you start
 
-
-
 - Ensure that the necessary local images have been made. Otherwise, run following commands to create images:
+  ```bash
+  cd mediaMicroservices
+  docker build -t mediamicroservices:latest -f ./Dockerfile .
+  docker build -t openresty-through:xenial -f ./docker/openresty-thrift/xenial/Dockerfile ./docker/openresty-thrift
+  ```
 
-```bash
-cd mediaMicroservices
-docker build -t mediamicroservices:latest -f ./Dockerfile .
-docker build -t openresty-through:xenial -f ./docker/openresty-thrift/xenial/Dockerfile ./docker/openresty-thrift
-```
-
+- Refer to [doc](https://github.com/intel-sandbox/DeathStarBenchPlusPlus/blob/master/socialNetwork/k8s/README.md) for
+  how to upload your local compiled container images to a docker registry or copy and load them manually.
+  
 ### Deploy services
 
 run `<path-of-repo>/mediaMicroservices/k8s/scripts/deploy-all-services-and-configurations.sh`
@@ -48,7 +27,7 @@ and wait `kubectl -n media-microsvc get pod` to show all pods with status `Runni
 
 ### Register users and movie information
 
-Run following comamnds on the host:
+Run following commands on the host:
 
 ```bash
 cd k8s/scripts 
@@ -73,7 +52,7 @@ kubectl -n media-microsvc exec -it pod/wrk-client -- wrk -D exp -t <num-threads>
 
 Use `kubectl -n media-microsvc get ep | grep jaeger-out` to get the location of jaeger service.
 
-View Jaeger traces by accessing `http://<jaeger-ip-address>:<jaeger-port>` 
+View Jaeger traces by accessing `http://<jaeger-ip-address>:<jaeger-port>` on any cluster node.
 
 ### Inject istio sidecar for services
 
