@@ -20,6 +20,113 @@ local ServiceException = media_service_ttypes.ServiceException
 
 -- HELPER FUNCTIONS AND STRUCTURES
 
+local GetUser_args = __TObject:new{
+  username,
+  carrier
+}
+
+function GetUser_args:read(iprot)
+  iprot:readStructBegin()
+  while true do
+    local fname, ftype, fid = iprot:readFieldBegin()
+    if ftype == TType.STOP then
+      break
+    elseif fid == 1 then
+      if ftype == TType.STRING then
+        self.username = iprot:readString()
+      else
+        iprot:skip(ftype)
+      end
+    elseif fid == 2 then
+      if ftype == TType.MAP then
+        self.carrier = {}
+        local _ktype77, _vtype78, _size76 = iprot:readMapBegin() 
+        for _i=1,_size76 do
+          local _key80 = iprot:readString()
+          local _val81 = iprot:readString()
+          self.carrier[_key80] = _val81
+        end
+        iprot:readMapEnd()
+      else
+        iprot:skip(ftype)
+      end
+    else
+      iprot:skip(ftype)
+    end
+    iprot:readFieldEnd()
+  end
+  iprot:readStructEnd()
+end
+
+function GetUser_args:write(oprot)
+  oprot:writeStructBegin('GetUser_args')
+  if self.username ~= nil then
+    oprot:writeFieldBegin('username', TType.STRING, 1)
+    oprot:writeString(self.username)
+    oprot:writeFieldEnd()
+  end
+  if self.carrier ~= nil then
+    oprot:writeFieldBegin('carrier', TType.MAP, 2)
+    oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
+    for kiter82,viter83 in pairs(self.carrier) do
+      oprot:writeString(kiter82)
+      oprot:writeString(viter83)
+    end
+    oprot:writeMapEnd()
+    oprot:writeFieldEnd()
+  end
+  oprot:writeFieldStop()
+  oprot:writeStructEnd()
+end
+
+local GetUser_result = __TObject:new{
+  success,
+  se
+}
+
+function GetUser_result:read(iprot)
+  iprot:readStructBegin()
+  while true do
+    local fname, ftype, fid = iprot:readFieldBegin()
+    if ftype == TType.STOP then
+      break
+    elseif fid == 0 then
+      if ftype == TType.STRING then
+        self.success = iprot:readString()
+      else
+        iprot:skip(ftype)
+      end
+    elseif fid == 1 then
+      if ftype == TType.STRUCT then
+        self.se = ServiceException:new{}
+        self.se:read(iprot)
+      else
+        iprot:skip(ftype)
+      end
+    else
+      iprot:skip(ftype)
+    end
+    iprot:readFieldEnd()
+  end
+  iprot:readStructEnd()
+end
+
+function GetUser_result:write(oprot)
+  oprot:writeStructBegin('GetUser_result')
+  if self.success ~= nil then
+    oprot:writeFieldBegin('success', TType.STRING, 0)
+    oprot:writeString(self.success)
+    oprot:writeFieldEnd()
+  end
+  if self.se ~= nil then
+    oprot:writeFieldBegin('se', TType.STRUCT, 1)
+    self.se:write(oprot)
+    oprot:writeFieldEnd()
+  end
+  oprot:writeFieldStop()
+  oprot:writeStructEnd()
+end
+
 local RegisterUser_args = __TObject:new{
   req_id,
   first_name,
@@ -68,11 +175,11 @@ function RegisterUser_args:read(iprot)
     elseif fid == 6 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype77, _vtype78, _size76 = iprot:readMapBegin()
-        for _i=1,_size76 do
-          local _key80 = iprot:readString()
-          local _val81 = iprot:readString()
-          self.carrier[_key80] = _val81
+        local _ktype85, _vtype86, _size84 = iprot:readMapBegin() 
+        for _i=1,_size84 do
+          local _key88 = iprot:readString()
+          local _val89 = iprot:readString()
+          self.carrier[_key88] = _val89
         end
         iprot:readMapEnd()
       else
@@ -116,9 +223,9 @@ function RegisterUser_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 6)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter82,viter83 in pairs(self.carrier) do
-      oprot:writeString(kiter82)
-      oprot:writeString(viter83)
+    for kiter90,viter91 in pairs(self.carrier) do
+      oprot:writeString(kiter90)
+      oprot:writeString(viter91)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -218,11 +325,11 @@ function RegisterUserWithId_args:read(iprot)
     elseif fid == 7 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype85, _vtype86, _size84 = iprot:readMapBegin()
-        for _i=1,_size84 do
-          local _key88 = iprot:readString()
-          local _val89 = iprot:readString()
-          self.carrier[_key88] = _val89
+        local _ktype93, _vtype94, _size92 = iprot:readMapBegin() 
+        for _i=1,_size92 do
+          local _key96 = iprot:readString()
+          local _val97 = iprot:readString()
+          self.carrier[_key96] = _val97
         end
         iprot:readMapEnd()
       else
@@ -271,9 +378,9 @@ function RegisterUserWithId_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 7)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter90,viter91 in pairs(self.carrier) do
-      oprot:writeString(kiter90)
-      oprot:writeString(viter91)
+    for kiter98,viter99 in pairs(self.carrier) do
+      oprot:writeString(kiter98)
+      oprot:writeString(viter99)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -352,11 +459,11 @@ function Login_args:read(iprot)
     elseif fid == 4 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype93, _vtype94, _size92 = iprot:readMapBegin()
-        for _i=1,_size92 do
-          local _key96 = iprot:readString()
-          local _val97 = iprot:readString()
-          self.carrier[_key96] = _val97
+        local _ktype101, _vtype102, _size100 = iprot:readMapBegin() 
+        for _i=1,_size100 do
+          local _key104 = iprot:readString()
+          local _val105 = iprot:readString()
+          self.carrier[_key104] = _val105
         end
         iprot:readMapEnd()
       else
@@ -390,9 +497,9 @@ function Login_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 4)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter98,viter99 in pairs(self.carrier) do
-      oprot:writeString(kiter98)
-      oprot:writeString(viter99)
+    for kiter106,viter107 in pairs(self.carrier) do
+      oprot:writeString(kiter106)
+      oprot:writeString(viter107)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -476,11 +583,11 @@ function UploadUserWithUserId_args:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype101, _vtype102, _size100 = iprot:readMapBegin()
-        for _i=1,_size100 do
-          local _key104 = iprot:readString()
-          local _val105 = iprot:readString()
-          self.carrier[_key104] = _val105
+        local _ktype109, _vtype110, _size108 = iprot:readMapBegin() 
+        for _i=1,_size108 do
+          local _key112 = iprot:readString()
+          local _val113 = iprot:readString()
+          self.carrier[_key112] = _val113
         end
         iprot:readMapEnd()
       else
@@ -509,9 +616,9 @@ function UploadUserWithUserId_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter106,viter107 in pairs(self.carrier) do
-      oprot:writeString(kiter106)
-      oprot:writeString(viter107)
+    for kiter114,viter115 in pairs(self.carrier) do
+      oprot:writeString(kiter114)
+      oprot:writeString(viter115)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -583,11 +690,11 @@ function UploadUserWithUsername_args:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype109, _vtype110, _size108 = iprot:readMapBegin()
-        for _i=1,_size108 do
-          local _key112 = iprot:readString()
-          local _val113 = iprot:readString()
-          self.carrier[_key112] = _val113
+        local _ktype117, _vtype118, _size116 = iprot:readMapBegin() 
+        for _i=1,_size116 do
+          local _key120 = iprot:readString()
+          local _val121 = iprot:readString()
+          self.carrier[_key120] = _val121
         end
         iprot:readMapEnd()
       else
@@ -616,9 +723,9 @@ function UploadUserWithUsername_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter114,viter115 in pairs(self.carrier) do
-      oprot:writeString(kiter114)
-      oprot:writeString(viter115)
+    for kiter122,viter123 in pairs(self.carrier) do
+      oprot:writeString(kiter122)
+      oprot:writeString(viter123)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -667,6 +774,40 @@ local UserServiceClient = __TObject.new(__TClient, {
   __type = 'UserServiceClient'
 })
 
+function UserServiceClient:GetUser(username, carrier)
+  self:send_GetUser(username, carrier)
+  return self:recv_GetUser(username, carrier)
+end
+
+function UserServiceClient:send_GetUser(username, carrier)
+  self.oprot:writeMessageBegin('GetUser', TMessageType.CALL, self._seqid)
+  local args = GetUser_args:new{}
+  args.username = username
+  args.carrier = carrier
+  args:write(self.oprot)
+  self.oprot:writeMessageEnd()
+  self.oprot.trans:flush()
+end
+
+function UserServiceClient:recv_GetUser(username, carrier)
+  local fname, mtype, rseqid = self.iprot:readMessageBegin()
+  if mtype == TMessageType.EXCEPTION then
+    local x = TApplicationException:new{}
+    x:read(self.iprot)
+    self.iprot:readMessageEnd()
+    error(x)
+  end
+  local result = GetUser_result:new{}
+  result:read(self.iprot)
+  self.iprot:readMessageEnd()
+  if result.success ~= nil then
+    return result.success
+  elseif result.se then
+    error(result.se)
+  end
+  error(TApplicationException:new{errorCode = TApplicationException.MISSING_RESULT})
+end
+
 function UserServiceClient:RegisterUser(req_id, first_name, last_name, username, password, carrier)
   self:send_RegisterUser(req_id, first_name, last_name, username, password, carrier)
   self:recv_RegisterUser(req_id, first_name, last_name, username, password, carrier)
@@ -697,9 +838,6 @@ function UserServiceClient:recv_RegisterUser(req_id, first_name, last_name, user
   local result = RegisterUser_result:new{}
   result:read(self.iprot)
   self.iprot:readMessageEnd()
-  if result.se then
-    error(result.se)
-  end
 end
 
 function UserServiceClient:RegisterUserWithId(req_id, first_name, last_name, username, password, user_id, carrier)
@@ -733,9 +871,6 @@ function UserServiceClient:recv_RegisterUserWithId(req_id, first_name, last_name
   local result = RegisterUserWithId_result:new{}
   result:read(self.iprot)
   self.iprot:readMessageEnd()
-  if result.se then
-    error(result.se)
-  end
 end
 
 function UserServiceClient:Login(req_id, username, password, carrier)
@@ -801,9 +936,6 @@ function UserServiceClient:recv_UploadUserWithUserId(req_id, user_id, carrier)
   local result = UploadUserWithUserId_result:new{}
   result:read(self.iprot)
   self.iprot:readMessageEnd()
-  if result.se then
-    error(result.se)
-  end
 end
 
 function UserServiceClient:UploadUserWithUsername(req_id, username, carrier)
@@ -833,12 +965,7 @@ function UserServiceClient:recv_UploadUserWithUsername(req_id, username, carrier
   local result = UploadUserWithUsername_result:new{}
   result:read(self.iprot)
   self.iprot:readMessageEnd()
-  if result.se then
-    error(result.se)
-  end
 end
-
-
 local UserServiceIface = __TObject:new{
   __type = 'UserServiceIface'
 }
@@ -865,6 +992,27 @@ function UserServiceProcessor:process(iprot, oprot, server_ctx)
   else
     self[func_name](self, seqid, iprot, oprot, server_ctx)
   end
+end
+
+function UserServiceProcessor:process_GetUser(seqid, iprot, oprot, server_ctx)
+  local args = GetUser_args:new{}
+  local reply_type = TMessageType.REPLY
+  args:read(iprot)
+  iprot:readMessageEnd()
+  local result = GetUser_result:new{}
+  local status, res = pcall(self.handler.GetUser, self.handler, args.username, args.carrier)
+  if not status then
+    reply_type = TMessageType.EXCEPTION
+    result = TApplicationException:new{message = res}
+  elseif ttype(res) == 'ServiceException' then
+    result.se = res
+  else
+    result.success = res
+  end
+  oprot:writeMessageBegin('GetUser', reply_type, seqid)
+  result:write(oprot)
+  oprot:writeMessageEnd()
+  oprot.trans:flush()
 end
 
 function UserServiceProcessor:process_RegisterUser(seqid, iprot, oprot, server_ctx)

@@ -62,11 +62,11 @@ function ReadPage_args:read(iprot)
     elseif fid == 5 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype321, _vtype322, _size320 = iprot:readMapBegin()
-        for _i=1,_size320 do
-          local _key324 = iprot:readString()
-          local _val325 = iprot:readString()
-          self.carrier[_key324] = _val325
+        local _ktype329, _vtype330, _size328 = iprot:readMapBegin() 
+        for _i=1,_size328 do
+          local _key332 = iprot:readString()
+          local _val333 = iprot:readString()
+          self.carrier[_key332] = _val333
         end
         iprot:readMapEnd()
       else
@@ -105,9 +105,9 @@ function ReadPage_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 5)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter326,viter327 in pairs(self.carrier) do
-      oprot:writeString(kiter326)
-      oprot:writeString(viter327)
+    for kiter334,viter335 in pairs(self.carrier) do
+      oprot:writeString(kiter334)
+      oprot:writeString(viter335)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()

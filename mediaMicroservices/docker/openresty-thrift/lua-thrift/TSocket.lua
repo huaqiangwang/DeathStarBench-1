@@ -23,7 +23,6 @@ local Thrift = require 'Thrift'
 local ttype = Thrift.ttype
 local terror = Thrift.terror
 
-
 -- TSocketBase
 local TSocketBase = TTransportBase:new{
   __type = 'TSocketBase',
@@ -90,7 +89,7 @@ function TSocket:open()
         .. ' (' .. err .. ')'
     })
   end
-end    
+end
 
 function TSocket:read(len)
   local buf = self.handle:receive(len)
@@ -119,6 +118,7 @@ function TServerSocket:listen()
     self:close()
   end
 
+  -- TODO: How to remove luasocket module and using ngx sockets
   local sock, err = luasocket.create(self.host, self.port)
   if not err then
     self.handle = sock
@@ -129,7 +129,6 @@ function TServerSocket:listen()
   self.handle:listen()
 end
 
-
 function TServerSocket:accept()
   local client, err = self.handle:accept()
   if err then
@@ -139,5 +138,3 @@ function TServerSocket:accept()
 end
 
 return TSocket
-
-

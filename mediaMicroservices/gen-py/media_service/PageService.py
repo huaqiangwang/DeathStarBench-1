@@ -183,11 +183,11 @@ class ReadPage_args(object):
             elif fid == 5:
                 if ftype == TType.MAP:
                     self.carrier = {}
-                    (_ktype365, _vtype366, _size364) = iprot.readMapBegin()
-                    for _i368 in range(_size364):
-                        _key369 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val370 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.carrier[_key369] = _val370
+                    (_ktype374, _vtype375, _size373) = iprot.readMapBegin()
+                    for _i377 in range(_size373):
+                        _key378 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val379 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.carrier[_key378] = _val379
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
@@ -220,9 +220,9 @@ class ReadPage_args(object):
         if self.carrier is not None:
             oprot.writeFieldBegin('carrier', TType.MAP, 5)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.carrier))
-            for kiter371, viter372 in self.carrier.items():
-                oprot.writeString(kiter371.encode('utf-8') if sys.version_info[0] == 2 else kiter371)
-                oprot.writeString(viter372.encode('utf-8') if sys.version_info[0] == 2 else viter372)
+            for kiter380, viter381 in self.carrier.items():
+                oprot.writeString(kiter380.encode('utf-8') if sys.version_info[0] == 2 else kiter380)
+                oprot.writeString(viter381.encode('utf-8') if sys.version_info[0] == 2 else viter381)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()

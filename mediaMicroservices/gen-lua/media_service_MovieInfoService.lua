@@ -63,11 +63,11 @@ function WriteMovieInfo_args:read(iprot)
     elseif fid == 4 then
       if ftype == TType.LIST then
         self.casts = {}
-        local _etype275, _size272 = iprot:readListBegin()
-        for _i=1,_size272 do
-          local _elem276 = Cast:new{}
-          _elem276:read(iprot)
-          table.insert(self.casts, _elem276)
+        local _etype283, _size280 = iprot:readListBegin()
+        for _i=1,_size280 do
+          local _elem284 = Cast:new{}
+          _elem284:read(iprot)
+          table.insert(self.casts, _elem284)
         end
         iprot:readListEnd()
       else
@@ -82,10 +82,10 @@ function WriteMovieInfo_args:read(iprot)
     elseif fid == 6 then
       if ftype == TType.LIST then
         self.thumbnail_ids = {}
-        local _etype280, _size277 = iprot:readListBegin()
-        for _i=1,_size277 do
-          local _elem281 = iprot:readString()
-          table.insert(self.thumbnail_ids, _elem281)
+        local _etype288, _size285 = iprot:readListBegin()
+        for _i=1,_size285 do
+          local _elem289 = iprot:readString()
+          table.insert(self.thumbnail_ids, _elem289)
         end
         iprot:readListEnd()
       else
@@ -94,10 +94,10 @@ function WriteMovieInfo_args:read(iprot)
     elseif fid == 7 then
       if ftype == TType.LIST then
         self.photo_ids = {}
-        local _etype285, _size282 = iprot:readListBegin()
-        for _i=1,_size282 do
-          local _elem286 = iprot:readString()
-          table.insert(self.photo_ids, _elem286)
+        local _etype293, _size290 = iprot:readListBegin()
+        for _i=1,_size290 do
+          local _elem294 = iprot:readString()
+          table.insert(self.photo_ids, _elem294)
         end
         iprot:readListEnd()
       else
@@ -106,10 +106,10 @@ function WriteMovieInfo_args:read(iprot)
     elseif fid == 8 then
       if ftype == TType.LIST then
         self.video_ids = {}
-        local _etype290, _size287 = iprot:readListBegin()
-        for _i=1,_size287 do
-          local _elem291 = iprot:readString()
-          table.insert(self.video_ids, _elem291)
+        local _etype298, _size295 = iprot:readListBegin()
+        for _i=1,_size295 do
+          local _elem299 = iprot:readString()
+          table.insert(self.video_ids, _elem299)
         end
         iprot:readListEnd()
       else
@@ -130,11 +130,11 @@ function WriteMovieInfo_args:read(iprot)
     elseif fid == 11 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype293, _vtype294, _size292 = iprot:readMapBegin()
-        for _i=1,_size292 do
-          local _key296 = iprot:readString()
-          local _val297 = iprot:readString()
-          self.carrier[_key296] = _val297
+        local _ktype301, _vtype302, _size300 = iprot:readMapBegin() 
+        for _i=1,_size300 do
+          local _key304 = iprot:readString()
+          local _val305 = iprot:readString()
+          self.carrier[_key304] = _val305
         end
         iprot:readMapEnd()
       else
@@ -168,8 +168,8 @@ function WriteMovieInfo_args:write(oprot)
   if self.casts ~= nil then
     oprot:writeFieldBegin('casts', TType.LIST, 4)
     oprot:writeListBegin(TType.STRUCT, #self.casts)
-    for _,iter298 in ipairs(self.casts) do
-      iter298:write(oprot)
+    for _,iter306 in ipairs(self.casts) do
+      iter306:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -182,8 +182,8 @@ function WriteMovieInfo_args:write(oprot)
   if self.thumbnail_ids ~= nil then
     oprot:writeFieldBegin('thumbnail_ids', TType.LIST, 6)
     oprot:writeListBegin(TType.STRING, #self.thumbnail_ids)
-    for _,iter299 in ipairs(self.thumbnail_ids) do
-      oprot:writeString(iter299)
+    for _,iter307 in ipairs(self.thumbnail_ids) do
+      oprot:writeString(iter307)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -191,8 +191,8 @@ function WriteMovieInfo_args:write(oprot)
   if self.photo_ids ~= nil then
     oprot:writeFieldBegin('photo_ids', TType.LIST, 7)
     oprot:writeListBegin(TType.STRING, #self.photo_ids)
-    for _,iter300 in ipairs(self.photo_ids) do
-      oprot:writeString(iter300)
+    for _,iter308 in ipairs(self.photo_ids) do
+      oprot:writeString(iter308)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -200,8 +200,8 @@ function WriteMovieInfo_args:write(oprot)
   if self.video_ids ~= nil then
     oprot:writeFieldBegin('video_ids', TType.LIST, 8)
     oprot:writeListBegin(TType.STRING, #self.video_ids)
-    for _,iter301 in ipairs(self.video_ids) do
-      oprot:writeString(iter301)
+    for _,iter309 in ipairs(self.video_ids) do
+      oprot:writeString(iter309)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -219,9 +219,9 @@ function WriteMovieInfo_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 11)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter302,viter303 in pairs(self.carrier) do
-      oprot:writeString(kiter302)
-      oprot:writeString(viter303)
+    for kiter310,viter311 in pairs(self.carrier) do
+      oprot:writeString(kiter310)
+      oprot:writeString(viter311)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -293,11 +293,11 @@ function ReadMovieInfo_args:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype305, _vtype306, _size304 = iprot:readMapBegin()
-        for _i=1,_size304 do
-          local _key308 = iprot:readString()
-          local _val309 = iprot:readString()
-          self.carrier[_key308] = _val309
+        local _ktype313, _vtype314, _size312 = iprot:readMapBegin() 
+        for _i=1,_size312 do
+          local _key316 = iprot:readString()
+          local _val317 = iprot:readString()
+          self.carrier[_key316] = _val317
         end
         iprot:readMapEnd()
       else
@@ -326,9 +326,9 @@ function ReadMovieInfo_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter310,viter311 in pairs(self.carrier) do
-      oprot:writeString(kiter310)
-      oprot:writeString(viter311)
+    for kiter318,viter319 in pairs(self.carrier) do
+      oprot:writeString(kiter318)
+      oprot:writeString(viter319)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -427,11 +427,11 @@ function UpdateRating_args:read(iprot)
     elseif fid == 5 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype313, _vtype314, _size312 = iprot:readMapBegin()
-        for _i=1,_size312 do
-          local _key316 = iprot:readString()
-          local _val317 = iprot:readString()
-          self.carrier[_key316] = _val317
+        local _ktype321, _vtype322, _size320 = iprot:readMapBegin() 
+        for _i=1,_size320 do
+          local _key324 = iprot:readString()
+          local _val325 = iprot:readString()
+          self.carrier[_key324] = _val325
         end
         iprot:readMapEnd()
       else
@@ -470,9 +470,9 @@ function UpdateRating_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 5)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter318,viter319 in pairs(self.carrier) do
-      oprot:writeString(kiter318)
-      oprot:writeString(viter319)
+    for kiter326,viter327 in pairs(self.carrier) do
+      oprot:writeString(kiter326)
+      oprot:writeString(viter327)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -556,9 +556,6 @@ function MovieInfoServiceClient:recv_WriteMovieInfo(req_id, movie_id, title, cas
   local result = WriteMovieInfo_result:new{}
   result:read(self.iprot)
   self.iprot:readMessageEnd()
-  if result.se then
-    error(result.se)
-  end
 end
 
 function MovieInfoServiceClient:ReadMovieInfo(req_id, movie_id, carrier)
@@ -625,10 +622,8 @@ function MovieInfoServiceClient:recv_UpdateRating(req_id, movie_id, sum_uncommit
   local result = UpdateRating_result:new{}
   result:read(self.iprot)
   self.iprot:readMessageEnd()
-  if result.se then
-    error(result.se)
-  end
 end
+
 local MovieInfoServiceIface = __TObject:new{
   __type = 'MovieInfoServiceIface'
 }

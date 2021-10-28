@@ -54,17 +54,17 @@ uint32_t ComposeReviewService_UploadText_args::read(::apache::thrift::protocol::
         if (ftype == ::apache::thrift::protocol::T_MAP) {
           {
             this->carrier.clear();
-            uint32_t _size141;
-            ::apache::thrift::protocol::TType _ktype142;
-            ::apache::thrift::protocol::TType _vtype143;
-            xfer += iprot->readMapBegin(_ktype142, _vtype143, _size141);
-            uint32_t _i145;
-            for (_i145 = 0; _i145 < _size141; ++_i145)
+            uint32_t _size150;
+            ::apache::thrift::protocol::TType _ktype151;
+            ::apache::thrift::protocol::TType _vtype152;
+            xfer += iprot->readMapBegin(_ktype151, _vtype152, _size150);
+            uint32_t _i154;
+            for (_i154 = 0; _i154 < _size150; ++_i154)
             {
-              std::string _key146;
-              xfer += iprot->readString(_key146);
-              std::string& _val147 = this->carrier[_key146];
-              xfer += iprot->readString(_val147);
+              std::string _key155;
+              xfer += iprot->readString(_key155);
+              std::string& _val156 = this->carrier[_key155];
+              xfer += iprot->readString(_val156);
             }
             xfer += iprot->readMapEnd();
           }
@@ -101,11 +101,11 @@ uint32_t ComposeReviewService_UploadText_args::write(::apache::thrift::protocol:
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 3);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->carrier.size()));
-    std::map<std::string, std::string> ::const_iterator _iter148;
-    for (_iter148 = this->carrier.begin(); _iter148 != this->carrier.end(); ++_iter148)
+    std::map<std::string, std::string> ::const_iterator _iter157;
+    for (_iter157 = this->carrier.begin(); _iter157 != this->carrier.end(); ++_iter157)
     {
-      xfer += oprot->writeString(_iter148->first);
-      xfer += oprot->writeString(_iter148->second);
+      xfer += oprot->writeString(_iter157->first);
+      xfer += oprot->writeString(_iter157->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -137,11 +137,11 @@ uint32_t ComposeReviewService_UploadText_pargs::write(::apache::thrift::protocol
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 3);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>((*(this->carrier)).size()));
-    std::map<std::string, std::string> ::const_iterator _iter149;
-    for (_iter149 = (*(this->carrier)).begin(); _iter149 != (*(this->carrier)).end(); ++_iter149)
+    std::map<std::string, std::string> ::const_iterator _iter158;
+    for (_iter158 = (*(this->carrier)).begin(); _iter158 != (*(this->carrier)).end(); ++_iter158)
     {
-      xfer += oprot->writeString(_iter149->first);
-      xfer += oprot->writeString(_iter149->second);
+      xfer += oprot->writeString(_iter158->first);
+      xfer += oprot->writeString(_iter158->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -306,17 +306,17 @@ uint32_t ComposeReviewService_UploadRating_args::read(::apache::thrift::protocol
         if (ftype == ::apache::thrift::protocol::T_MAP) {
           {
             this->carrier.clear();
-            uint32_t _size150;
-            ::apache::thrift::protocol::TType _ktype151;
-            ::apache::thrift::protocol::TType _vtype152;
-            xfer += iprot->readMapBegin(_ktype151, _vtype152, _size150);
-            uint32_t _i154;
-            for (_i154 = 0; _i154 < _size150; ++_i154)
+            uint32_t _size159;
+            ::apache::thrift::protocol::TType _ktype160;
+            ::apache::thrift::protocol::TType _vtype161;
+            xfer += iprot->readMapBegin(_ktype160, _vtype161, _size159);
+            uint32_t _i163;
+            for (_i163 = 0; _i163 < _size159; ++_i163)
             {
-              std::string _key155;
-              xfer += iprot->readString(_key155);
-              std::string& _val156 = this->carrier[_key155];
-              xfer += iprot->readString(_val156);
+              std::string _key164;
+              xfer += iprot->readString(_key164);
+              std::string& _val165 = this->carrier[_key164];
+              xfer += iprot->readString(_val165);
             }
             xfer += iprot->readMapEnd();
           }
@@ -353,11 +353,11 @@ uint32_t ComposeReviewService_UploadRating_args::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 3);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->carrier.size()));
-    std::map<std::string, std::string> ::const_iterator _iter157;
-    for (_iter157 = this->carrier.begin(); _iter157 != this->carrier.end(); ++_iter157)
+    std::map<std::string, std::string> ::const_iterator _iter166;
+    for (_iter166 = this->carrier.begin(); _iter166 != this->carrier.end(); ++_iter166)
     {
-      xfer += oprot->writeString(_iter157->first);
-      xfer += oprot->writeString(_iter157->second);
+      xfer += oprot->writeString(_iter166->first);
+      xfer += oprot->writeString(_iter166->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -389,11 +389,11 @@ uint32_t ComposeReviewService_UploadRating_pargs::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 3);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>((*(this->carrier)).size()));
-    std::map<std::string, std::string> ::const_iterator _iter158;
-    for (_iter158 = (*(this->carrier)).begin(); _iter158 != (*(this->carrier)).end(); ++_iter158)
+    std::map<std::string, std::string> ::const_iterator _iter167;
+    for (_iter167 = (*(this->carrier)).begin(); _iter167 != (*(this->carrier)).end(); ++_iter167)
     {
-      xfer += oprot->writeString(_iter158->first);
-      xfer += oprot->writeString(_iter158->second);
+      xfer += oprot->writeString(_iter167->first);
+      xfer += oprot->writeString(_iter167->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -558,17 +558,17 @@ uint32_t ComposeReviewService_UploadMovieId_args::read(::apache::thrift::protoco
         if (ftype == ::apache::thrift::protocol::T_MAP) {
           {
             this->carrier.clear();
-            uint32_t _size159;
-            ::apache::thrift::protocol::TType _ktype160;
-            ::apache::thrift::protocol::TType _vtype161;
-            xfer += iprot->readMapBegin(_ktype160, _vtype161, _size159);
-            uint32_t _i163;
-            for (_i163 = 0; _i163 < _size159; ++_i163)
+            uint32_t _size168;
+            ::apache::thrift::protocol::TType _ktype169;
+            ::apache::thrift::protocol::TType _vtype170;
+            xfer += iprot->readMapBegin(_ktype169, _vtype170, _size168);
+            uint32_t _i172;
+            for (_i172 = 0; _i172 < _size168; ++_i172)
             {
-              std::string _key164;
-              xfer += iprot->readString(_key164);
-              std::string& _val165 = this->carrier[_key164];
-              xfer += iprot->readString(_val165);
+              std::string _key173;
+              xfer += iprot->readString(_key173);
+              std::string& _val174 = this->carrier[_key173];
+              xfer += iprot->readString(_val174);
             }
             xfer += iprot->readMapEnd();
           }
@@ -605,11 +605,11 @@ uint32_t ComposeReviewService_UploadMovieId_args::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 3);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->carrier.size()));
-    std::map<std::string, std::string> ::const_iterator _iter166;
-    for (_iter166 = this->carrier.begin(); _iter166 != this->carrier.end(); ++_iter166)
+    std::map<std::string, std::string> ::const_iterator _iter175;
+    for (_iter175 = this->carrier.begin(); _iter175 != this->carrier.end(); ++_iter175)
     {
-      xfer += oprot->writeString(_iter166->first);
-      xfer += oprot->writeString(_iter166->second);
+      xfer += oprot->writeString(_iter175->first);
+      xfer += oprot->writeString(_iter175->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -641,11 +641,11 @@ uint32_t ComposeReviewService_UploadMovieId_pargs::write(::apache::thrift::proto
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 3);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>((*(this->carrier)).size()));
-    std::map<std::string, std::string> ::const_iterator _iter167;
-    for (_iter167 = (*(this->carrier)).begin(); _iter167 != (*(this->carrier)).end(); ++_iter167)
+    std::map<std::string, std::string> ::const_iterator _iter176;
+    for (_iter176 = (*(this->carrier)).begin(); _iter176 != (*(this->carrier)).end(); ++_iter176)
     {
-      xfer += oprot->writeString(_iter167->first);
-      xfer += oprot->writeString(_iter167->second);
+      xfer += oprot->writeString(_iter176->first);
+      xfer += oprot->writeString(_iter176->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -810,17 +810,17 @@ uint32_t ComposeReviewService_UploadUniqueId_args::read(::apache::thrift::protoc
         if (ftype == ::apache::thrift::protocol::T_MAP) {
           {
             this->carrier.clear();
-            uint32_t _size168;
-            ::apache::thrift::protocol::TType _ktype169;
-            ::apache::thrift::protocol::TType _vtype170;
-            xfer += iprot->readMapBegin(_ktype169, _vtype170, _size168);
-            uint32_t _i172;
-            for (_i172 = 0; _i172 < _size168; ++_i172)
+            uint32_t _size177;
+            ::apache::thrift::protocol::TType _ktype178;
+            ::apache::thrift::protocol::TType _vtype179;
+            xfer += iprot->readMapBegin(_ktype178, _vtype179, _size177);
+            uint32_t _i181;
+            for (_i181 = 0; _i181 < _size177; ++_i181)
             {
-              std::string _key173;
-              xfer += iprot->readString(_key173);
-              std::string& _val174 = this->carrier[_key173];
-              xfer += iprot->readString(_val174);
+              std::string _key182;
+              xfer += iprot->readString(_key182);
+              std::string& _val183 = this->carrier[_key182];
+              xfer += iprot->readString(_val183);
             }
             xfer += iprot->readMapEnd();
           }
@@ -857,11 +857,11 @@ uint32_t ComposeReviewService_UploadUniqueId_args::write(::apache::thrift::proto
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 3);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->carrier.size()));
-    std::map<std::string, std::string> ::const_iterator _iter175;
-    for (_iter175 = this->carrier.begin(); _iter175 != this->carrier.end(); ++_iter175)
+    std::map<std::string, std::string> ::const_iterator _iter184;
+    for (_iter184 = this->carrier.begin(); _iter184 != this->carrier.end(); ++_iter184)
     {
-      xfer += oprot->writeString(_iter175->first);
-      xfer += oprot->writeString(_iter175->second);
+      xfer += oprot->writeString(_iter184->first);
+      xfer += oprot->writeString(_iter184->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -893,11 +893,11 @@ uint32_t ComposeReviewService_UploadUniqueId_pargs::write(::apache::thrift::prot
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 3);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>((*(this->carrier)).size()));
-    std::map<std::string, std::string> ::const_iterator _iter176;
-    for (_iter176 = (*(this->carrier)).begin(); _iter176 != (*(this->carrier)).end(); ++_iter176)
+    std::map<std::string, std::string> ::const_iterator _iter185;
+    for (_iter185 = (*(this->carrier)).begin(); _iter185 != (*(this->carrier)).end(); ++_iter185)
     {
-      xfer += oprot->writeString(_iter176->first);
-      xfer += oprot->writeString(_iter176->second);
+      xfer += oprot->writeString(_iter185->first);
+      xfer += oprot->writeString(_iter185->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -1062,17 +1062,17 @@ uint32_t ComposeReviewService_UploadUserId_args::read(::apache::thrift::protocol
         if (ftype == ::apache::thrift::protocol::T_MAP) {
           {
             this->carrier.clear();
-            uint32_t _size177;
-            ::apache::thrift::protocol::TType _ktype178;
-            ::apache::thrift::protocol::TType _vtype179;
-            xfer += iprot->readMapBegin(_ktype178, _vtype179, _size177);
-            uint32_t _i181;
-            for (_i181 = 0; _i181 < _size177; ++_i181)
+            uint32_t _size186;
+            ::apache::thrift::protocol::TType _ktype187;
+            ::apache::thrift::protocol::TType _vtype188;
+            xfer += iprot->readMapBegin(_ktype187, _vtype188, _size186);
+            uint32_t _i190;
+            for (_i190 = 0; _i190 < _size186; ++_i190)
             {
-              std::string _key182;
-              xfer += iprot->readString(_key182);
-              std::string& _val183 = this->carrier[_key182];
-              xfer += iprot->readString(_val183);
+              std::string _key191;
+              xfer += iprot->readString(_key191);
+              std::string& _val192 = this->carrier[_key191];
+              xfer += iprot->readString(_val192);
             }
             xfer += iprot->readMapEnd();
           }
@@ -1109,11 +1109,11 @@ uint32_t ComposeReviewService_UploadUserId_args::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 4);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->carrier.size()));
-    std::map<std::string, std::string> ::const_iterator _iter184;
-    for (_iter184 = this->carrier.begin(); _iter184 != this->carrier.end(); ++_iter184)
+    std::map<std::string, std::string> ::const_iterator _iter193;
+    for (_iter193 = this->carrier.begin(); _iter193 != this->carrier.end(); ++_iter193)
     {
-      xfer += oprot->writeString(_iter184->first);
-      xfer += oprot->writeString(_iter184->second);
+      xfer += oprot->writeString(_iter193->first);
+      xfer += oprot->writeString(_iter193->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -1145,11 +1145,11 @@ uint32_t ComposeReviewService_UploadUserId_pargs::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 4);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>((*(this->carrier)).size()));
-    std::map<std::string, std::string> ::const_iterator _iter185;
-    for (_iter185 = (*(this->carrier)).begin(); _iter185 != (*(this->carrier)).end(); ++_iter185)
+    std::map<std::string, std::string> ::const_iterator _iter194;
+    for (_iter194 = (*(this->carrier)).begin(); _iter194 != (*(this->carrier)).end(); ++_iter194)
     {
-      xfer += oprot->writeString(_iter185->first);
-      xfer += oprot->writeString(_iter185->second);
+      xfer += oprot->writeString(_iter194->first);
+      xfer += oprot->writeString(_iter194->second);
     }
     xfer += oprot->writeMapEnd();
   }

@@ -23,7 +23,7 @@ local CastInfo = media_service_ttypes.CastInfo
 
 local WriteCastInfo_args = __TObject:new{
   req_id,
-  cast_id,
+  cast_info_id,
   name,
   gender,
   intro,
@@ -44,7 +44,7 @@ function WriteCastInfo_args:read(iprot)
       end
     elseif fid == 2 then
       if ftype == TType.I64 then
-        self.cast_id = iprot:readI64()
+        self.cast_info_id = iprot:readI64()
       else
         iprot:skip(ftype)
       end
@@ -69,11 +69,11 @@ function WriteCastInfo_args:read(iprot)
     elseif fid == 6 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype229, _vtype230, _size228 = iprot:readMapBegin()
-        for _i=1,_size228 do
-          local _key232 = iprot:readString()
-          local _val233 = iprot:readString()
-          self.carrier[_key232] = _val233
+        local _ktype237, _vtype238, _size236 = iprot:readMapBegin() 
+        for _i=1,_size236 do
+          local _key240 = iprot:readString()
+          local _val241 = iprot:readString()
+          self.carrier[_key240] = _val241
         end
         iprot:readMapEnd()
       else
@@ -94,9 +94,9 @@ function WriteCastInfo_args:write(oprot)
     oprot:writeI64(self.req_id)
     oprot:writeFieldEnd()
   end
-  if self.cast_id ~= nil then
-    oprot:writeFieldBegin('cast_id', TType.I64, 2)
-    oprot:writeI64(self.cast_id)
+  if self.cast_info_id ~= nil then
+    oprot:writeFieldBegin('cast_info_id', TType.I64, 2)
+    oprot:writeI64(self.cast_info_id)
     oprot:writeFieldEnd()
   end
   if self.name ~= nil then
@@ -117,9 +117,9 @@ function WriteCastInfo_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 6)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter234,viter235 in pairs(self.carrier) do
-      oprot:writeString(kiter234)
-      oprot:writeString(viter235)
+    for kiter242,viter243 in pairs(self.carrier) do
+      oprot:writeString(kiter242)
+      oprot:writeString(viter243)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -185,10 +185,10 @@ function ReadCastInfo_args:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.cast_ids = {}
-        local _etype239, _size236 = iprot:readListBegin()
-        for _i=1,_size236 do
-          local _elem240 = iprot:readI64()
-          table.insert(self.cast_ids, _elem240)
+        local _etype247, _size244 = iprot:readListBegin()
+        for _i=1,_size244 do
+          local _elem248 = iprot:readI64()
+          table.insert(self.cast_ids, _elem248)
         end
         iprot:readListEnd()
       else
@@ -197,11 +197,11 @@ function ReadCastInfo_args:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype242, _vtype243, _size241 = iprot:readMapBegin()
-        for _i=1,_size241 do
-          local _key245 = iprot:readString()
-          local _val246 = iprot:readString()
-          self.carrier[_key245] = _val246
+        local _ktype250, _vtype251, _size249 = iprot:readMapBegin() 
+        for _i=1,_size249 do
+          local _key253 = iprot:readString()
+          local _val254 = iprot:readString()
+          self.carrier[_key253] = _val254
         end
         iprot:readMapEnd()
       else
@@ -225,8 +225,8 @@ function ReadCastInfo_args:write(oprot)
   if self.cast_ids ~= nil then
     oprot:writeFieldBegin('cast_ids', TType.LIST, 2)
     oprot:writeListBegin(TType.I64, #self.cast_ids)
-    for _,iter247 in ipairs(self.cast_ids) do
-      oprot:writeI64(iter247)
+    for _,iter255 in ipairs(self.cast_ids) do
+      oprot:writeI64(iter255)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -234,9 +234,9 @@ function ReadCastInfo_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter248,viter249 in pairs(self.carrier) do
-      oprot:writeString(kiter248)
-      oprot:writeString(viter249)
+    for kiter256,viter257 in pairs(self.carrier) do
+      oprot:writeString(kiter256)
+      oprot:writeString(viter257)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -259,11 +259,11 @@ function ReadCastInfo_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype253, _size250 = iprot:readListBegin()
-        for _i=1,_size250 do
-          local _elem254 = CastInfo:new{}
-          _elem254:read(iprot)
-          table.insert(self.success, _elem254)
+        local _etype261, _size258 = iprot:readListBegin()
+        for _i=1,_size258 do
+          local _elem262 = CastInfo:new{}
+          _elem262:read(iprot)
+          table.insert(self.success, _elem262)
         end
         iprot:readListEnd()
       else
@@ -289,8 +289,8 @@ function ReadCastInfo_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRUCT, #self.success)
-    for _,iter255 in ipairs(self.success) do
-      iter255:write(oprot)
+    for _,iter263 in ipairs(self.success) do
+      iter263:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -308,16 +308,16 @@ local CastInfoServiceClient = __TObject.new(__TClient, {
   __type = 'CastInfoServiceClient'
 })
 
-function CastInfoServiceClient:WriteCastInfo(req_id, cast_id, name, gender, intro, carrier)
-  self:send_WriteCastInfo(req_id, cast_id, name, gender, intro, carrier)
-  self:recv_WriteCastInfo(req_id, cast_id, name, gender, intro, carrier)
+function CastInfoServiceClient:WriteCastInfo(req_id, cast_info_id, name, gender, intro, carrier)
+  self:send_WriteCastInfo(req_id, cast_info_id, name, gender, intro, carrier)
+  self:recv_WriteCastInfo(req_id, cast_info_id, name, gender, intro, carrier)
 end
 
-function CastInfoServiceClient:send_WriteCastInfo(req_id, cast_id, name, gender, intro, carrier)
+function CastInfoServiceClient:send_WriteCastInfo(req_id, cast_info_id, name, gender, intro, carrier)
   self.oprot:writeMessageBegin('WriteCastInfo', TMessageType.CALL, self._seqid)
   local args = WriteCastInfo_args:new{}
   args.req_id = req_id
-  args.cast_id = cast_id
+  args.cast_info_id = cast_info_id
   args.name = name
   args.gender = gender
   args.intro = intro
@@ -327,7 +327,7 @@ function CastInfoServiceClient:send_WriteCastInfo(req_id, cast_id, name, gender,
   self.oprot.trans:flush()
 end
 
-function CastInfoServiceClient:recv_WriteCastInfo(req_id, cast_id, name, gender, intro, carrier)
+function CastInfoServiceClient:recv_WriteCastInfo(req_id, cast_info_id, name, gender, intro, carrier)
   local fname, mtype, rseqid = self.iprot:readMessageBegin()
   if mtype == TMessageType.EXCEPTION then
     local x = TApplicationException:new{}
@@ -338,9 +338,6 @@ function CastInfoServiceClient:recv_WriteCastInfo(req_id, cast_id, name, gender,
   local result = WriteCastInfo_result:new{}
   result:read(self.iprot)
   self.iprot:readMessageEnd()
-  if result.se then
-    error(result.se)
-  end
 end
 
 function CastInfoServiceClient:ReadCastInfo(req_id, cast_ids, carrier)
@@ -411,7 +408,7 @@ function CastInfoServiceProcessor:process_WriteCastInfo(seqid, iprot, oprot, ser
   args:read(iprot)
   iprot:readMessageEnd()
   local result = WriteCastInfo_result:new{}
-  local status, res = pcall(self.handler.WriteCastInfo, self.handler, args.req_id, args.cast_id, args.name, args.gender, args.intro, args.carrier)
+  local status, res = pcall(self.handler.WriteCastInfo, self.handler, args.req_id, args.cast_info_id, args.name, args.gender, args.intro, args.carrier)
   if not status then
     reply_type = TMessageType.EXCEPTION
     result = TApplicationException:new{message = res}

@@ -246,11 +246,11 @@ class WritePlot_args(object):
             elif fid == 4:
                 if ftype == TType.MAP:
                     self.carrier = {}
-                    (_ktype292, _vtype293, _size291) = iprot.readMapBegin()
-                    for _i295 in range(_size291):
-                        _key296 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val297 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.carrier[_key296] = _val297
+                    (_ktype301, _vtype302, _size300) = iprot.readMapBegin()
+                    for _i304 in range(_size300):
+                        _key305 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val306 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.carrier[_key305] = _val306
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
@@ -279,9 +279,9 @@ class WritePlot_args(object):
         if self.carrier is not None:
             oprot.writeFieldBegin('carrier', TType.MAP, 4)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.carrier))
-            for kiter298, viter299 in self.carrier.items():
-                oprot.writeString(kiter298.encode('utf-8') if sys.version_info[0] == 2 else kiter298)
-                oprot.writeString(viter299.encode('utf-8') if sys.version_info[0] == 2 else viter299)
+            for kiter307, viter308 in self.carrier.items():
+                oprot.writeString(kiter307.encode('utf-8') if sys.version_info[0] == 2 else kiter307)
+                oprot.writeString(viter308.encode('utf-8') if sys.version_info[0] == 2 else viter308)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -410,11 +410,11 @@ class ReadPlot_args(object):
             elif fid == 3:
                 if ftype == TType.MAP:
                     self.carrier = {}
-                    (_ktype301, _vtype302, _size300) = iprot.readMapBegin()
-                    for _i304 in range(_size300):
-                        _key305 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val306 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.carrier[_key305] = _val306
+                    (_ktype310, _vtype311, _size309) = iprot.readMapBegin()
+                    for _i313 in range(_size309):
+                        _key314 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val315 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.carrier[_key314] = _val315
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
@@ -439,9 +439,9 @@ class ReadPlot_args(object):
         if self.carrier is not None:
             oprot.writeFieldBegin('carrier', TType.MAP, 3)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.carrier))
-            for kiter307, viter308 in self.carrier.items():
-                oprot.writeString(kiter307.encode('utf-8') if sys.version_info[0] == 2 else kiter307)
-                oprot.writeString(viter308.encode('utf-8') if sys.version_info[0] == 2 else viter308)
+            for kiter316, viter317 in self.carrier.items():
+                oprot.writeString(kiter316.encode('utf-8') if sys.version_info[0] == 2 else kiter316)
+                oprot.writeString(viter317.encode('utf-8') if sys.version_info[0] == 2 else viter317)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()

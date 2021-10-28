@@ -70,17 +70,17 @@ uint32_t MovieReviewService_UploadMovieReview_args::read(::apache::thrift::proto
         if (ftype == ::apache::thrift::protocol::T_MAP) {
           {
             this->carrier.clear();
-            uint32_t _size222;
-            ::apache::thrift::protocol::TType _ktype223;
-            ::apache::thrift::protocol::TType _vtype224;
-            xfer += iprot->readMapBegin(_ktype223, _vtype224, _size222);
-            uint32_t _i226;
-            for (_i226 = 0; _i226 < _size222; ++_i226)
+            uint32_t _size231;
+            ::apache::thrift::protocol::TType _ktype232;
+            ::apache::thrift::protocol::TType _vtype233;
+            xfer += iprot->readMapBegin(_ktype232, _vtype233, _size231);
+            uint32_t _i235;
+            for (_i235 = 0; _i235 < _size231; ++_i235)
             {
-              std::string _key227;
-              xfer += iprot->readString(_key227);
-              std::string& _val228 = this->carrier[_key227];
-              xfer += iprot->readString(_val228);
+              std::string _key236;
+              xfer += iprot->readString(_key236);
+              std::string& _val237 = this->carrier[_key236];
+              xfer += iprot->readString(_val237);
             }
             xfer += iprot->readMapEnd();
           }
@@ -125,11 +125,11 @@ uint32_t MovieReviewService_UploadMovieReview_args::write(::apache::thrift::prot
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 5);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->carrier.size()));
-    std::map<std::string, std::string> ::const_iterator _iter229;
-    for (_iter229 = this->carrier.begin(); _iter229 != this->carrier.end(); ++_iter229)
+    std::map<std::string, std::string> ::const_iterator _iter238;
+    for (_iter238 = this->carrier.begin(); _iter238 != this->carrier.end(); ++_iter238)
     {
-      xfer += oprot->writeString(_iter229->first);
-      xfer += oprot->writeString(_iter229->second);
+      xfer += oprot->writeString(_iter238->first);
+      xfer += oprot->writeString(_iter238->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -169,11 +169,11 @@ uint32_t MovieReviewService_UploadMovieReview_pargs::write(::apache::thrift::pro
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 5);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>((*(this->carrier)).size()));
-    std::map<std::string, std::string> ::const_iterator _iter230;
-    for (_iter230 = (*(this->carrier)).begin(); _iter230 != (*(this->carrier)).end(); ++_iter230)
+    std::map<std::string, std::string> ::const_iterator _iter239;
+    for (_iter239 = (*(this->carrier)).begin(); _iter239 != (*(this->carrier)).end(); ++_iter239)
     {
-      xfer += oprot->writeString(_iter230->first);
-      xfer += oprot->writeString(_iter230->second);
+      xfer += oprot->writeString(_iter239->first);
+      xfer += oprot->writeString(_iter239->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -354,17 +354,17 @@ uint32_t MovieReviewService_ReadMovieReviews_args::read(::apache::thrift::protoc
         if (ftype == ::apache::thrift::protocol::T_MAP) {
           {
             this->carrier.clear();
-            uint32_t _size231;
-            ::apache::thrift::protocol::TType _ktype232;
-            ::apache::thrift::protocol::TType _vtype233;
-            xfer += iprot->readMapBegin(_ktype232, _vtype233, _size231);
-            uint32_t _i235;
-            for (_i235 = 0; _i235 < _size231; ++_i235)
+            uint32_t _size240;
+            ::apache::thrift::protocol::TType _ktype241;
+            ::apache::thrift::protocol::TType _vtype242;
+            xfer += iprot->readMapBegin(_ktype241, _vtype242, _size240);
+            uint32_t _i244;
+            for (_i244 = 0; _i244 < _size240; ++_i244)
             {
-              std::string _key236;
-              xfer += iprot->readString(_key236);
-              std::string& _val237 = this->carrier[_key236];
-              xfer += iprot->readString(_val237);
+              std::string _key245;
+              xfer += iprot->readString(_key245);
+              std::string& _val246 = this->carrier[_key245];
+              xfer += iprot->readString(_val246);
             }
             xfer += iprot->readMapEnd();
           }
@@ -409,11 +409,11 @@ uint32_t MovieReviewService_ReadMovieReviews_args::write(::apache::thrift::proto
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 5);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->carrier.size()));
-    std::map<std::string, std::string> ::const_iterator _iter238;
-    for (_iter238 = this->carrier.begin(); _iter238 != this->carrier.end(); ++_iter238)
+    std::map<std::string, std::string> ::const_iterator _iter247;
+    for (_iter247 = this->carrier.begin(); _iter247 != this->carrier.end(); ++_iter247)
     {
-      xfer += oprot->writeString(_iter238->first);
-      xfer += oprot->writeString(_iter238->second);
+      xfer += oprot->writeString(_iter247->first);
+      xfer += oprot->writeString(_iter247->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -453,11 +453,11 @@ uint32_t MovieReviewService_ReadMovieReviews_pargs::write(::apache::thrift::prot
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 5);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>((*(this->carrier)).size()));
-    std::map<std::string, std::string> ::const_iterator _iter239;
-    for (_iter239 = (*(this->carrier)).begin(); _iter239 != (*(this->carrier)).end(); ++_iter239)
+    std::map<std::string, std::string> ::const_iterator _iter248;
+    for (_iter248 = (*(this->carrier)).begin(); _iter248 != (*(this->carrier)).end(); ++_iter248)
     {
-      xfer += oprot->writeString(_iter239->first);
-      xfer += oprot->writeString(_iter239->second);
+      xfer += oprot->writeString(_iter248->first);
+      xfer += oprot->writeString(_iter248->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -498,14 +498,14 @@ uint32_t MovieReviewService_ReadMovieReviews_result::read(::apache::thrift::prot
         if (ftype == ::apache::thrift::protocol::T_LIST) {
           {
             this->success.clear();
-            uint32_t _size240;
-            ::apache::thrift::protocol::TType _etype243;
-            xfer += iprot->readListBegin(_etype243, _size240);
-            this->success.resize(_size240);
-            uint32_t _i244;
-            for (_i244 = 0; _i244 < _size240; ++_i244)
+            uint32_t _size249;
+            ::apache::thrift::protocol::TType _etype252;
+            xfer += iprot->readListBegin(_etype252, _size249);
+            this->success.resize(_size249);
+            uint32_t _i253;
+            for (_i253 = 0; _i253 < _size249; ++_i253)
             {
-              xfer += this->success[_i244].read(iprot);
+              xfer += this->success[_i253].read(iprot);
             }
             xfer += iprot->readListEnd();
           }
@@ -544,10 +544,10 @@ uint32_t MovieReviewService_ReadMovieReviews_result::write(::apache::thrift::pro
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_LIST, 0);
     {
       xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRUCT, static_cast<uint32_t>(this->success.size()));
-      std::vector<Review> ::const_iterator _iter245;
-      for (_iter245 = this->success.begin(); _iter245 != this->success.end(); ++_iter245)
+      std::vector<Review> ::const_iterator _iter254;
+      for (_iter254 = this->success.begin(); _iter254 != this->success.end(); ++_iter254)
       {
-        xfer += (*_iter245).write(oprot);
+        xfer += (*_iter254).write(oprot);
       }
       xfer += oprot->writeListEnd();
     }
@@ -592,14 +592,14 @@ uint32_t MovieReviewService_ReadMovieReviews_presult::read(::apache::thrift::pro
         if (ftype == ::apache::thrift::protocol::T_LIST) {
           {
             (*(this->success)).clear();
-            uint32_t _size246;
-            ::apache::thrift::protocol::TType _etype249;
-            xfer += iprot->readListBegin(_etype249, _size246);
-            (*(this->success)).resize(_size246);
-            uint32_t _i250;
-            for (_i250 = 0; _i250 < _size246; ++_i250)
+            uint32_t _size255;
+            ::apache::thrift::protocol::TType _etype258;
+            xfer += iprot->readListBegin(_etype258, _size255);
+            (*(this->success)).resize(_size255);
+            uint32_t _i259;
+            for (_i259 = 0; _i259 < _size255; ++_i259)
             {
-              xfer += (*(this->success))[_i250].read(iprot);
+              xfer += (*(this->success))[_i259].read(iprot);
             }
             xfer += iprot->readListEnd();
           }

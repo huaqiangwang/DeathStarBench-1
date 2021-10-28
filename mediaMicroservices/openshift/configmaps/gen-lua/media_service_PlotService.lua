@@ -54,11 +54,11 @@ function WritePlot_args:read(iprot)
     elseif fid == 4 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype257, _vtype258, _size256 = iprot:readMapBegin()
-        for _i=1,_size256 do
-          local _key260 = iprot:readString()
-          local _val261 = iprot:readString()
-          self.carrier[_key260] = _val261
+        local _ktype265, _vtype266, _size264 = iprot:readMapBegin() 
+        for _i=1,_size264 do
+          local _key268 = iprot:readString()
+          local _val269 = iprot:readString()
+          self.carrier[_key268] = _val269
         end
         iprot:readMapEnd()
       else
@@ -92,9 +92,9 @@ function WritePlot_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 4)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter262,viter263 in pairs(self.carrier) do
-      oprot:writeString(kiter262)
-      oprot:writeString(viter263)
+    for kiter270,viter271 in pairs(self.carrier) do
+      oprot:writeString(kiter270)
+      oprot:writeString(viter271)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -166,11 +166,11 @@ function ReadPlot_args:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype265, _vtype266, _size264 = iprot:readMapBegin()
-        for _i=1,_size264 do
-          local _key268 = iprot:readString()
-          local _val269 = iprot:readString()
-          self.carrier[_key268] = _val269
+        local _ktype273, _vtype274, _size272 = iprot:readMapBegin() 
+        for _i=1,_size272 do
+          local _key276 = iprot:readString()
+          local _val277 = iprot:readString()
+          self.carrier[_key276] = _val277
         end
         iprot:readMapEnd()
       else
@@ -199,9 +199,9 @@ function ReadPlot_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter270,viter271 in pairs(self.carrier) do
-      oprot:writeString(kiter270)
-      oprot:writeString(viter271)
+    for kiter278,viter279 in pairs(self.carrier) do
+      oprot:writeString(kiter278)
+      oprot:writeString(viter279)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -290,9 +290,6 @@ function PlotServiceClient:recv_WritePlot(req_id, plot_id, plot, carrier)
   local result = WritePlot_result:new{}
   result:read(self.iprot)
   self.iprot:readMessageEnd()
-  if result.se then
-    error(result.se)
-  end
 end
 
 function PlotServiceClient:ReadPlot(req_id, plot_id, carrier)

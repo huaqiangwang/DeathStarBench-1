@@ -360,11 +360,11 @@ class WriteMovieInfo_args(object):
             elif fid == 4:
                 if ftype == TType.LIST:
                     self.casts = []
-                    (_etype312, _size309) = iprot.readListBegin()
-                    for _i313 in range(_size309):
-                        _elem314 = Cast()
-                        _elem314.read(iprot)
-                        self.casts.append(_elem314)
+                    (_etype321, _size318) = iprot.readListBegin()
+                    for _i322 in range(_size318):
+                        _elem323 = Cast()
+                        _elem323.read(iprot)
+                        self.casts.append(_elem323)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
@@ -376,36 +376,36 @@ class WriteMovieInfo_args(object):
             elif fid == 6:
                 if ftype == TType.LIST:
                     self.thumbnail_ids = []
-                    (_etype318, _size315) = iprot.readListBegin()
-                    for _i319 in range(_size315):
-                        _elem320 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.thumbnail_ids.append(_elem320)
+                    (_etype327, _size324) = iprot.readListBegin()
+                    for _i328 in range(_size324):
+                        _elem329 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.thumbnail_ids.append(_elem329)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 7:
                 if ftype == TType.LIST:
                     self.photo_ids = []
-                    (_etype324, _size321) = iprot.readListBegin()
-                    for _i325 in range(_size321):
-                        _elem326 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.photo_ids.append(_elem326)
+                    (_etype333, _size330) = iprot.readListBegin()
+                    for _i334 in range(_size330):
+                        _elem335 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.photo_ids.append(_elem335)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 8:
                 if ftype == TType.LIST:
                     self.video_ids = []
-                    (_etype330, _size327) = iprot.readListBegin()
-                    for _i331 in range(_size327):
-                        _elem332 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.video_ids.append(_elem332)
+                    (_etype339, _size336) = iprot.readListBegin()
+                    for _i340 in range(_size336):
+                        _elem341 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.video_ids.append(_elem341)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 9:
-                if ftype == TType.DOUBLE:
-                    self.avg_rating = iprot.readDouble()
+                if ftype == TType.STRING:
+                    self.avg_rating = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
             elif fid == 10:
@@ -416,11 +416,11 @@ class WriteMovieInfo_args(object):
             elif fid == 11:
                 if ftype == TType.MAP:
                     self.carrier = {}
-                    (_ktype334, _vtype335, _size333) = iprot.readMapBegin()
-                    for _i337 in range(_size333):
-                        _key338 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val339 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.carrier[_key338] = _val339
+                    (_ktype343, _vtype344, _size342) = iprot.readMapBegin()
+                    for _i346 in range(_size342):
+                        _key347 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val348 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.carrier[_key347] = _val348
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
@@ -449,8 +449,8 @@ class WriteMovieInfo_args(object):
         if self.casts is not None:
             oprot.writeFieldBegin('casts', TType.LIST, 4)
             oprot.writeListBegin(TType.STRUCT, len(self.casts))
-            for iter340 in self.casts:
-                iter340.write(oprot)
+            for iter349 in self.casts:
+                iter349.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.plot_id is not None:
@@ -460,27 +460,27 @@ class WriteMovieInfo_args(object):
         if self.thumbnail_ids is not None:
             oprot.writeFieldBegin('thumbnail_ids', TType.LIST, 6)
             oprot.writeListBegin(TType.STRING, len(self.thumbnail_ids))
-            for iter341 in self.thumbnail_ids:
-                oprot.writeString(iter341.encode('utf-8') if sys.version_info[0] == 2 else iter341)
+            for iter350 in self.thumbnail_ids:
+                oprot.writeString(iter350.encode('utf-8') if sys.version_info[0] == 2 else iter350)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.photo_ids is not None:
             oprot.writeFieldBegin('photo_ids', TType.LIST, 7)
             oprot.writeListBegin(TType.STRING, len(self.photo_ids))
-            for iter342 in self.photo_ids:
-                oprot.writeString(iter342.encode('utf-8') if sys.version_info[0] == 2 else iter342)
+            for iter351 in self.photo_ids:
+                oprot.writeString(iter351.encode('utf-8') if sys.version_info[0] == 2 else iter351)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.video_ids is not None:
             oprot.writeFieldBegin('video_ids', TType.LIST, 8)
             oprot.writeListBegin(TType.STRING, len(self.video_ids))
-            for iter343 in self.video_ids:
-                oprot.writeString(iter343.encode('utf-8') if sys.version_info[0] == 2 else iter343)
+            for iter352 in self.video_ids:
+                oprot.writeString(iter352.encode('utf-8') if sys.version_info[0] == 2 else iter352)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.avg_rating is not None:
-            oprot.writeFieldBegin('avg_rating', TType.DOUBLE, 9)
-            oprot.writeDouble(self.avg_rating)
+            oprot.writeFieldBegin('avg_rating', TType.STRING, 9)
+            oprot.writeString(self.avg_rating.encode('utf-8') if sys.version_info[0] == 2 else self.avg_rating)
             oprot.writeFieldEnd()
         if self.num_rating is not None:
             oprot.writeFieldBegin('num_rating', TType.I32, 10)
@@ -489,9 +489,9 @@ class WriteMovieInfo_args(object):
         if self.carrier is not None:
             oprot.writeFieldBegin('carrier', TType.MAP, 11)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.carrier))
-            for kiter344, viter345 in self.carrier.items():
-                oprot.writeString(kiter344.encode('utf-8') if sys.version_info[0] == 2 else kiter344)
-                oprot.writeString(viter345.encode('utf-8') if sys.version_info[0] == 2 else viter345)
+            for kiter353, viter354 in self.carrier.items():
+                oprot.writeString(kiter353.encode('utf-8') if sys.version_info[0] == 2 else kiter353)
+                oprot.writeString(viter354.encode('utf-8') if sys.version_info[0] == 2 else viter354)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -521,7 +521,7 @@ WriteMovieInfo_args.thrift_spec = (
     (6, TType.LIST, 'thumbnail_ids', (TType.STRING, 'UTF8', False), None, ),  # 6
     (7, TType.LIST, 'photo_ids', (TType.STRING, 'UTF8', False), None, ),  # 7
     (8, TType.LIST, 'video_ids', (TType.STRING, 'UTF8', False), None, ),  # 8
-    (9, TType.DOUBLE, 'avg_rating', None, None, ),  # 9
+    (9, TType.STRING, 'avg_rating', 'UTF8', None, ),  # 9
     (10, TType.I32, 'num_rating', None, None, ),  # 10
     (11, TType.MAP, 'carrier', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 11
 )
@@ -627,11 +627,11 @@ class ReadMovieInfo_args(object):
             elif fid == 3:
                 if ftype == TType.MAP:
                     self.carrier = {}
-                    (_ktype347, _vtype348, _size346) = iprot.readMapBegin()
-                    for _i350 in range(_size346):
-                        _key351 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val352 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.carrier[_key351] = _val352
+                    (_ktype356, _vtype357, _size355) = iprot.readMapBegin()
+                    for _i359 in range(_size355):
+                        _key360 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val361 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.carrier[_key360] = _val361
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
@@ -656,9 +656,9 @@ class ReadMovieInfo_args(object):
         if self.carrier is not None:
             oprot.writeFieldBegin('carrier', TType.MAP, 3)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.carrier))
-            for kiter353, viter354 in self.carrier.items():
-                oprot.writeString(kiter353.encode('utf-8') if sys.version_info[0] == 2 else kiter353)
-                oprot.writeString(viter354.encode('utf-8') if sys.version_info[0] == 2 else viter354)
+            for kiter362, viter363 in self.carrier.items():
+                oprot.writeString(kiter362.encode('utf-8') if sys.version_info[0] == 2 else kiter362)
+                oprot.writeString(viter363.encode('utf-8') if sys.version_info[0] == 2 else viter363)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -812,11 +812,11 @@ class UpdateRating_args(object):
             elif fid == 5:
                 if ftype == TType.MAP:
                     self.carrier = {}
-                    (_ktype356, _vtype357, _size355) = iprot.readMapBegin()
-                    for _i359 in range(_size355):
-                        _key360 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val361 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.carrier[_key360] = _val361
+                    (_ktype365, _vtype366, _size364) = iprot.readMapBegin()
+                    for _i368 in range(_size364):
+                        _key369 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val370 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.carrier[_key369] = _val370
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
@@ -849,9 +849,9 @@ class UpdateRating_args(object):
         if self.carrier is not None:
             oprot.writeFieldBegin('carrier', TType.MAP, 5)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.carrier))
-            for kiter362, viter363 in self.carrier.items():
-                oprot.writeString(kiter362.encode('utf-8') if sys.version_info[0] == 2 else kiter362)
-                oprot.writeString(viter363.encode('utf-8') if sys.version_info[0] == 2 else viter363)
+            for kiter371, viter372 in self.carrier.items():
+                oprot.writeString(kiter371.encode('utf-8') if sys.version_info[0] == 2 else kiter371)
+                oprot.writeString(viter372.encode('utf-8') if sys.version_info[0] == 2 else viter372)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()

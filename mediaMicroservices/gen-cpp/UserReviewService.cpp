@@ -70,17 +70,17 @@ uint32_t UserReviewService_UploadUserReview_args::read(::apache::thrift::protoco
         if (ftype == ::apache::thrift::protocol::T_MAP) {
           {
             this->carrier.clear();
-            uint32_t _size251;
-            ::apache::thrift::protocol::TType _ktype252;
-            ::apache::thrift::protocol::TType _vtype253;
-            xfer += iprot->readMapBegin(_ktype252, _vtype253, _size251);
-            uint32_t _i255;
-            for (_i255 = 0; _i255 < _size251; ++_i255)
+            uint32_t _size260;
+            ::apache::thrift::protocol::TType _ktype261;
+            ::apache::thrift::protocol::TType _vtype262;
+            xfer += iprot->readMapBegin(_ktype261, _vtype262, _size260);
+            uint32_t _i264;
+            for (_i264 = 0; _i264 < _size260; ++_i264)
             {
-              std::string _key256;
-              xfer += iprot->readString(_key256);
-              std::string& _val257 = this->carrier[_key256];
-              xfer += iprot->readString(_val257);
+              std::string _key265;
+              xfer += iprot->readString(_key265);
+              std::string& _val266 = this->carrier[_key265];
+              xfer += iprot->readString(_val266);
             }
             xfer += iprot->readMapEnd();
           }
@@ -125,11 +125,11 @@ uint32_t UserReviewService_UploadUserReview_args::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 5);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->carrier.size()));
-    std::map<std::string, std::string> ::const_iterator _iter258;
-    for (_iter258 = this->carrier.begin(); _iter258 != this->carrier.end(); ++_iter258)
+    std::map<std::string, std::string> ::const_iterator _iter267;
+    for (_iter267 = this->carrier.begin(); _iter267 != this->carrier.end(); ++_iter267)
     {
-      xfer += oprot->writeString(_iter258->first);
-      xfer += oprot->writeString(_iter258->second);
+      xfer += oprot->writeString(_iter267->first);
+      xfer += oprot->writeString(_iter267->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -169,11 +169,11 @@ uint32_t UserReviewService_UploadUserReview_pargs::write(::apache::thrift::proto
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 5);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>((*(this->carrier)).size()));
-    std::map<std::string, std::string> ::const_iterator _iter259;
-    for (_iter259 = (*(this->carrier)).begin(); _iter259 != (*(this->carrier)).end(); ++_iter259)
+    std::map<std::string, std::string> ::const_iterator _iter268;
+    for (_iter268 = (*(this->carrier)).begin(); _iter268 != (*(this->carrier)).end(); ++_iter268)
     {
-      xfer += oprot->writeString(_iter259->first);
-      xfer += oprot->writeString(_iter259->second);
+      xfer += oprot->writeString(_iter268->first);
+      xfer += oprot->writeString(_iter268->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -354,17 +354,17 @@ uint32_t UserReviewService_ReadUserReviews_args::read(::apache::thrift::protocol
         if (ftype == ::apache::thrift::protocol::T_MAP) {
           {
             this->carrier.clear();
-            uint32_t _size260;
-            ::apache::thrift::protocol::TType _ktype261;
-            ::apache::thrift::protocol::TType _vtype262;
-            xfer += iprot->readMapBegin(_ktype261, _vtype262, _size260);
-            uint32_t _i264;
-            for (_i264 = 0; _i264 < _size260; ++_i264)
+            uint32_t _size269;
+            ::apache::thrift::protocol::TType _ktype270;
+            ::apache::thrift::protocol::TType _vtype271;
+            xfer += iprot->readMapBegin(_ktype270, _vtype271, _size269);
+            uint32_t _i273;
+            for (_i273 = 0; _i273 < _size269; ++_i273)
             {
-              std::string _key265;
-              xfer += iprot->readString(_key265);
-              std::string& _val266 = this->carrier[_key265];
-              xfer += iprot->readString(_val266);
+              std::string _key274;
+              xfer += iprot->readString(_key274);
+              std::string& _val275 = this->carrier[_key274];
+              xfer += iprot->readString(_val275);
             }
             xfer += iprot->readMapEnd();
           }
@@ -409,11 +409,11 @@ uint32_t UserReviewService_ReadUserReviews_args::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 5);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->carrier.size()));
-    std::map<std::string, std::string> ::const_iterator _iter267;
-    for (_iter267 = this->carrier.begin(); _iter267 != this->carrier.end(); ++_iter267)
+    std::map<std::string, std::string> ::const_iterator _iter276;
+    for (_iter276 = this->carrier.begin(); _iter276 != this->carrier.end(); ++_iter276)
     {
-      xfer += oprot->writeString(_iter267->first);
-      xfer += oprot->writeString(_iter267->second);
+      xfer += oprot->writeString(_iter276->first);
+      xfer += oprot->writeString(_iter276->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -453,11 +453,11 @@ uint32_t UserReviewService_ReadUserReviews_pargs::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 5);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>((*(this->carrier)).size()));
-    std::map<std::string, std::string> ::const_iterator _iter268;
-    for (_iter268 = (*(this->carrier)).begin(); _iter268 != (*(this->carrier)).end(); ++_iter268)
+    std::map<std::string, std::string> ::const_iterator _iter277;
+    for (_iter277 = (*(this->carrier)).begin(); _iter277 != (*(this->carrier)).end(); ++_iter277)
     {
-      xfer += oprot->writeString(_iter268->first);
-      xfer += oprot->writeString(_iter268->second);
+      xfer += oprot->writeString(_iter277->first);
+      xfer += oprot->writeString(_iter277->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -498,14 +498,14 @@ uint32_t UserReviewService_ReadUserReviews_result::read(::apache::thrift::protoc
         if (ftype == ::apache::thrift::protocol::T_LIST) {
           {
             this->success.clear();
-            uint32_t _size269;
-            ::apache::thrift::protocol::TType _etype272;
-            xfer += iprot->readListBegin(_etype272, _size269);
-            this->success.resize(_size269);
-            uint32_t _i273;
-            for (_i273 = 0; _i273 < _size269; ++_i273)
+            uint32_t _size278;
+            ::apache::thrift::protocol::TType _etype281;
+            xfer += iprot->readListBegin(_etype281, _size278);
+            this->success.resize(_size278);
+            uint32_t _i282;
+            for (_i282 = 0; _i282 < _size278; ++_i282)
             {
-              xfer += this->success[_i273].read(iprot);
+              xfer += this->success[_i282].read(iprot);
             }
             xfer += iprot->readListEnd();
           }
@@ -544,10 +544,10 @@ uint32_t UserReviewService_ReadUserReviews_result::write(::apache::thrift::proto
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_LIST, 0);
     {
       xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRUCT, static_cast<uint32_t>(this->success.size()));
-      std::vector<Review> ::const_iterator _iter274;
-      for (_iter274 = this->success.begin(); _iter274 != this->success.end(); ++_iter274)
+      std::vector<Review> ::const_iterator _iter283;
+      for (_iter283 = this->success.begin(); _iter283 != this->success.end(); ++_iter283)
       {
-        xfer += (*_iter274).write(oprot);
+        xfer += (*_iter283).write(oprot);
       }
       xfer += oprot->writeListEnd();
     }
@@ -592,14 +592,14 @@ uint32_t UserReviewService_ReadUserReviews_presult::read(::apache::thrift::proto
         if (ftype == ::apache::thrift::protocol::T_LIST) {
           {
             (*(this->success)).clear();
-            uint32_t _size275;
-            ::apache::thrift::protocol::TType _etype278;
-            xfer += iprot->readListBegin(_etype278, _size275);
-            (*(this->success)).resize(_size275);
-            uint32_t _i279;
-            for (_i279 = 0; _i279 < _size275; ++_i279)
+            uint32_t _size284;
+            ::apache::thrift::protocol::TType _etype287;
+            xfer += iprot->readListBegin(_etype287, _size284);
+            (*(this->success)).resize(_size284);
+            uint32_t _i288;
+            for (_i288 = 0; _i288 < _size284; ++_i288)
             {
-              xfer += (*(this->success))[_i279].read(iprot);
+              xfer += (*(this->success))[_i288].read(iprot);
             }
             xfer += iprot->readListEnd();
           }

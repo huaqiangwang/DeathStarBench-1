@@ -109,6 +109,11 @@ service RatingService {
 }
 
 service UserService {
+  string GetUser (
+      1: string username,
+      2: map<string, string> carrier
+  ) throws (1: ServiceException se)
+
   void RegisterUser (
       1: i64 req_id,
       2: string first_name,

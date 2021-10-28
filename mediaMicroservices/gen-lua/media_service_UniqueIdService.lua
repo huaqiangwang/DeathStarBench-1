@@ -145,9 +145,6 @@ function UniqueIdServiceClient:recv_UploadUniqueId(req_id, carrier)
   local result = UploadUniqueId_result:new{}
   result:read(self.iprot)
   self.iprot:readMessageEnd()
-  if result.se then
-    error(result.se)
-  end
 end
 local UniqueIdServiceIface = __TObject:new{
   __type = 'UniqueIdServiceIface'

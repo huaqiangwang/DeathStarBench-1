@@ -48,7 +48,7 @@ local function ttable_size(t)
   return count
 end
 
-local version = 1.0
+local version = '0.12.0'
 
 local TType = {
   STOP   = 0,
@@ -149,7 +149,6 @@ function TException:__tostring()
   end
 end
 
--- Thrift[5]
 local TApplicationException = TException:new{
   UNKNOWN                 = 0,
   UNKNOWN_METHOD          = 1,

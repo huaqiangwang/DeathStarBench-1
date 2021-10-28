@@ -54,17 +54,17 @@ uint32_t ReviewStorageService_StoreReview_args::read(::apache::thrift::protocol:
         if (ftype == ::apache::thrift::protocol::T_MAP) {
           {
             this->carrier.clear();
-            uint32_t _size186;
-            ::apache::thrift::protocol::TType _ktype187;
-            ::apache::thrift::protocol::TType _vtype188;
-            xfer += iprot->readMapBegin(_ktype187, _vtype188, _size186);
-            uint32_t _i190;
-            for (_i190 = 0; _i190 < _size186; ++_i190)
+            uint32_t _size195;
+            ::apache::thrift::protocol::TType _ktype196;
+            ::apache::thrift::protocol::TType _vtype197;
+            xfer += iprot->readMapBegin(_ktype196, _vtype197, _size195);
+            uint32_t _i199;
+            for (_i199 = 0; _i199 < _size195; ++_i199)
             {
-              std::string _key191;
-              xfer += iprot->readString(_key191);
-              std::string& _val192 = this->carrier[_key191];
-              xfer += iprot->readString(_val192);
+              std::string _key200;
+              xfer += iprot->readString(_key200);
+              std::string& _val201 = this->carrier[_key200];
+              xfer += iprot->readString(_val201);
             }
             xfer += iprot->readMapEnd();
           }
@@ -101,11 +101,11 @@ uint32_t ReviewStorageService_StoreReview_args::write(::apache::thrift::protocol
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 3);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->carrier.size()));
-    std::map<std::string, std::string> ::const_iterator _iter193;
-    for (_iter193 = this->carrier.begin(); _iter193 != this->carrier.end(); ++_iter193)
+    std::map<std::string, std::string> ::const_iterator _iter202;
+    for (_iter202 = this->carrier.begin(); _iter202 != this->carrier.end(); ++_iter202)
     {
-      xfer += oprot->writeString(_iter193->first);
-      xfer += oprot->writeString(_iter193->second);
+      xfer += oprot->writeString(_iter202->first);
+      xfer += oprot->writeString(_iter202->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -137,11 +137,11 @@ uint32_t ReviewStorageService_StoreReview_pargs::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 3);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>((*(this->carrier)).size()));
-    std::map<std::string, std::string> ::const_iterator _iter194;
-    for (_iter194 = (*(this->carrier)).begin(); _iter194 != (*(this->carrier)).end(); ++_iter194)
+    std::map<std::string, std::string> ::const_iterator _iter203;
+    for (_iter203 = (*(this->carrier)).begin(); _iter203 != (*(this->carrier)).end(); ++_iter203)
     {
-      xfer += oprot->writeString(_iter194->first);
-      xfer += oprot->writeString(_iter194->second);
+      xfer += oprot->writeString(_iter203->first);
+      xfer += oprot->writeString(_iter203->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -298,14 +298,14 @@ uint32_t ReviewStorageService_ReadReviews_args::read(::apache::thrift::protocol:
         if (ftype == ::apache::thrift::protocol::T_LIST) {
           {
             this->review_ids.clear();
-            uint32_t _size195;
-            ::apache::thrift::protocol::TType _etype198;
-            xfer += iprot->readListBegin(_etype198, _size195);
-            this->review_ids.resize(_size195);
-            uint32_t _i199;
-            for (_i199 = 0; _i199 < _size195; ++_i199)
+            uint32_t _size204;
+            ::apache::thrift::protocol::TType _etype207;
+            xfer += iprot->readListBegin(_etype207, _size204);
+            this->review_ids.resize(_size204);
+            uint32_t _i208;
+            for (_i208 = 0; _i208 < _size204; ++_i208)
             {
-              xfer += iprot->readI64(this->review_ids[_i199]);
+              xfer += iprot->readI64(this->review_ids[_i208]);
             }
             xfer += iprot->readListEnd();
           }
@@ -318,17 +318,17 @@ uint32_t ReviewStorageService_ReadReviews_args::read(::apache::thrift::protocol:
         if (ftype == ::apache::thrift::protocol::T_MAP) {
           {
             this->carrier.clear();
-            uint32_t _size200;
-            ::apache::thrift::protocol::TType _ktype201;
-            ::apache::thrift::protocol::TType _vtype202;
-            xfer += iprot->readMapBegin(_ktype201, _vtype202, _size200);
-            uint32_t _i204;
-            for (_i204 = 0; _i204 < _size200; ++_i204)
+            uint32_t _size209;
+            ::apache::thrift::protocol::TType _ktype210;
+            ::apache::thrift::protocol::TType _vtype211;
+            xfer += iprot->readMapBegin(_ktype210, _vtype211, _size209);
+            uint32_t _i213;
+            for (_i213 = 0; _i213 < _size209; ++_i213)
             {
-              std::string _key205;
-              xfer += iprot->readString(_key205);
-              std::string& _val206 = this->carrier[_key205];
-              xfer += iprot->readString(_val206);
+              std::string _key214;
+              xfer += iprot->readString(_key214);
+              std::string& _val215 = this->carrier[_key214];
+              xfer += iprot->readString(_val215);
             }
             xfer += iprot->readMapEnd();
           }
@@ -361,10 +361,10 @@ uint32_t ReviewStorageService_ReadReviews_args::write(::apache::thrift::protocol
   xfer += oprot->writeFieldBegin("review_ids", ::apache::thrift::protocol::T_LIST, 2);
   {
     xfer += oprot->writeListBegin(::apache::thrift::protocol::T_I64, static_cast<uint32_t>(this->review_ids.size()));
-    std::vector<int64_t> ::const_iterator _iter207;
-    for (_iter207 = this->review_ids.begin(); _iter207 != this->review_ids.end(); ++_iter207)
+    std::vector<int64_t> ::const_iterator _iter216;
+    for (_iter216 = this->review_ids.begin(); _iter216 != this->review_ids.end(); ++_iter216)
     {
-      xfer += oprot->writeI64((*_iter207));
+      xfer += oprot->writeI64((*_iter216));
     }
     xfer += oprot->writeListEnd();
   }
@@ -373,11 +373,11 @@ uint32_t ReviewStorageService_ReadReviews_args::write(::apache::thrift::protocol
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 3);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->carrier.size()));
-    std::map<std::string, std::string> ::const_iterator _iter208;
-    for (_iter208 = this->carrier.begin(); _iter208 != this->carrier.end(); ++_iter208)
+    std::map<std::string, std::string> ::const_iterator _iter217;
+    for (_iter217 = this->carrier.begin(); _iter217 != this->carrier.end(); ++_iter217)
     {
-      xfer += oprot->writeString(_iter208->first);
-      xfer += oprot->writeString(_iter208->second);
+      xfer += oprot->writeString(_iter217->first);
+      xfer += oprot->writeString(_iter217->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -405,10 +405,10 @@ uint32_t ReviewStorageService_ReadReviews_pargs::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("review_ids", ::apache::thrift::protocol::T_LIST, 2);
   {
     xfer += oprot->writeListBegin(::apache::thrift::protocol::T_I64, static_cast<uint32_t>((*(this->review_ids)).size()));
-    std::vector<int64_t> ::const_iterator _iter209;
-    for (_iter209 = (*(this->review_ids)).begin(); _iter209 != (*(this->review_ids)).end(); ++_iter209)
+    std::vector<int64_t> ::const_iterator _iter218;
+    for (_iter218 = (*(this->review_ids)).begin(); _iter218 != (*(this->review_ids)).end(); ++_iter218)
     {
-      xfer += oprot->writeI64((*_iter209));
+      xfer += oprot->writeI64((*_iter218));
     }
     xfer += oprot->writeListEnd();
   }
@@ -417,11 +417,11 @@ uint32_t ReviewStorageService_ReadReviews_pargs::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("carrier", ::apache::thrift::protocol::T_MAP, 3);
   {
     xfer += oprot->writeMapBegin(::apache::thrift::protocol::T_STRING, ::apache::thrift::protocol::T_STRING, static_cast<uint32_t>((*(this->carrier)).size()));
-    std::map<std::string, std::string> ::const_iterator _iter210;
-    for (_iter210 = (*(this->carrier)).begin(); _iter210 != (*(this->carrier)).end(); ++_iter210)
+    std::map<std::string, std::string> ::const_iterator _iter219;
+    for (_iter219 = (*(this->carrier)).begin(); _iter219 != (*(this->carrier)).end(); ++_iter219)
     {
-      xfer += oprot->writeString(_iter210->first);
-      xfer += oprot->writeString(_iter210->second);
+      xfer += oprot->writeString(_iter219->first);
+      xfer += oprot->writeString(_iter219->second);
     }
     xfer += oprot->writeMapEnd();
   }
@@ -462,14 +462,14 @@ uint32_t ReviewStorageService_ReadReviews_result::read(::apache::thrift::protoco
         if (ftype == ::apache::thrift::protocol::T_LIST) {
           {
             this->success.clear();
-            uint32_t _size211;
-            ::apache::thrift::protocol::TType _etype214;
-            xfer += iprot->readListBegin(_etype214, _size211);
-            this->success.resize(_size211);
-            uint32_t _i215;
-            for (_i215 = 0; _i215 < _size211; ++_i215)
+            uint32_t _size220;
+            ::apache::thrift::protocol::TType _etype223;
+            xfer += iprot->readListBegin(_etype223, _size220);
+            this->success.resize(_size220);
+            uint32_t _i224;
+            for (_i224 = 0; _i224 < _size220; ++_i224)
             {
-              xfer += this->success[_i215].read(iprot);
+              xfer += this->success[_i224].read(iprot);
             }
             xfer += iprot->readListEnd();
           }
@@ -508,10 +508,10 @@ uint32_t ReviewStorageService_ReadReviews_result::write(::apache::thrift::protoc
     xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_LIST, 0);
     {
       xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRUCT, static_cast<uint32_t>(this->success.size()));
-      std::vector<Review> ::const_iterator _iter216;
-      for (_iter216 = this->success.begin(); _iter216 != this->success.end(); ++_iter216)
+      std::vector<Review> ::const_iterator _iter225;
+      for (_iter225 = this->success.begin(); _iter225 != this->success.end(); ++_iter225)
       {
-        xfer += (*_iter216).write(oprot);
+        xfer += (*_iter225).write(oprot);
       }
       xfer += oprot->writeListEnd();
     }
@@ -556,14 +556,14 @@ uint32_t ReviewStorageService_ReadReviews_presult::read(::apache::thrift::protoc
         if (ftype == ::apache::thrift::protocol::T_LIST) {
           {
             (*(this->success)).clear();
-            uint32_t _size217;
-            ::apache::thrift::protocol::TType _etype220;
-            xfer += iprot->readListBegin(_etype220, _size217);
-            (*(this->success)).resize(_size217);
-            uint32_t _i221;
-            for (_i221 = 0; _i221 < _size217; ++_i221)
+            uint32_t _size226;
+            ::apache::thrift::protocol::TType _etype229;
+            xfer += iprot->readListBegin(_etype229, _size226);
+            (*(this->success)).resize(_size226);
+            uint32_t _i230;
+            for (_i230 = 0; _i230 < _size226; ++_i230)
             {
-              xfer += (*(this->success))[_i221].read(iprot);
+              xfer += (*(this->success))[_i230].read(iprot);
             }
             xfer += iprot->readListEnd();
           }

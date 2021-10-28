@@ -289,9 +289,6 @@ function MovieIdServiceClient:recv_UploadMovieId(req_id, title, rating, carrier)
   local result = UploadMovieId_result:new{}
   result:read(self.iprot)
   self.iprot:readMessageEnd()
-  if result.se then
-    error(result.se)
-  end
 end
 
 function MovieIdServiceClient:RegisterMovieId(req_id, title, movie_id, carrier)
@@ -322,10 +319,8 @@ function MovieIdServiceClient:recv_RegisterMovieId(req_id, title, movie_id, carr
   local result = RegisterMovieId_result:new{}
   result:read(self.iprot)
   self.iprot:readMessageEnd()
-  if result.se then
-    error(result.se)
-  end
 end
+
 local MovieIdServiceIface = __TObject:new{
   __type = 'MovieIdServiceIface'
 }

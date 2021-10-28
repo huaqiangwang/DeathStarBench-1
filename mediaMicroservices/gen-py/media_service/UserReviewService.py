@@ -262,11 +262,11 @@ class UploadUserReview_args(object):
             elif fid == 5:
                 if ftype == TType.MAP:
                     self.carrier = {}
-                    (_ktype235, _vtype236, _size234) = iprot.readMapBegin()
-                    for _i238 in range(_size234):
-                        _key239 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val240 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.carrier[_key239] = _val240
+                    (_ktype244, _vtype245, _size243) = iprot.readMapBegin()
+                    for _i247 in range(_size243):
+                        _key248 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val249 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.carrier[_key248] = _val249
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
@@ -299,9 +299,9 @@ class UploadUserReview_args(object):
         if self.carrier is not None:
             oprot.writeFieldBegin('carrier', TType.MAP, 5)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.carrier))
-            for kiter241, viter242 in self.carrier.items():
-                oprot.writeString(kiter241.encode('utf-8') if sys.version_info[0] == 2 else kiter241)
-                oprot.writeString(viter242.encode('utf-8') if sys.version_info[0] == 2 else viter242)
+            for kiter250, viter251 in self.carrier.items():
+                oprot.writeString(kiter250.encode('utf-8') if sys.version_info[0] == 2 else kiter250)
+                oprot.writeString(viter251.encode('utf-8') if sys.version_info[0] == 2 else viter251)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -445,11 +445,11 @@ class ReadUserReviews_args(object):
             elif fid == 5:
                 if ftype == TType.MAP:
                     self.carrier = {}
-                    (_ktype244, _vtype245, _size243) = iprot.readMapBegin()
-                    for _i247 in range(_size243):
-                        _key248 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val249 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.carrier[_key248] = _val249
+                    (_ktype253, _vtype254, _size252) = iprot.readMapBegin()
+                    for _i256 in range(_size252):
+                        _key257 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val258 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.carrier[_key257] = _val258
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
@@ -482,9 +482,9 @@ class ReadUserReviews_args(object):
         if self.carrier is not None:
             oprot.writeFieldBegin('carrier', TType.MAP, 5)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.carrier))
-            for kiter250, viter251 in self.carrier.items():
-                oprot.writeString(kiter250.encode('utf-8') if sys.version_info[0] == 2 else kiter250)
-                oprot.writeString(viter251.encode('utf-8') if sys.version_info[0] == 2 else viter251)
+            for kiter259, viter260 in self.carrier.items():
+                oprot.writeString(kiter259.encode('utf-8') if sys.version_info[0] == 2 else kiter259)
+                oprot.writeString(viter260.encode('utf-8') if sys.version_info[0] == 2 else viter260)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -539,11 +539,11 @@ class ReadUserReviews_result(object):
             if fid == 0:
                 if ftype == TType.LIST:
                     self.success = []
-                    (_etype255, _size252) = iprot.readListBegin()
-                    for _i256 in range(_size252):
-                        _elem257 = Review()
-                        _elem257.read(iprot)
-                        self.success.append(_elem257)
+                    (_etype264, _size261) = iprot.readListBegin()
+                    for _i265 in range(_size261):
+                        _elem266 = Review()
+                        _elem266.read(iprot)
+                        self.success.append(_elem266)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
@@ -566,8 +566,8 @@ class ReadUserReviews_result(object):
         if self.success is not None:
             oprot.writeFieldBegin('success', TType.LIST, 0)
             oprot.writeListBegin(TType.STRUCT, len(self.success))
-            for iter258 in self.success:
-                iter258.write(oprot)
+            for iter267 in self.success:
+                iter267.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.se is not None:

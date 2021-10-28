@@ -319,11 +319,11 @@ function UploadText_args:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype117, _vtype118, _size116 = iprot:readMapBegin() 
-        for _i=1,_size116 do
-          local _key120 = iprot:readString()
-          local _val121 = iprot:readString()
-          self.carrier[_key120] = _val121
+        local _ktype125, _vtype126, _size124 = iprot:readMapBegin() 
+        for _i=1,_size124 do
+          local _key128 = iprot:readString()
+          local _val129 = iprot:readString()
+          self.carrier[_key128] = _val129
         end
         iprot:readMapEnd()
       else
@@ -352,9 +352,9 @@ function UploadText_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter122,viter123 in pairs(self.carrier) do
-      oprot:writeString(kiter122)
-      oprot:writeString(viter123)
+    for kiter130,viter131 in pairs(self.carrier) do
+      oprot:writeString(kiter130)
+      oprot:writeString(viter131)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -426,11 +426,11 @@ function UploadRating_args:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype125, _vtype126, _size124 = iprot:readMapBegin() 
-        for _i=1,_size124 do
-          local _key128 = iprot:readString()
-          local _val129 = iprot:readString()
-          self.carrier[_key128] = _val129
+        local _ktype133, _vtype134, _size132 = iprot:readMapBegin() 
+        for _i=1,_size132 do
+          local _key136 = iprot:readString()
+          local _val137 = iprot:readString()
+          self.carrier[_key136] = _val137
         end
         iprot:readMapEnd()
       else
@@ -459,9 +459,9 @@ function UploadRating_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter130,viter131 in pairs(self.carrier) do
-      oprot:writeString(kiter130)
-      oprot:writeString(viter131)
+    for kiter138,viter139 in pairs(self.carrier) do
+      oprot:writeString(kiter138)
+      oprot:writeString(viter139)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -533,11 +533,11 @@ function UploadMovieId_args:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype133, _vtype134, _size132 = iprot:readMapBegin() 
-        for _i=1,_size132 do
-          local _key136 = iprot:readString()
-          local _val137 = iprot:readString()
-          self.carrier[_key136] = _val137
+        local _ktype141, _vtype142, _size140 = iprot:readMapBegin() 
+        for _i=1,_size140 do
+          local _key144 = iprot:readString()
+          local _val145 = iprot:readString()
+          self.carrier[_key144] = _val145
         end
         iprot:readMapEnd()
       else
@@ -566,9 +566,9 @@ function UploadMovieId_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter138,viter139 in pairs(self.carrier) do
-      oprot:writeString(kiter138)
-      oprot:writeString(viter139)
+    for kiter146,viter147 in pairs(self.carrier) do
+      oprot:writeString(kiter146)
+      oprot:writeString(viter147)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -640,11 +640,11 @@ function UploadUniqueId_args:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype141, _vtype142, _size140 = iprot:readMapBegin() 
-        for _i=1,_size140 do
-          local _key144 = iprot:readString()
-          local _val145 = iprot:readString()
-          self.carrier[_key144] = _val145
+        local _ktype149, _vtype150, _size148 = iprot:readMapBegin() 
+        for _i=1,_size148 do
+          local _key152 = iprot:readString()
+          local _val153 = iprot:readString()
+          self.carrier[_key152] = _val153
         end
         iprot:readMapEnd()
       else
@@ -673,9 +673,9 @@ function UploadUniqueId_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter146,viter147 in pairs(self.carrier) do
-      oprot:writeString(kiter146)
-      oprot:writeString(viter147)
+    for kiter154,viter155 in pairs(self.carrier) do
+      oprot:writeString(kiter154)
+      oprot:writeString(viter155)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -747,11 +747,11 @@ function UploadUserId_args:read(iprot)
     elseif fid == 4 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype149, _vtype150, _size148 = iprot:readMapBegin() 
-        for _i=1,_size148 do
-          local _key152 = iprot:readString()
-          local _val153 = iprot:readString()
-          self.carrier[_key152] = _val153
+        local _ktype157, _vtype158, _size156 = iprot:readMapBegin() 
+        for _i=1,_size156 do
+          local _key160 = iprot:readString()
+          local _val161 = iprot:readString()
+          self.carrier[_key160] = _val161
         end
         iprot:readMapEnd()
       else
@@ -780,9 +780,9 @@ function UploadUserId_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 4)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter154,viter155 in pairs(self.carrier) do
-      oprot:writeString(kiter154)
-      oprot:writeString(viter155)
+    for kiter162,viter163 in pairs(self.carrier) do
+      oprot:writeString(kiter162)
+      oprot:writeString(viter163)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()

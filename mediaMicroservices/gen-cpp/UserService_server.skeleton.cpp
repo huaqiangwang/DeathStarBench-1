@@ -20,6 +20,11 @@ class UserServiceHandler : virtual public UserServiceIf {
     // Your initialization goes here
   }
 
+  void GetUser(std::string& _return, const std::string& username, const std::map<std::string, std::string> & carrier) {
+    // Your implementation goes here
+    printf("GetUser\n");
+  }
+
   void RegisterUser(const int64_t req_id, const std::string& first_name, const std::string& last_name, const std::string& username, const std::string& password, const std::map<std::string, std::string> & carrier) {
     // Your implementation goes here
     printf("RegisterUser\n");

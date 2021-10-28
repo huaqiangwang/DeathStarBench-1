@@ -62,11 +62,11 @@ function UploadMovieReview_args:read(iprot)
     elseif fid == 5 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype185, _vtype186, _size184 = iprot:readMapBegin()
-        for _i=1,_size184 do
-          local _key188 = iprot:readString()
-          local _val189 = iprot:readString()
-          self.carrier[_key188] = _val189
+        local _ktype193, _vtype194, _size192 = iprot:readMapBegin() 
+        for _i=1,_size192 do
+          local _key196 = iprot:readString()
+          local _val197 = iprot:readString()
+          self.carrier[_key196] = _val197
         end
         iprot:readMapEnd()
       else
@@ -105,9 +105,9 @@ function UploadMovieReview_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 5)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter190,viter191 in pairs(self.carrier) do
-      oprot:writeString(kiter190)
-      oprot:writeString(viter191)
+    for kiter198,viter199 in pairs(self.carrier) do
+      oprot:writeString(kiter198)
+      oprot:writeString(viter199)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -193,11 +193,11 @@ function ReadMovieReviews_args:read(iprot)
     elseif fid == 5 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype193, _vtype194, _size192 = iprot:readMapBegin()
-        for _i=1,_size192 do
-          local _key196 = iprot:readString()
-          local _val197 = iprot:readString()
-          self.carrier[_key196] = _val197
+        local _ktype201, _vtype202, _size200 = iprot:readMapBegin() 
+        for _i=1,_size200 do
+          local _key204 = iprot:readString()
+          local _val205 = iprot:readString()
+          self.carrier[_key204] = _val205
         end
         iprot:readMapEnd()
       else
@@ -236,9 +236,9 @@ function ReadMovieReviews_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 5)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter198,viter199 in pairs(self.carrier) do
-      oprot:writeString(kiter198)
-      oprot:writeString(viter199)
+    for kiter206,viter207 in pairs(self.carrier) do
+      oprot:writeString(kiter206)
+      oprot:writeString(viter207)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -261,11 +261,11 @@ function ReadMovieReviews_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype203, _size200 = iprot:readListBegin()
-        for _i=1,_size200 do
-          local _elem204 = Review:new{}
-          _elem204:read(iprot)
-          table.insert(self.success, _elem204)
+        local _etype211, _size208 = iprot:readListBegin()
+        for _i=1,_size208 do
+          local _elem212 = Review:new{}
+          _elem212:read(iprot)
+          table.insert(self.success, _elem212)
         end
         iprot:readListEnd()
       else
@@ -291,8 +291,8 @@ function ReadMovieReviews_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRUCT, #self.success)
-    for _,iter205 in ipairs(self.success) do
-      iter205:write(oprot)
+    for _,iter213 in ipairs(self.success) do
+      iter213:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -339,9 +339,6 @@ function MovieReviewServiceClient:recv_UploadMovieReview(req_id, movie_id, revie
   local result = UploadMovieReview_result:new{}
   result:read(self.iprot)
   self.iprot:readMessageEnd()
-  if result.se then
-    error(result.se)
-  end
 end
 
 function MovieReviewServiceClient:ReadMovieReviews(req_id, movie_id, start, stop, carrier)

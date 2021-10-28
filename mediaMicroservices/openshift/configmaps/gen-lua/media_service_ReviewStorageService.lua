@@ -176,11 +176,11 @@ function StoreReview_args:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype157, _vtype158, _size156 = iprot:readMapBegin() 
-        for _i=1,_size156 do
-          local _key160 = iprot:readString()
-          local _val161 = iprot:readString()
-          self.carrier[_key160] = _val161
+        local _ktype165, _vtype166, _size164 = iprot:readMapBegin() 
+        for _i=1,_size164 do
+          local _key168 = iprot:readString()
+          local _val169 = iprot:readString()
+          self.carrier[_key168] = _val169
         end
         iprot:readMapEnd()
       else
@@ -209,9 +209,9 @@ function StoreReview_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter162,viter163 in pairs(self.carrier) do
-      oprot:writeString(kiter162)
-      oprot:writeString(viter163)
+    for kiter170,viter171 in pairs(self.carrier) do
+      oprot:writeString(kiter170)
+      oprot:writeString(viter171)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -277,10 +277,10 @@ function ReadReviews_args:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.review_ids = {}
-        local _etype167, _size164 = iprot:readListBegin()
-        for _i=1,_size164 do
-          local _elem168 = iprot:readI64()
-          table.insert(self.review_ids, _elem168)
+        local _etype175, _size172 = iprot:readListBegin()
+        for _i=1,_size172 do
+          local _elem176 = iprot:readI64()
+          table.insert(self.review_ids, _elem176)
         end
         iprot:readListEnd()
       else
@@ -289,11 +289,11 @@ function ReadReviews_args:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype170, _vtype171, _size169 = iprot:readMapBegin() 
-        for _i=1,_size169 do
-          local _key173 = iprot:readString()
-          local _val174 = iprot:readString()
-          self.carrier[_key173] = _val174
+        local _ktype178, _vtype179, _size177 = iprot:readMapBegin() 
+        for _i=1,_size177 do
+          local _key181 = iprot:readString()
+          local _val182 = iprot:readString()
+          self.carrier[_key181] = _val182
         end
         iprot:readMapEnd()
       else
@@ -317,8 +317,8 @@ function ReadReviews_args:write(oprot)
   if self.review_ids ~= nil then
     oprot:writeFieldBegin('review_ids', TType.LIST, 2)
     oprot:writeListBegin(TType.I64, #self.review_ids)
-    for _,iter175 in ipairs(self.review_ids) do
-      oprot:writeI64(iter175)
+    for _,iter183 in ipairs(self.review_ids) do
+      oprot:writeI64(iter183)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -326,9 +326,9 @@ function ReadReviews_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter176,viter177 in pairs(self.carrier) do
-      oprot:writeString(kiter176)
-      oprot:writeString(viter177)
+    for kiter184,viter185 in pairs(self.carrier) do
+      oprot:writeString(kiter184)
+      oprot:writeString(viter185)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -351,11 +351,11 @@ function ReadReviews_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype181, _size178 = iprot:readListBegin()
-        for _i=1,_size178 do
-          local _elem182 = Review:new{}
-          _elem182:read(iprot)
-          table.insert(self.success, _elem182)
+        local _etype189, _size186 = iprot:readListBegin()
+        for _i=1,_size186 do
+          local _elem190 = Review:new{}
+          _elem190:read(iprot)
+          table.insert(self.success, _elem190)
         end
         iprot:readListEnd()
       else
@@ -381,8 +381,8 @@ function ReadReviews_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRUCT, #self.success)
-    for _,iter183 in ipairs(self.success) do
-      iter183:write(oprot)
+    for _,iter191 in ipairs(self.success) do
+      iter191:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()

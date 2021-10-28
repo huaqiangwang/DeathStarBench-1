@@ -62,11 +62,11 @@ function UploadUserReview_args:read(iprot)
     elseif fid == 5 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype207, _vtype208, _size206 = iprot:readMapBegin()
-        for _i=1,_size206 do
-          local _key210 = iprot:readString()
-          local _val211 = iprot:readString()
-          self.carrier[_key210] = _val211
+        local _ktype215, _vtype216, _size214 = iprot:readMapBegin() 
+        for _i=1,_size214 do
+          local _key218 = iprot:readString()
+          local _val219 = iprot:readString()
+          self.carrier[_key218] = _val219
         end
         iprot:readMapEnd()
       else
@@ -105,9 +105,9 @@ function UploadUserReview_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 5)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter212,viter213 in pairs(self.carrier) do
-      oprot:writeString(kiter212)
-      oprot:writeString(viter213)
+    for kiter220,viter221 in pairs(self.carrier) do
+      oprot:writeString(kiter220)
+      oprot:writeString(viter221)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -193,11 +193,11 @@ function ReadUserReviews_args:read(iprot)
     elseif fid == 5 then
       if ftype == TType.MAP then
         self.carrier = {}
-        local _ktype215, _vtype216, _size214 = iprot:readMapBegin()
-        for _i=1,_size214 do
-          local _key218 = iprot:readString()
-          local _val219 = iprot:readString()
-          self.carrier[_key218] = _val219
+        local _ktype223, _vtype224, _size222 = iprot:readMapBegin() 
+        for _i=1,_size222 do
+          local _key226 = iprot:readString()
+          local _val227 = iprot:readString()
+          self.carrier[_key226] = _val227
         end
         iprot:readMapEnd()
       else
@@ -236,9 +236,9 @@ function ReadUserReviews_args:write(oprot)
   if self.carrier ~= nil then
     oprot:writeFieldBegin('carrier', TType.MAP, 5)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.carrier))
-    for kiter220,viter221 in pairs(self.carrier) do
-      oprot:writeString(kiter220)
-      oprot:writeString(viter221)
+    for kiter228,viter229 in pairs(self.carrier) do
+      oprot:writeString(kiter228)
+      oprot:writeString(viter229)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -261,11 +261,11 @@ function ReadUserReviews_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype225, _size222 = iprot:readListBegin()
-        for _i=1,_size222 do
-          local _elem226 = Review:new{}
-          _elem226:read(iprot)
-          table.insert(self.success, _elem226)
+        local _etype233, _size230 = iprot:readListBegin()
+        for _i=1,_size230 do
+          local _elem234 = Review:new{}
+          _elem234:read(iprot)
+          table.insert(self.success, _elem234)
         end
         iprot:readListEnd()
       else
@@ -291,8 +291,8 @@ function ReadUserReviews_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRUCT, #self.success)
-    for _,iter227 in ipairs(self.success) do
-      iter227:write(oprot)
+    for _,iter235 in ipairs(self.success) do
+      iter235:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -339,9 +339,6 @@ function UserReviewServiceClient:recv_UploadUserReview(req_id, user_id, review_i
   local result = UploadUserReview_result:new{}
   result:read(self.iprot)
   self.iprot:readMessageEnd()
-  if result.se then
-    error(result.se)
-  end
 end
 
 function UserReviewServiceClient:ReadUserReviews(req_id, user_id, start, stop, carrier)

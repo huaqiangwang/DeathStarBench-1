@@ -453,11 +453,11 @@ class UploadText_args(object):
             elif fid == 3:
                 if ftype == TType.MAP:
                     self.carrier = {}
-                    (_ktype133, _vtype134, _size132) = iprot.readMapBegin()
-                    for _i136 in range(_size132):
-                        _key137 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val138 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.carrier[_key137] = _val138
+                    (_ktype142, _vtype143, _size141) = iprot.readMapBegin()
+                    for _i145 in range(_size141):
+                        _key146 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val147 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.carrier[_key146] = _val147
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
@@ -482,9 +482,9 @@ class UploadText_args(object):
         if self.carrier is not None:
             oprot.writeFieldBegin('carrier', TType.MAP, 3)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.carrier))
-            for kiter139, viter140 in self.carrier.items():
-                oprot.writeString(kiter139.encode('utf-8') if sys.version_info[0] == 2 else kiter139)
-                oprot.writeString(viter140.encode('utf-8') if sys.version_info[0] == 2 else viter140)
+            for kiter148, viter149 in self.carrier.items():
+                oprot.writeString(kiter148.encode('utf-8') if sys.version_info[0] == 2 else kiter148)
+                oprot.writeString(viter149.encode('utf-8') if sys.version_info[0] == 2 else viter149)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -612,11 +612,11 @@ class UploadRating_args(object):
             elif fid == 3:
                 if ftype == TType.MAP:
                     self.carrier = {}
-                    (_ktype142, _vtype143, _size141) = iprot.readMapBegin()
-                    for _i145 in range(_size141):
-                        _key146 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val147 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.carrier[_key146] = _val147
+                    (_ktype151, _vtype152, _size150) = iprot.readMapBegin()
+                    for _i154 in range(_size150):
+                        _key155 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val156 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.carrier[_key155] = _val156
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
@@ -641,9 +641,9 @@ class UploadRating_args(object):
         if self.carrier is not None:
             oprot.writeFieldBegin('carrier', TType.MAP, 3)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.carrier))
-            for kiter148, viter149 in self.carrier.items():
-                oprot.writeString(kiter148.encode('utf-8') if sys.version_info[0] == 2 else kiter148)
-                oprot.writeString(viter149.encode('utf-8') if sys.version_info[0] == 2 else viter149)
+            for kiter157, viter158 in self.carrier.items():
+                oprot.writeString(kiter157.encode('utf-8') if sys.version_info[0] == 2 else kiter157)
+                oprot.writeString(viter158.encode('utf-8') if sys.version_info[0] == 2 else viter158)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -771,11 +771,11 @@ class UploadMovieId_args(object):
             elif fid == 3:
                 if ftype == TType.MAP:
                     self.carrier = {}
-                    (_ktype151, _vtype152, _size150) = iprot.readMapBegin()
-                    for _i154 in range(_size150):
-                        _key155 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val156 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.carrier[_key155] = _val156
+                    (_ktype160, _vtype161, _size159) = iprot.readMapBegin()
+                    for _i163 in range(_size159):
+                        _key164 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val165 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.carrier[_key164] = _val165
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
@@ -800,9 +800,9 @@ class UploadMovieId_args(object):
         if self.carrier is not None:
             oprot.writeFieldBegin('carrier', TType.MAP, 3)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.carrier))
-            for kiter157, viter158 in self.carrier.items():
-                oprot.writeString(kiter157.encode('utf-8') if sys.version_info[0] == 2 else kiter157)
-                oprot.writeString(viter158.encode('utf-8') if sys.version_info[0] == 2 else viter158)
+            for kiter166, viter167 in self.carrier.items():
+                oprot.writeString(kiter166.encode('utf-8') if sys.version_info[0] == 2 else kiter166)
+                oprot.writeString(viter167.encode('utf-8') if sys.version_info[0] == 2 else viter167)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -930,11 +930,11 @@ class UploadUniqueId_args(object):
             elif fid == 3:
                 if ftype == TType.MAP:
                     self.carrier = {}
-                    (_ktype160, _vtype161, _size159) = iprot.readMapBegin()
-                    for _i163 in range(_size159):
-                        _key164 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val165 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.carrier[_key164] = _val165
+                    (_ktype169, _vtype170, _size168) = iprot.readMapBegin()
+                    for _i172 in range(_size168):
+                        _key173 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val174 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.carrier[_key173] = _val174
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
@@ -959,9 +959,9 @@ class UploadUniqueId_args(object):
         if self.carrier is not None:
             oprot.writeFieldBegin('carrier', TType.MAP, 3)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.carrier))
-            for kiter166, viter167 in self.carrier.items():
-                oprot.writeString(kiter166.encode('utf-8') if sys.version_info[0] == 2 else kiter166)
-                oprot.writeString(viter167.encode('utf-8') if sys.version_info[0] == 2 else viter167)
+            for kiter175, viter176 in self.carrier.items():
+                oprot.writeString(kiter175.encode('utf-8') if sys.version_info[0] == 2 else kiter175)
+                oprot.writeString(viter176.encode('utf-8') if sys.version_info[0] == 2 else viter176)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -1089,11 +1089,11 @@ class UploadUserId_args(object):
             elif fid == 4:
                 if ftype == TType.MAP:
                     self.carrier = {}
-                    (_ktype169, _vtype170, _size168) = iprot.readMapBegin()
-                    for _i172 in range(_size168):
-                        _key173 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val174 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.carrier[_key173] = _val174
+                    (_ktype178, _vtype179, _size177) = iprot.readMapBegin()
+                    for _i181 in range(_size177):
+                        _key182 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val183 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.carrier[_key182] = _val183
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
@@ -1118,9 +1118,9 @@ class UploadUserId_args(object):
         if self.carrier is not None:
             oprot.writeFieldBegin('carrier', TType.MAP, 4)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.carrier))
-            for kiter175, viter176 in self.carrier.items():
-                oprot.writeString(kiter175.encode('utf-8') if sys.version_info[0] == 2 else kiter175)
-                oprot.writeString(viter176.encode('utf-8') if sys.version_info[0] == 2 else viter176)
+            for kiter184, viter185 in self.carrier.items():
+                oprot.writeString(kiter184.encode('utf-8') if sys.version_info[0] == 2 else kiter184)
+                oprot.writeString(viter185.encode('utf-8') if sys.version_info[0] == 2 else viter185)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
