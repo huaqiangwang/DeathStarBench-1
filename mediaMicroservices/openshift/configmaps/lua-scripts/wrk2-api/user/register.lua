@@ -59,7 +59,7 @@ function _M.GetUser()
     ngx.exit(ngx.HTTP_BAD_REQUEST)
   end
 
-  local client = GenericObjectPool:connection(UserServiceClient, "user-service", 9090)
+  local client = GenericObjectPool:connection(UserServiceClient, "user-service.media-microsvc.svc.cluster.local", 9090)
 
   local user_id = client:GetUser(post.username, carrier)
   ngx.say(user_id)
